@@ -1,16 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
+fancy_socks:
+  name: "Expensive Socks"
+  description: "These sox rule!"
   price: 1.5
-  photo_url: MyString
+  photo_url:
   stock: 1
   user_id: 1
 
-two:
-  name: MyString
-  description: MyText
+fancy_shirt:
+  name: "Expensive Shirt"
+  description: "This shirt is made of diamonds"
   price: 1.5
   photo_url: MyString
   stock: 1
