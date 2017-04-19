@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>d'Ebtsy</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,21 @@
   </head>
 
   <body>
+    <header>
+      <h1 class="main-header">d'Ebtsy</h1>
+      <ul class="header-nav">
+        <li>
+          <%= button_to "Log in", login_path, method: :get %>
+        </li>
+        <li>
+          <%= image_tag "cart", class: "cart" %>
+        </li>
+      </ul>
+
+    </header>
+    <body class="content">
+
     <%= yield %>
+  </body>
   </body>
 </html>
