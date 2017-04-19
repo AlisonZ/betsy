@@ -13,7 +13,15 @@
       <h1 class="main-header">d'Ebtsy</h1>
       <ul class="header-nav">
         <li>
+        <% if current_user %>
+        <p>
+          Logged in as <%= current_user.username %>
+        </p>
+        <%= button_to "Log out", login_path, method: :delete %>
+        <% else %>
+
           <%= button_to "Log in", login_path, method: :get %>
+          <% end %>
         </li>
         <li>
           <%= image_tag "cart", class: "cart" %>
@@ -22,7 +30,11 @@
 
     </header>
     <body class="content">
-
+      <section class="flash">
+    <% flash.each do |name, message| %>
+      <h3 class="row status <%= name %>"><%= message %></h3>
+    <% end %>
+    </section>
     <%= yield %>
   </body>
   </body>

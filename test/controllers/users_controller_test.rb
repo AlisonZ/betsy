@@ -12,7 +12,7 @@ describe UsersController do
     # create should change the db count
     it "must update DB upon create" do
       proc { post users_path, params: { user:
-            { username: "felicity"
+            { username: "felicity", email: "bob@bob.com"
             }
           }
         }.must_change 'User.count', 1
@@ -22,7 +22,7 @@ describe UsersController do
     # create should redirect to root
 
     it "creating a new user should redirect to root" do
-      post users_path, user: {username: "georgianna"}
+      post users_path, user: {username: "georgianna", email: "email@test.com"}
       must_redirect_to :root
     end
     #
