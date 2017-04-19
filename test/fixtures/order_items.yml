@@ -3,13 +3,13 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-# order_item_one:
-#   product: fancy_socks
-#   order: order_one
-#   quanitity: 3
-#
-# order_item_two:
-#   product: fancy_shirt
-#   order: order_one
-#   quanitity: 1
+
+socks:
+  product: fancy_socks
+  order: order_one
+  quantity: 2
+
+shirts:
+  product: fancy_shirt
+  order: order_one
+  quantity: 1
