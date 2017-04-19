@@ -14,4 +14,14 @@ describe Order do
     #to_do maybe fix the fixtures?
     order.valid?.must_equal true
   end
+
+  it "can be created with multiple order_items" do
+    order.order_items = [order_items(:socks), order_items(:shirts)]
+    order.valid?.must_equal true
+  end
+
+  it "can access order_items" do
+    order.order_items = [order_items(:socks), order_items(:shirts)]
+    order.must_respond_to :order_items
+  end
 end
