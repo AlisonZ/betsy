@@ -10,7 +10,8 @@ describe OrderItemsController do
       must_redirect_to cart_path
     end
 
-    #do we need a test to show where it should go if not added?
+    #maybe want to add a test if it isn't created, that it
+    #re-renders the product show page.  I'm not sure how to do this! Also may need to edit the controller itself
 
     it "should update model if data is good" do
       proc {

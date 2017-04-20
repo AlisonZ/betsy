@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  def create
-    @order = Order.new
+  def checkout
   end
 end
