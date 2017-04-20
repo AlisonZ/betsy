@@ -8,7 +8,15 @@
 <li>
   <%= @product.stock %> left in stock
 </li>
+<li>
+  Selling status:  <%= @product.sell_status %>
+</li>
+<li>
+<%= link_to @product.user.username, user_path(@product.user.id) %> 
+</li>
 </ul>
+
+<img src="<%=@product.photo_url%>">
 
 <%= link_to "Back to all products", products_path %>
 <%= link_to "Edit this product", edit_product_path(@product.id) %>

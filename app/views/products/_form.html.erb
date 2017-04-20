@@ -19,6 +19,13 @@
   <%= f.label :description %>
   <%= f.text_area :description, size: "60x12" %>
 
+  <%= f.label :photo_url, "Image URL:"%>
+  <%= f.text_field :photo_url %>
+
+  <%= f.label :selling_status, "Selling Status:" %>
+  <%= f.select :selling_status, [['Selling', true], ['Retired', false]] %>
+
+
   <%= f.label :user_id, "Merchant/user_id:" %>
   <%= f.text_field :user_id %>
 

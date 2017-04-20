@@ -14,12 +14,7 @@ end
 
 
 def create
-  @product = Product.new
-  @product.name = params[:product][:name]
-  @product.description = params[:product][:description]
-  @product.stock = params[:product][:stock]
-  @product.price = params[:product][:price]
-  @product.user_id = params[:product][:user_id]
+  @product = Product.create(product_params)
 
   if @product.save
     flash[:success] = "#{@product.name} successfully added!"
@@ -37,12 +32,7 @@ end
 def update
   @product = Product.find_by_id(params[:id])
 
-  @product.name = product_params[:name]
-  @product.price = product_params[:price]
-  @product.stock = product_params[:stock]
-  @product.description = product_params[:description]
-
-  if @product.save
+  if @product.update(product_params)
     flash[:success] = "#{@product.name} successfully edited"
     redirect_to product_path(@product.id)
   else
@@ -54,7 +44,7 @@ end
 private
 
 def product_params
-  params.require(:product).permit(:name, :user_id, :description, :stock, :price)
+  params.require(:product).permit(:name, :user_id, :description, :stock, :price, :photo_url, :selling_status)
 end
 
 end
