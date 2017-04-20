@@ -15,3 +15,12 @@ umbrella:
   photo_url: http://www.google.com
   stock: 1
   user_id: 3
+  user_id: 1
+
+aurorahat:
+  name: "aurora's hat"
+  description: "Aurora's hat is a nice little hat"
+  price: 15.75
+  photo_url: "some url"
+  stock: 5
+  user_id: users(:aurora)
