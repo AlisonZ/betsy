@@ -18,13 +18,15 @@ class OrderItemsController < ApplicationController
       @order.order_items << @item
       redirect_to cart_path
     else
-      flash[:failure] = "Unable to add to cart at this time"
+      flash.now[:failure] = "Unable to add to cart at this time"
+      redirect_to product_path(params[:id])
     end
   end
 
   def cart
     @cart_items = OrderItem.where(order_id: session[:order_id])
     @item = OrderItem.find_by_id(params[:id])
+    # raise
   end
 
   def update
