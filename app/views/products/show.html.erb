@@ -12,3 +12,13 @@
 
 <%= link_to "Back to all products", products_path %>
 <%= link_to "Edit this product", edit_product_path(@product.id) %>
+
+
+<%= form_for @product do |f| %>
+
+  <%= f.label :quantity %>
+  <%= f.select :quantity, [1..@product.stock] %>
+
+  <%= f.submit %>
+
+<% end %>

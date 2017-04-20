@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/login', to: 'sessions#logout'
 
-  resources :orders, except: [:index, :new, :edit]
+  get 'products/:id/cart', to: 'order_items#create', as: 'cart'
 end
