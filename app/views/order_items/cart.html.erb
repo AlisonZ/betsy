@@ -2,8 +2,17 @@
 <ul>
   <% @cart_items.each do |item| %>
     <li>
-      <%= link_to item.product.name, product_path(item.product_id) %>: <%= item.quantity %>
+      <%= link_to item.product.name, product_path(item.product_id) %>
+      <p>
+        quantity: <%= item.quantity %>
+      </p>
 
+      <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+
+        <%= f.label :quantity, "Quantity" %>
+        <%= f.select :quantity, options_for_select(1..item.product.stock) %>
+        <%= f.submit "Update quantity" %>
+      <% end %>
     </li>
   <% end %>
 

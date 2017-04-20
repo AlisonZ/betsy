@@ -6,12 +6,28 @@ class OrderItemsController < ApplicationController
     @item.quantity = item_params[:quantity]
     @item.product_id = params[:id]
     @item.order_id = @order.id
-    @order.order_items << @item
-    redirect_to cart_path
+    if @item.save
+      @order.order_items << @item
+      redirect_to cart_path
+    else
+      flash[:failure] = "Unable to add to cart at this time"
+    end
   end
 
   def cart
     @cart_items = OrderItem.where(order_id: session[:order_id])
+    @item = OrderItem.find_by_id(params[:id])
+  end
+
+  def update
+    @item = OrderItem.find_by_id(params[:id])
+    if @item.update(item_params)
+      redirect_to :cart
+    else
+      flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
+      render :cart
+    end
+
   end
 
   private

@@ -24,7 +24,7 @@
         <% end %>
       </li>
       <li>
-        <%= image_tag "cart", class: "cart" %>
+        <%= link_to image_tag( "cart", class: "cart" ), cart_path %><%= total_items_in_cart %>
       </li>
     </ul>
 
