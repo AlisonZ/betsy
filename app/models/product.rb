@@ -20,4 +20,16 @@ class Product < ApplicationRecord
 
   end
 
+
+  def self.to_csv
+    attributes = %w(id title description price photo_url stock user_id selling_status )
+    CSV.generate( headers: true ) do |csv|
+      csv << attributes
+
+      all.each do |product|
+        csv << product.attributes.values_at(*attributes)
+      end
+    end
+  end
+
 end

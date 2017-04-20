@@ -1,6 +1,14 @@
 class OrderItemsController < ApplicationController
   before_action :create_order, only: [:create]
 
+  def index
+    @order_items = OrderItem.all
+    respond_to do |format|
+        format.html
+        format.csv { send_data @order_items.to_csv }
+      end
+  end
+
   def create
     @item = OrderItem.new
     @item.quantity = item_params[:quantity]
