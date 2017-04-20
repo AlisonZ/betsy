@@ -1,6 +1,11 @@
 <h1><%= @user.username %></h1>
 
 <h2><%=@user.username%>'s Products</h2>
-<p>
-  List of user's products will go here.
-</p>
+<ul>
+  <% @user.products.each do |product| %>
+  <li>
+    <%= product.name %> <%= link_to "Edit", edit_product_path(product.id) %>
+  </li>
+  <% end %>
+</ul>
+<%= button_to "Add a product to your store", new_product_path, method: :get %>
