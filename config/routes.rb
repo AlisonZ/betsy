@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :categories, :except => [:edit, :update, :destroy]
   resources :products
-  resources :reviews, only: [:new, :create]
+  resources :product do
+      resources :reviews, only: [:new, :create]
+  end
 
   resources :users, only: [:index, :show]
   get '/login', to: 'sessions#login_form'

@@ -6,12 +6,17 @@
   <% end %>
 </ul>
 
-<%= form_for @review, method: form_method do |f| %>
+<%= form_for @review, url: product_reviews_path, method: form_method do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
 
     <%= f.label :rating %>
     <%= f.text_field :rating %>
 
-    <%= f.submit action_name%>
+    <%= f.label :review_text %>
+    <%= f.text_area :review_text %>
+
+
+
+    <%= f.submit action_name %>
 <% end %>

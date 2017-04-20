@@ -14,12 +14,12 @@
 
 require 'csv'
 
-# CSV.read("db/users.csv", headers: true).map do |line|
-#   new_user = User.create(username: line[0], email: line[1])
-#   if !new_user.id
-#     puts "couldn't create user #{new_user.username}"
-#   end
-# end
+CSV.read("db/users.csv", headers: true).map do |line|
+  new_user = User.create(username: line[0], email: line[1])
+  if !new_user.id
+    puts "couldn't create user #{new_user.username}"
+  end
+end
 
 
 CSV.read("db/products.csv", headers: true).map do |line|
