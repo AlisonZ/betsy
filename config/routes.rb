@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   post 'products/:id/add', to: 'order_items#create', as: 'new_order_item'
   get '/cart', to: 'order_items#cart', as: 'cart'
+  resources :order_items, only: [:update, :destroy]
 end
