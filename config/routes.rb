@@ -14,8 +14,13 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/login', to: 'sessions#logout'
 
+  resources :order_items, only: [:update, :destroy, :index]
   post 'products/:id/add', to: 'order_items#create', as: 'new_order_item'
   get '/cart', to: 'order_items#cart', as: 'cart'
-  resources :order_items, only: [:update, :destroy, :index]
+
   resources :orders, only: [:index]
+  get '/checkout', to: 'orders#checkout', as: 'checkout'
+  #Should we change this controller method name to edit?
+
+  put '/orders/:id', to: 'orders#update', as: 'order'
 end
