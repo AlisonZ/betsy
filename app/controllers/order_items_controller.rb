@@ -7,7 +7,6 @@ class OrderItemsController < ApplicationController
     @item.product_id = params[:id]
     @item.order_id = @order.id
     @order.order_items << @item
-    #get quantity from show view!
     redirect_to cart_path
   end
 
