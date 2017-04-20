@@ -29,6 +29,21 @@
 <% end %>
 
 
+
 <%= link_to "Back to all products", products_path %>
 <%= link_to "Edit this product", edit_product_path(@product.id) %>
 <%= link_to "Review this product", new_product_review_path(@product.id) %>
+
+
+<section class="review">
+  <h2>Reviews!</h2>
+  <% @product.reviews.each do |review| %>
+  <h3>Rating: <%= review.rating %></h3>
+  <h3><%= review.title %> <small>reviewed on <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
+  <section class="review-body" >
+    <p>
+      <%= review.review_text %>
+    </p>
+  </section>
+  <% end %>
+</section>
