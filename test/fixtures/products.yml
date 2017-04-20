@@ -1,17 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  price: 1.5
-  photo_url: MyString
+watch:
+  name: Men's Rolex Watch
+  description: "A really cool description"
+  price: 12.99
+  photo_url: http://www.google.com
   stock: 1
-  user_id: 1
+  user_id: 2
 
-two:
-  name: MyString
-  description: MyText
+fancy_socks:
+  name: "Expensive Socks"
+  description: "These sox rule!"
+  price: 1.5
+  photo_url:
+  stock: 1
+  user_id: 2
+
+umbrella:
+  name: Umbrella
+  description: "A really cool umbrella"
+  price: 14.99
+  photo_url: http://www.google.com
+  stock: 1
+  user_id: 3
+
+fancy_shirt:
+  name: "Expensive Shirt"
+  description: "This shirt is made of diamonds"
   price: 1.5
   photo_url: MyString
   stock: 1
-  user_id: 1
+  user_id: 3
+
+aurorahat:
+  name: "aurora's hat"
+  description: "Aurora's hat is a nice little hat"
+  price: 15.75
+  photo_url: "some url"
+  stock: 5
+  user_id: users(:aurora)

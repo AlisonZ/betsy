@@ -1,0 +1,14 @@
+
+<h2><%= @product.name %></h2>
+<p><%= @product.description %> </p>
+<ul>
+<li>
+  <%= @product.price %>
+</li>
+<li>
+  <%= @product.stock %> left in stock
+</li>
+</ul>
+
+<%= link_to "Back to all products", products_path %>
+<%= link_to "Edit this product", edit_product_path(@product.id) %>
