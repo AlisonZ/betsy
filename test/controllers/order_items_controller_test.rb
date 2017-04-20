@@ -34,5 +34,11 @@ describe OrderItemsController do
       get cart_path
       must_respond_with :success
     end
+
+    it "Still works if no orderItems are in cart" do
+      OrderItem.destroy_all
+      get cart_path
+      must_respond_with :success
+    end
   end
 end
