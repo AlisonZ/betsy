@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   # has_many :reviews
   # has_many :order_items
 
-
+  validates :name, uniqueness: true
 
   validates :name, presence: true
   # validates :user_id, presence: true
