@@ -9,28 +9,37 @@ describe UsersController do
       must_respond_with :success
     end
 
-    # create should change the db count
-    it "must update DB upon create" do
-      proc { post users_path, params: { user:
-            { username: "felicity", email: "bob@bob.com"
-            }
-          }
-        }.must_change 'User.count', 1
+    it "succeeds with many users" do
+      # Assumption: there are many users in the DB
+      User.count.must_be :>, 0
+
+      get users_path
+      must_respond_with :success
     end
 
+    it "succeeds with no users" do
+      # Start with a clean slate
+      User.destroy_all
 
-    # create should redirect to root
-
-    it "creating a new user should redirect to root" do
-      post users_path, user: {username: "georgianna", email: "email@test.com"}
-      must_redirect_to :root
+      get users_path
+      must_respond_with :success
     end
+
     #
     # show should redirect to individual user's page
     it "show user should show one user" do
       get user_path(users(:aurora))
       must_respond_with :success
     end
+
+    it "renders 404 not_found for a bogus user" do
+      # User.last gives the user with the highest ID
+      bogus_user_id = User.last.id + 1
+      get user_path(bogus_user_id)
+      must_respond_with 404
+    end
+
+
 
 
 
