@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+like:
   product_id: 1
-  rating: 1
-  review_text: MyString
+  rating: 5
+  review_text: "I like it!"
 
-two:
+dislike:
   product_id: 1
   rating: 1
-  review_text: MyString
+  review_text: "I don't like it"

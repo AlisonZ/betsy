@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :categories, :except => [:edit, :update, :destroy]
   resources :products
+  resources :reviews, only: [:new, :create]
 
   resources :users, only: [:index, :show]
   get '/login', to: 'sessions#login_form'
