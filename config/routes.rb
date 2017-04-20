@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'order_items#cart', as: 'cart'
 
   get '/checkout', to: 'orders#checkout', as: 'checkout'
+  #Should we change this controller method name to edit?
+
+  put '/orders/:id', to: 'orders#update', as: 'order'
 end

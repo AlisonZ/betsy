@@ -1,6 +1,6 @@
 <h1>Enter CC / Shipping Info</h1>
 
-<%= form_for @order do |f| %>
+<%= form_for @order, url: order_path(@order.id), method: :put do |f| %>
 
   <%= f.label :email %>
   <%= f.text_field :email %>
