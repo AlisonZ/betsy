@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :create]
   get '/login', to: 'sessions#login_form'
-  post '/login', to: 'sessions#login'
+  post '/login', to: 'sessions#create'
   delete '/login', to: 'sessions#logout'
 
 end
