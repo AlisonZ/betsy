@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  price: 1.5
-  photo_url: MyString
+watch:
+  name: Men's Rolex Watch
+  description: "A really cool description"
+  price: 12.99
+  photo_url: http://www.google.com
   stock: 1
-  user_id: 1
+  user_id: 2
 
-two:
-  name: MyString
-  description: MyText
-  price: 1.5
-  photo_url: MyString
+umbrella:
+  name: Umbrella
+  description: "A really cool umbrella"
+  price: 14.99
+  photo_url: http://www.google.com
   stock: 1
-  user_id: 1
+  user_id: 3
