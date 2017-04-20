@@ -6,6 +6,8 @@ end
 
 def show
   @product = Product.find(params[:id])
+  #Lynn adding this in to test something!
+  @item = OrderItem.new
 end
 
 def new
