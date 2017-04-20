@@ -10,7 +10,7 @@ describe SessionsController do
   it "login succeeds for a new user" do
       username = "test_user"
       # Precondition: no user with this username exists
-      User.find_by(username: username).must_be_nil
+      User.find_by(username: username, email: "email").must_be_nil
 
       post login_path, params: { username: username, email: "email" }
       must_redirect_to users_path
@@ -31,5 +31,9 @@ describe SessionsController do
       must_redirect_to users_path
     end
 
-    
+    it "unsuccessful login redirects to login form" do
+      post login_path, params: { username: ""}
+      must_respond_with :success
+      # it's not throwing an error, just redirecting
+    end
 end
