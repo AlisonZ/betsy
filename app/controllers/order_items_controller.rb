@@ -1,9 +1,10 @@
 class OrderItemsController < ApplicationController
+  before_action :create_order, only: [:create]
+
   def create
     @item = OrderItem.new
     @item.quantity = item_params[:quantity]
     @item.product_id = params[:id]
-    @order ||= Order.create
     @item.order_id = @order.id
     @order.order_items << @item
     #get quantity from show view!
@@ -11,10 +12,7 @@ class OrderItemsController < ApplicationController
   end
 
   def cart
-    #have to be attached to Session, otherwise all of the
-    #order items ever will be shown - And how does this work if
-    #the user has not logged in??
-    @items = OrderItem.all
+    @cart_items = OrderItem.where(order_id: session[:order_id])
   end
 
   private
@@ -23,4 +21,12 @@ class OrderItemsController < ApplicationController
     params.require(:order_item).permit(:quantity)
   end
 
+  def create_order
+    if !session[:order_id]
+      @order = Order.create
+      session[:order_id] = @order.id
+    else
+      @order = Order.find_by_id(session[:order_id])
+    end
+  end
 end
