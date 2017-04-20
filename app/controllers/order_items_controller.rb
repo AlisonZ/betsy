@@ -40,6 +40,20 @@ class OrderItemsController < ApplicationController
 
   end
 
+  def destroy
+    @item = OrderItem.find_by_id(params[:id])
+    if @item.destroy
+      flash[:success] = "Removed #{@item.product.name} from cart"
+      redirect_to :cart
+
+    else
+      flash.now[:failure] = "Could not remove #{@item.product.name} from cart at this time. Whoops!"
+      render :cart
+
+    end
+
+  end
+
   private
 
   def item_params
