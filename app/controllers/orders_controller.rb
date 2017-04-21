@@ -16,4 +16,25 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update #place order
+    @order = Order.find_by_id(session[:order_id])
+    @order.status = "Paid"
+    @order.email = order_params[:email]
+    @order.name_on_cc = order_params[:name_on_cc]
+    @order.cc_number = order_params[:cc_number]
+    @order.cc_ccv = order_params[:cc_ccv]
+    @order.billing_zip = order_params[:billing_zip]
+    @order.address = order_params[:address]
+    if @order.save
+      session[:order_id] = nil
+      #Should update the stock of each of the products
+      #Should update the merchant page somehow.
+    end
+  end
+
+  private
+
+  def order_params
+      params.require(:order).permit(:email, :name_on_cc, :cc_number, :cc_ccv, :billing_zip, :address)
+  end
 end

@@ -14,4 +14,10 @@ describe OrdersController do
     #   must_respond_with :success
     # end
   end
+
+  describe "#update" do
+    it "Gets the Orders Confirmation page" do
+
+    end
+  end
 end
