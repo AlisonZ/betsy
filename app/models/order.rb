@@ -22,4 +22,5 @@ class Order < ApplicationRecord
     end
     return total.round(2)
   end
+
 end

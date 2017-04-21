@@ -14,4 +14,9 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def orders
+    user_orders = Order.where(email: email)
+    return user_orders
+  end
 end
