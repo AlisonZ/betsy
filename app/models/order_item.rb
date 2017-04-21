@@ -14,4 +14,13 @@ class OrderItem < ApplicationRecord
       end
     end
   end
+
+  def subtotal
+    if product
+      subtotal = product.price * quantity
+      return subtotal
+    else
+      return nil
+    end
+  end
 end

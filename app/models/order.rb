@@ -13,4 +13,10 @@ class Order < ApplicationRecord
       end
     end
   end
+
+  # def total
+    #accesses the subtotal of each of the order items
+    #Adds them together
+    #returns floats
+  # end
 end
