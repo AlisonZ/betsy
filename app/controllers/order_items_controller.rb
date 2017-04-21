@@ -61,11 +61,11 @@ class OrderItemsController < ApplicationController
   end
 
   def create_order
-    if !session[:order_id]
+    if session[:order_id]
+      @order = Order.find_by_id(session[:order_id])
+    else
       @order = Order.create
       session[:order_id] = @order.id
-    else
-      @order = Order.find_by_id(session[:order_id])
     end
   end
 end
