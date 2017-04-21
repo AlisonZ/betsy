@@ -1,7 +1,7 @@
 <h1>Confirm Order Details</h1>
 <% @order.order_items.each do |order_item| %>
   <p>
-    <%= order_item.product.name %>: <%= order_item.quantity %>
+    <%= order_item.product.name %>, Quantity: <%= order_item.quantity %> = $<%= order_item.subtotal %>
   </p>
 <% end %>
 

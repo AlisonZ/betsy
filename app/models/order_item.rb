@@ -18,7 +18,7 @@ class OrderItem < ApplicationRecord
   def subtotal
     if product
       subtotal = product.price * quantity
-      return subtotal
+      return subtotal.round(2)
     else
       return nil
     end
