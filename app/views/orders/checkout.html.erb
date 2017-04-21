@@ -1,17 +1,29 @@
 <h1>Confirm Order Details</h1>
-<ul>
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Subtotal</th>
+  </tr>
   <% @order.order_items.each do |order_item| %>
-    <li>
-      <%= order_item.product.name %>, Quantity: <%= order_item.quantity %> = $<%= order_item.subtotal %>
-    </li>
+  <tr>
+    <td><%= order_item.product.name %></td>
+    <td><%= order_item.product.price %></td>
+    <td><%= order_item.quantity %></td>
+    <td><%= order_item.subtotal %></td>
+  </tr>
   <% end %>
-</ul>
+</table>
 
 <p>
-  Your Order Total is: $<%= @order.total %>
+    <strong>Your Order Total is: $<%= @order.total %></strong>
 </p>
 
 <h2>Shipping Information</h2>
+<p>
+  Please enter in all details to complete your order.
+</p>
 
 <%= form_for @order, url: order_path(@order.id), method: :put do |f| %>
 

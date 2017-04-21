@@ -8,9 +8,6 @@
     <% @cart_items.each do |item| %>
       <li>
         <%= link_to item.product.name, product_path(item.product_id) %>
-        <p>
-          <!-- quantity: <%# item.quantity %> -->
-        </p>
 
         <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
           <%= f.label :quantity, "Quantity" %>
