@@ -5,3 +5,11 @@ order_one:
 
 order_two:
   status: "complete"
+
+aurora_order:
+  status: "complete"
+  email: "aurora@test.com"
+
+aurora_order_two:
+  status: "complete"
+  email: "aurora@test.com"

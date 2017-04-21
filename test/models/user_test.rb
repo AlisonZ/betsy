@@ -41,5 +41,19 @@ describe User do
     end
   end
 
+  describe "#Orders" do
+    it "returns a list of past orders" do
+      user = users(:aurora)
+      orders = user.orders
+      orders.each do |order|
+        order.must_be_instance_of Order
+      end
+    end
 
+    it "If user has no past orders, returns empty array" do
+      user = users(:felix)
+      orders = user.orders
+      orders.must_equal []
+    end
+  end
 end
