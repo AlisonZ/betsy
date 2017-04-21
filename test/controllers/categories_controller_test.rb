@@ -24,5 +24,10 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
             proc {
                 post categories_path, params: { category: {name: "sci-fi"}} }.must_change 'Category.count', 1
         end
+
+        it "should redirect to category index after creating a new category" do
+            post categories_path, params:{ categroy: {name: "chick lit"}}
+            must_redirect_to categories_path
+        end
     end
 end

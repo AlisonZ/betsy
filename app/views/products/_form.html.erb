@@ -25,6 +25,8 @@
   <%= f.label :selling_status, "Selling Status:" %>
   <%= f.select :selling_status, [['Selling', true], ['Retired', false]] %>
 
+  <%= f.label "Categories:" %>
+  <%= f.collection_select :category_ids, Category.order(:name), :id, :name, {}, {multiple: true} %>
 
   <%= f.label :user_id, "Merchant/user_id:" %>
   <%= f.text_field :user_id %>

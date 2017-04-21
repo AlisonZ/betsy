@@ -10,22 +10,22 @@
 <%= form_for @order, url: order_path(@order.id), method: :put do |f| %>
 
   <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, required: true %>
 
   <%= f.label :name_on_cc %>
-  <%= f.text_field :name_on_cc %>
+  <%= f.text_field :name_on_cc, required: true %>
 
   <%= f.label :cc_number %>
-  <%= f.text_field :cc_number %>
+  <%= f.text_field :cc_number, required: true %>
 
   <%= f.label :cc_ccv %>
-  <%= f.text_field :cc_ccv %>
+  <%= f.text_field :cc_ccv, required: true %>
 
   <%= f.label :billing_zip %>
-  <%= f.text_field :billing_zip %>
+  <%= f.text_field :billing_zip, required: true %>
 
   <%= f.label :address, "Shipping Address" %>
-  <%= f.text_area :address %>
+  <%= f.text_area :address, required: true %>
 
   <%= f.submit %>
 

@@ -28,12 +28,12 @@ header {
   float: left;
 }
 
-.header-nav {
+.header-login {
   float: right;
   display: block;
 }
 
-.header-nav li {
+.header-login li {
   display: inline-block;
 }
 

@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170420224938) do
     t.string   "review_text"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "title"
   end
 
   create_table "users", force: :cascade do |t|

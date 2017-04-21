@@ -1,10 +1,26 @@
 <h1>Cart</h1>
 <ul>
-  <% @cart_items.each do |item| %>
-    <li>
-      <%= link_to item.product.name, product_path(item.product_id) %>: <%= item.quantity %>
+  <% if @cart_items.empty? %>
+  <p>
+    Your cart is empty!
+  </p>
+  <% else %>
+    <% @cart_items.each do |item| %>
+      <li>
+        <%= link_to item.product.name, product_path(item.product_id) %>
+        <p>
+          <!-- quantity: <%# item.quantity %> -->
+        </p>
 
-    </li>
+        <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+          <%= f.label :quantity, "Quantity" %>
+          <%= f.select :quantity, options_for_select((1..item.product.stock), selected: item.quantity)  %>
+          <%= f.submit "Update quantity"%>
+
+        <% end %>
+        <%= button_to "Remove from cart", order_item_path(item), method: :delete, data: {confirm: "Do you really want to remove this from your cart?"} %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <%= link_to "Checkout", checkout_path %>
