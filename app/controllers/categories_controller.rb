@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
         category = Category.new
         category.name = params[:category][:name]
         if category.save
-            redirect_to category_path
+            redirect_to categories_path
         end
 
     end
