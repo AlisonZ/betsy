@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
         if params[:category_id]
             category = Category.find_by(id: params[:category_id])
             @products = category.products
-            @category_name = category.name.upcase
+            @category_name = category.name.capitalize
         else
             @products = Product.all
             respond_to do |format|
