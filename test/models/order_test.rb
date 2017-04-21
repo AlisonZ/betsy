@@ -24,4 +24,24 @@ describe Order do
     order.order_items = [order_items(:socks), order_items(:shirts)]
     order.must_respond_to :order_items
   end
+
+  describe "#Total" do
+    it "returns a float" do
+      total = orders(:order_one).total
+      total.must_be_instance_of Float
+    end
+
+    it "returns the total of all of the order_items subtotals" do
+      items = orders(:order_one).order_items
+      total = 0
+      items.each do |item|
+        total += item.subtotal
+      end
+      orders(:order_one).total.must_equal total
+    end
+
+    it "If order has no order_items, returns 0" do
+      orders(:order_two).total.must_equal 0
+    end
+  end
 end

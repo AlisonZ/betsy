@@ -14,9 +14,12 @@ class Order < ApplicationRecord
     end
   end
 
-  # def total
+  def total
+    total = 0.00
     #accesses the subtotal of each of the order items
-    #Adds them together
-    #returns floats
-  # end
+    order_items.each do |item|
+      total += item.subtotal
+    end
+    return total.round(2)
+  end
 end
