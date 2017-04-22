@@ -1,6 +1,6 @@
 <h1><%= @user.username %></h1>
 
-<h2><%=@user.username%>'s Products</h2>
+<h2><%= @user.username %>'s Products</h2>
 <ul>
   <% @user.products.each do |product| %>
   <li>
@@ -9,3 +9,36 @@
   <% end %>
 </ul>
 <%= button_to "Add a product to your store", new_product_path, method: :get %>
+
+<h2><%= @user.username %>'s Purchases</h2>
+
+<h2>Order Details</h2>
+
+<% @user.orders.each do |order| %>
+  <p>Date: <%=order.updated_at %></p>
+  <p>Status: <%=order.status %></p>
+  <table>
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+    <% order.order_items.each do |order_item| %>
+    <tr>
+      <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
+      <td><%= order_item.product.price %></td>
+      <td><%= order_item.quantity %></td>
+      <td><%= order_item.subtotal %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <p>Order Shipped to:</p>
+  <ul>
+    <li><%= order.name_on_cc %></li>
+    <li><%= order.address %></li>
+    <li>Confirmation Email sent to:<%= order.email %> </li>
+  </ul>
+</br>
+<% end %>
