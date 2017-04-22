@@ -44,4 +44,19 @@ describe Order do
       orders(:order_two).total.must_equal 0
     end
   end
+
+  describe "#Products" do
+    it "returns an array of products" do
+      order = orders(:order_one)
+      order.products.must_be_instance_of Array
+      order.products.each do |product|
+        product.must_be_instance_of Product
+      end
+    end
+
+    it "returns an empty array if order has no products in it" do
+      order = orders(:order_two)
+      order.products.must_equal []
+    end
+  end
 end

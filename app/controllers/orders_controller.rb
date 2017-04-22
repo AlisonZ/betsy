@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
       @order.address = order_params[:address]
       if @order.save
         session[:order_id] = nil
+        # @order.products.
         #Needs to update the stock of each of the products - Model Method on Products?
         #Should update the merchant page somehow.
       end

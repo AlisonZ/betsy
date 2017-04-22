@@ -23,4 +23,10 @@ class Order < ApplicationRecord
     return total.round(2)
   end
 
+  def products
+    items = order_items
+    products = items.map { |item| item.product }
+    return products
+  end
+
 end
