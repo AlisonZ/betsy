@@ -28,9 +28,13 @@ class OrdersController < ApplicationController
       @order.address = order_params[:address]
       if @order.save
         session[:order_id] = nil
-        # @order.products.
-        #Needs to update the stock of each of the products - Model Method on Products?
-        #Should update the merchant page somehow.
+        @order.order_items.each do |item|
+          #updates the stock of each of the products
+          item.product.stock = item.product.stock - item.quantity
+          item.product.save
+          #need to test this, and possibly pull out into model method?
+        end
+        #Should update the merchant page somehow with a notice of a new order?
       end
     end
   end

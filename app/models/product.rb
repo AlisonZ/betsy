@@ -19,14 +19,6 @@ class Product < ApplicationRecord
     end
   end
 
-  # def update_stock(amount)
-  #   #has some conditional if stock will go down to 0.
-  #   #receives some information on how many items were bought
-  #   current stock = stock
-  #
-  #   #updates current stock
-  # end
-
   def self.to_csv
     attributes = %w(id title description price photo_url stock user_id selling_status )
     CSV.generate( headers: true ) do |csv|
