@@ -1,8 +1,12 @@
 <h1>BLAAAA</h1>
 
 <% if @user_orders != [] %>
-<% @user_orders.each do |order| %>
-<%= link_to "Order #{order.id}", order_path(order.id) %>
-Date: <%= order.updated_at %>
-<% end %>
+<ul>
+  <% @user_orders.each do |order| %>
+  <li>
+    <%= link_to "Order #{order.id}", order_path(order.id) %>
+    Date: <%= order.updated_at %>
+  </li>
+  <% end %>
+</ul>
 <% end %>
