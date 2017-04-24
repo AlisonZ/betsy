@@ -1,5 +1,13 @@
 
 <h2><%= @product.name %></h2>
+Category:
+<ul>
+  <% @product.categories.each do |category| %>
+  <li>
+    <%= category.name %>
+  </li>
+  <% end %>
+</ul>
 <p><%= @product.description %> </p>
 <ul>
 <li>
