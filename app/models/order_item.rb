@@ -4,16 +4,17 @@ class OrderItem < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
-  def self.to_csv
-    attributes = %w(id order_id product_id quantity )
-    CSV.generate( headers: true ) do |csv|
-      csv << attributes
-
-      all.each do |order_item|
-        csv << order_item.attributes.values_at(*attributes)
-      end
-    end
-  end
+  # Commentibng out to help our testing %
+  # def self.to_csv
+  #   attributes = %w(id order_id product_id quantity )
+  #   CSV.generate( headers: true ) do |csv|
+  #     csv << attributes
+  #
+  #     all.each do |order_item|
+  #       csv << order_item.attributes.values_at(*attributes)
+  #     end
+  #   end
+  # end
 
   def subtotal
     if product

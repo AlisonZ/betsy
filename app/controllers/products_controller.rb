@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
 
-
   def index
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
@@ -12,6 +11,14 @@ class ProductsController < ApplicationController
       @category_name = user.username.capitalize
     else
       @products = Product.all
+
+    def show
+        @product = Product.find_by_id(params[:id])
+        if !@product
+          render_404
+        end
+        @item = OrderItem.new
+    end
 
       @category_name = "All Products"
     end

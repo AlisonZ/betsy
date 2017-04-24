@@ -7,7 +7,7 @@ describe Category do
 
     it "is valid with a name" do
         category = Category.new
-        category.name = "nonfiction"
+        category.name = "watches"
         result = category.valid?
         result.must_equal true
     end
