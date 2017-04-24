@@ -3,6 +3,23 @@ class Order < ApplicationRecord
   # Removing this to solve logic problem
   # validates_presence_of :order_items
 
+
+  def self.user_orders(user)
+    # user = session[:user_id].to_i
+    @user_products = Product.where(user_id: user)
+    @order_items = []
+    @user_products.each do |product|
+       if product.order_items != []
+         @order_items << product.order_items
+       end
+    end
+    @order_items.flatten!
+
+    @user_orders = @order_items.map {|item| item.order}
+    return @user_orders
+  end
+
+
   def self.to_csv
     attributes = %w(id status )
     CSV.generate( headers: true ) do |csv|

@@ -37,3 +37,11 @@ CSV.read("db/categories.csv", headers: true).map do |line|
         puts new_category.errors.messages
     end
 end
+
+# CSV.read("db/categories_products.csv", headers: true).map do |line|
+#     new_category_product = Category.create(name: line[0])
+#     if !new_category.id
+#         puts "couldn't create category #{new_category.name}"
+#         puts new_category.errors.messages
+#     end
+# end
