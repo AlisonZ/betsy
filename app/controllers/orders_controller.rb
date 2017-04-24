@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    @user_orders = Order.user_orders(session[:user_id])
+
     respond_to do |format|
       format.html
       format.csv { send_data @orders.to_csv }
@@ -37,6 +39,10 @@ class OrdersController < ApplicationController
         #Should update the merchant page somehow with a notice of a new order?
       end
     end
+  end
+
+  def show
+    @order = Order.find(params[:id])
   end
 
   private
