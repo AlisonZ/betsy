@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
         category = Category.new
         category.name = params[:category][:name]
         if category.save
-            redirect_to :back
+            redirect_to user_path(current_user)
         end
 
     end
