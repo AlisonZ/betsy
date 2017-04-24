@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  helper_method :owner_of_product?
+  helper_method :can_review?, :can_edit?
 
 
   def index
@@ -71,9 +71,10 @@ class ProductsController < ApplicationController
   def can_edit?
     # if there is a user logged in, see if the user's id matches the user_id in the product params
     if current_user
-      user = User.find_by_id(session[:user_id])
+      # user = User.find_by_id(session[:user_id])
       # if someone is logged in
-      if user.id == params[:user_id]
+      product = Product.find_by_id(params[:id])
+      if current_user.id == product.user_id
         # if logged-in user is owner of product
         return true
       else
@@ -88,8 +89,10 @@ class ProductsController < ApplicationController
 
   def can_review?
     if current_user
-      user = User.find_by_id(session[:user_id])
-      if user.id == params[:user_id]
+      # user = User.find_by_id(session[:user_id])
+      product = Product.find_by_id(params[:id])
+
+      if current_user.id == product.user_id
         # if someone is logged in and they are the owner of the product -- they can't review it
         return false
       else
