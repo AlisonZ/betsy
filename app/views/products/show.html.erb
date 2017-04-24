@@ -31,8 +31,13 @@
 
 
 <%= link_to "Back to all products", products_path %>
-<%= link_to "Edit this product", edit_product_path(@product.id) %>
-<%= link_to "Review this product", new_product_review_path(@product.id) %>
+
+  <% if can_edit? %>
+    <%= link_to "Edit this product", edit_product_path(@product.id) %>
+  <% end %>
+  <% if can_review? %>
+    <%= link_to "Review this product", new_product_review_path(@product.id) %>
+  <% end %>
 
 
 <section class="review">

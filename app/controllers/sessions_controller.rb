@@ -20,6 +20,11 @@ class SessionsController < ApplicationController
     end
   end
 
+
+  def login_form
+    @users = User.all
+  end
+
   def logout
     session[:user_id] = nil
     redirect_to users_path
