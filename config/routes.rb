@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'order_items#cart', as: 'cart'
 
   resources :orders, only: [:index]
+  #Tutor brought up that this wording may be misleading.
   get '/checkout', to: 'orders#checkout', as: 'checkout'
   #Should we change this controller method name to edit?
 
