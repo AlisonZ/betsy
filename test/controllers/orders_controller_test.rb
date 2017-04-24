@@ -37,13 +37,13 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    #FAILLING RIGHT NOW AND I DON'T KNOW WHY!
+    #How can I do this??
     it "Updates the status of order to 'Paid'" do
       post new_order_item_path(products(:fancy_socks).id),
         params: {order_item:
           {quantity:   (order_items(:socks).quantity)}
         }
-      put order_path(orders(:order_one).id), params: {order:
+      proc { put order_path(orders(:order_one).id), params: {order:
         {email: "lynn@gmail.com",
          name_on_cc: "Lynn Trickey",
          cc_number: 123,
@@ -51,12 +51,24 @@ describe OrdersController do
          billing_zip: 123,
          address: "123 Avenue St.",
          }}
-      status = orders(:order_one).status
-      status.must_equal "Paid"
+       }.must_change #want it to change the info in columns
+    end
+
+    it "does not change database if info is not correct" do
+      post new_order_item_path(products(:fancy_socks).id),
+        params: {order_item:
+          {quantity:   (order_items(:socks).quantity)}
+        }
+      proc { put order_path(orders(:order_one).id), params: {order:
+        {email: "lynn@gmail.com",
+         name_on_cc: "Lynn Trickey",
+         cc_number: 123,
+         cc_ccv: 123,
+         billing_zip: 123,
+         address: "123 Avenue St.",
+         }}
+       }.#HOW DO I DO THIS?
+     end
     end
   end
-
-  #Need to write a test for if it doesn't work - then what!
-
-  #
 end
