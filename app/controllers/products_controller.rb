@@ -16,7 +16,10 @@ class ProductsController < ApplicationController
     end
 
     def show
-        @product = Product.find(params[:id])
+        @product = Product.find_by_id(params[:id])
+        if !@product
+          render_404
+        end
         @item = OrderItem.new
     end
 
