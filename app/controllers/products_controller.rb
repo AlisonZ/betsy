@@ -1,66 +1,75 @@
 class ProductsController < ApplicationController
 
-    def index
-        if params[:category_id]
-            category = Category.find_by(id: params[:category_id])
-            @products = category.products
-            @category_name = category.name.capitalize
-        elsif params[:user_id]
-            user = User.find_by(id: params[:user_id])
-            @products = user.products
-            @category_name = user.username.capitalize
-        else
-            @products = Product.all
-            respond_to do |format|
-                format.html
-                format.csv { send_data @products.to_csv }
-            end
-            @category_name = "All Products"
-        end
+
+  def index
+    if params[:category_id]
+      category = Category.find_by(id: params[:category_id])
+      @products = category.products
+      @category_name = category.name.capitalize
+    elsif params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @products = user.products
+      @category_name = user.username.capitalize
+    else
+      @products = Product.all
+
+      @category_name = "All Products"
     end
-
-    def show
-        @product = Product.find(params[:id])
-        @item = OrderItem.new
+    respond_to do |format|
+      format.html
+      format.csv { send_data @products.to_csv }
     end
+    # raise
+  end
 
-    def new
-        @product = Product.new
+  def show
+    @product = Product.find(params[:id])
+    @item = OrderItem.new
+    # raise
+  end
+
+  def new
+    @product = Product.new
+    @category = Category.new
+  end
+
+
+  def create
+    @product = Product.create(product_params)
+    @product.user_id = current_user.id
+    if @product.save
+      flash[:success] = "#{@product.name} successfully added!"
+      redirect_to products_path
+    else
+      flash[:failure] = "Something went wrong"
+      render "new"
     end
+  end
 
+  def edit
+    @product = Product.find_by_id(params[:id])
+  end
 
-    def create
-        @product = Product.create(product_params)
+  def update
+    @product = Product.find_by_id(params[:id])
 
-        if @product.save
-            flash[:success] = "#{@product.name} successfully added!"
-            redirect_to products_path
-        else
-            flash[:failure] = "Something went wrong"
-            render "new"
-        end
+    if @product.update(product_params)
+      flash[:success] = "#{@product.name} successfully edited"
+      redirect_to product_path(@product.id)
+    else
+      flash.now[:error] = "Something went wrong..."
+      render "edit"
     end
+  end
 
-    def edit
-        @product = Product.find_by_id(params[:id])
-    end
+  private
 
-    def update
-        @product = Product.find_by_id(params[:id])
+  def product_params
+    params.require(:product).permit(:name, :description, :stock, :price, :photo_url, :selling_status, category_ids: [])
+  end
 
-        if @product.update(product_params)
-            flash[:success] = "#{@product.name} successfully edited"
-            redirect_to product_path(@product.id)
-        else
-            flash.now[:error] = "Something went wrong..."
-            render "edit"
-        end
-    end
 
-    private
 
-    def product_params
-        params.require(:product).permit(:name, :user_id, :description, :stock, :price, :photo_url, :selling_status, category_ids: [])
-    end
+
 
 end
