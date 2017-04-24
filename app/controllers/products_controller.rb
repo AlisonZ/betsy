@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
 
 
-
   def index
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
@@ -31,12 +30,13 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @category = Category.new
   end
 
 
   def create
     @product = Product.create(product_params)
-
+    @product.user_id = current_user.id
     if @product.save
       flash[:success] = "#{@product.name} successfully added!"
       redirect_to products_path
@@ -65,8 +65,10 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :user_id, :description, :stock, :price, :photo_url, :selling_status, category_ids: [])
+    params.require(:product).permit(:name, :description, :stock, :price, :photo_url, :selling_status, category_ids: [])
   end
+
+
 
 
 
