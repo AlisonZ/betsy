@@ -105,5 +105,42 @@ describe ProductsController do
       must_respond_with :redirect
       must_redirect_to product_path(products(:umbrella).id)
     end
+
+    it "should update info of model if data is valid" do
+      old_name = products(:umbrella).name
+      put product_path(products(:umbrella).id), params: { product: {
+        name: "NEW Umbrella",
+        user_id: users(:aurora).id,
+        description: "This is great!",
+        stock: 123,
+        price: 12400.00,
+        photo_url: "www.url.com",
+        selling_status: true,
+        category_ids: [categories(:fiction).id, categories(:nonfiction).id]
+      } }
+      umbrella = Product.find_by_id(products(:umbrella).id)
+      new_name = umbrella.name
+
+      new_name.wont_equal old_name
+    end
+
+    it "should not update model if data is bad" do
+      old_name = products(:umbrella).name
+      put product_path(products(:umbrella).id), params: { product: {
+        name: "",
+        user_id: 1,
+        description: "This is great!",
+        stock: 123,
+        price: 12400.00,
+        photo_url: "www.url.com",
+        selling_status: true,
+        category_ids: [categories(:fiction).id, categories(:nonfiction).id]
+      } }
+
+      umbrella = Product.find_by_id(products(:umbrella).id)
+      new_name = umbrella.name
+
+      new_name.must_equal old_name
+    end
   end
 end
