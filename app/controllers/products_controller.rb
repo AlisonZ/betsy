@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
             category = Category.find_by(id: params[:category_id])
             @products = category.products
             @category_name = category.name.capitalize
+        elsif params[:user_id]
+            user = User.find_by(id: params[:user_id])
+            @products = user.products
+            @category_name = user.username.capitalize
         else
             @products = Product.all
             respond_to do |format|
