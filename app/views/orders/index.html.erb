@@ -5,7 +5,17 @@
   <% @user_orders.each do |order| %>
   <li>
     <%= link_to "Order #{order.id}", order_path(order.id) %>
-    Date: <%= order.updated_at %>
+    Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
+    Status: <%= order.status %>
+    <ul>
+        <% order.order_items.each do |item| %>
+        <li>
+            <%= link_to item.product.name, product_path(item.product.id) %>
+            Quantity: <%= item.quantity %>
+            Subtotal: <%= item.subtotal %>
+            <% end %>
+        </li>
+    </ul>
   </li>
   <% end %>
 </ul>
