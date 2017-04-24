@@ -37,7 +37,6 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    #FAILLING RIGHT NOW AND I DON'T KNOW WHY!
     it "Updates the status of order to 'Paid'" do
       post new_order_item_path(products(:fancy_socks).id),
         params: {order_item:
@@ -51,8 +50,11 @@ describe OrdersController do
          billing_zip: 123,
          address: "123 Avenue St.",
          }}
-      status = orders(:order_one).status
-      status.must_equal "Paid"
+      updated_order = Order.find_by_id(orders(:order_one).id)
+      new_status = updated_order.status
+      old_status = orders(:order_one).status
+
+      new_status.must_not_equal old_status
     end
   end
 

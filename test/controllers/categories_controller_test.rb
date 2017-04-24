@@ -26,7 +26,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
         end
 
         it "should redirect to category index after creating a new category" do
-            post categories_path, params:{ categroy: {name: "chick lit"}}
+            post categories_path, params:{ category: {name: "chick lit"}}
             must_redirect_to categories_path
         end
     end
