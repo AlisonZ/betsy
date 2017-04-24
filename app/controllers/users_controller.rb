@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_owner, only: [:show]
 
   def index
     @users = User.all
@@ -10,7 +11,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    render_404 if !@user
+    # raise
+
+    if !@user
+      render_404
+    end
   end
 
 

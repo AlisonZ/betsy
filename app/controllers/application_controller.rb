@@ -34,5 +34,12 @@ class ApplicationController < ActionController::Base
     return total
   end
 
+  def check_owner
+    if current_user.id != params[:id].to_i
+      flash[:failure] = "You must be the owner of this page to view it"
+      # redirect_to root_path
+    end
+  end
+
 
 end

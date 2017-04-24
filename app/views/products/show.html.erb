@@ -12,7 +12,7 @@
   Selling status:  <%= @product.sell_status %>
 </li>
 <li>
-<%= link_to @product.user.username, user_path(@product.user.id) %>
+<%= link_to @product.user.username, user_products_path(@product.user.id) %>
 </li>
 </ul>
 
