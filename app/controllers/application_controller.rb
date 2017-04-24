@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :render_404
   helper_method :can_review?, :can_edit?, :can_add_new_product?
 
-
-
-
-
   def render_404
     render file: "#{ Rails.root }/public/404.html", status: 404
   end

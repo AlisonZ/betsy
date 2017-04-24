@@ -1,14 +1,14 @@
 class OrdersController < ApplicationController
 
-  # I'm commenting this out so it stops hurting our
-  # Testing percentage!
-  # def index
-  #   @orders = Order.all
-  #   respond_to do |format|
-  #     format.html
-  #     format.csv { send_data @orders.to_csv }
-  #   end
-  # end
+  def index
+    @orders = Order.all
+    @user_orders = Order.user_orders(session[:user_id])
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @orders.to_csv }
+    end
+  end
 
   def checkout
     @order = Order.find_by_id(session[:order_id])
@@ -40,6 +40,10 @@ class OrdersController < ApplicationController
         raise
       end
     end
+  end
+
+  def show
+    @order = Order.find(params[:id])
   end
 
   private
