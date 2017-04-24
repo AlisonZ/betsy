@@ -25,9 +25,11 @@ describe Product do
   it "If a name and price are given the book is valid" do
     product.name = "My awesome product"
     product.price = 12.99
+    product.user = users(:aurora)
 
     product.errors.messages[:name].must_equal []
     product.errors.messages[:price].must_equal []
+    product.errors.messages[:user].must_equal []
   end
 
   it "You can create a product" do
@@ -46,6 +48,28 @@ describe Product do
 
       product.save
       product.sell_status.must_be_instance_of String
+    end
+
+    it "if selling_status is set to false, will return 'retired'" do
+      product.name = "My awesome product"
+      product.price = 12.99
+      product.user = users(:aurora)
+
+      product.save
+
+      product.selling_status = false
+      product.sell_status.must_equal "retired"
+    end
+
+    it "if selling_status is true, will return 'selling'" do
+      product.name = "My awesome product"
+      product.price = 12.99
+      product.user = users(:aurora)
+
+      product.save
+
+      product.selling_status = true
+      product.sell_status.must_equal 'selling'
     end
 
   end
