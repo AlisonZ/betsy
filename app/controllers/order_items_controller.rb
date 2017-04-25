@@ -5,24 +5,24 @@ class OrderItemsController < ApplicationController
   def index
     @order_items = OrderItem.all
     respond_to do |format|
-        format.html
-        format.csv { send_data @order_items.to_csv }
-      end
+      format.html
+      format.csv { send_data @order_items.to_csv }
+    end
   end
 
   def create
     # if !duplicate_item?
-      @item = OrderItem.new
-      @item.quantity = item_params[:quantity]
-      @item.product_id = params[:id]
-      @item.order_id = @order.id
-      if @item.save
-        @order.order_items << @item
-        redirect_to cart_path
-      else
-        flash.now[:failure] = "Unable to add to cart at this time"
-        redirect_to product_path(params[:id])
-      end
+    @item = OrderItem.new
+    @item.quantity = item_params[:quantity]
+    @item.product_id = params[:id]
+    @item.order_id = @order.id
+    if @item.save
+      @order.order_items << @item
+      redirect_to cart_path
+    else
+      flash.now[:failure] = "Unable to add to cart at this time"
+      redirect_to product_path(params[:id])
+    end
     # else
     #   @item = @cart_items.where(product_id: params[:id]).first
     #   @item.quantity += item_params[:quantity]
@@ -46,11 +46,25 @@ class OrderItemsController < ApplicationController
   def update
     @item = OrderItem.find_by_id(params[:id])
     if @item.update(item_params)
-        if @item.order.status == 'pending'
-            redirect_to :cart
-        else
-            redirect_to user_orders_path(session[:user_id])
+
+      @order = Order.find_by_id(@item.order)
+      incomplete = 0
+      @order.order_items.each do |item|
+        if item.ship_status == false
+          incomplete += 1
         end
+      end
+
+      if incomplete == 0
+        @order.status = 'complete'
+        @order.save
+      end
+
+      if @order.status == 'pending'
+        redirect_to :cart
+      else
+        redirect_to user_orders_path(session[:user_id])
+      end
     else
       flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
       render :cart

@@ -19,6 +19,7 @@
     <th>Price</th>
     <th>Quantity</th>
     <th>Subtotal</th>
+    <th>Shipping Status</th>
   </tr>
   <% @order.order_items.each do |order_item| %>
   <tr>
@@ -26,6 +27,7 @@
     <td><%= order_item.product.price %></td>
     <td><%= order_item.quantity %></td>
     <td><%= order_item.subtotal %></td>
+    <td><%= order_item.shipping_status %></td>
   </tr>
   <% end %>
 </table>
