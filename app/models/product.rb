@@ -19,6 +19,14 @@ class Product < ApplicationRecord
     end
   end
 
+  def out_of_stock
+    if self.stock == 0
+      return true
+    else
+      false
+    end
+  end
+
   # def self.to_csv
   #   attributes = %w(id title description price photo_url stock user_id selling_status )
   #   CSV.generate( headers: true ) do |csv|

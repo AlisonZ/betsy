@@ -13,3 +13,9 @@ shirts:
   product: fancy_shirt
   order: order_one
   quantity: 1
+
+
+hats:
+  product: aurorahat
+  order: order_one
+  quantity: 3

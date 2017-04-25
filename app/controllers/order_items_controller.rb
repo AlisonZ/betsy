@@ -61,19 +61,16 @@ class OrderItemsController < ApplicationController
         end
     end
 
-    def destroy
-        @item = OrderItem.find_by_id(params[:id])
-        if @item.destroy
-            flash[:success] = "Removed #{@item.product.name} from cart"
-            redirect_to :cart
-
-        else
-            flash.now[:failure] = "Could not remove #{@item.product.name} from cart at this time. Whoops!"
-            render :cart
-
-        end
-
+  def destroy
+    @item = OrderItem.find_by_id(params[:id])
+    if @item.destroy
+      flash[:success] = "Removed #{@item.product.name} from cart"
+      redirect_to :cart
+    else
+      flash.now[:failure] = "Could not remove #{@item.product.name} from cart at this time. Whoops!"
+      render :cart
     end
+  end
 
     private
 
@@ -90,12 +87,18 @@ class OrderItemsController < ApplicationController
         end
     end
 
-    # def duplicate_item?
-    #   if @cart_items.where(product_id: params[:id]).empty?
-    #     return false
-    #   else
-    #     return true
-    #   end
-    # end
-
+  def duplicate_item?
+    if session[:order_id]
+      if !OrderItem.where(order_id: session[:order_id]).empty?
+        items = OrderItem.where(order_id: session[:order_id])
+        if items.find_by(product_id: params[:id])
+          return true
+        else
+          return false
+        end
+      else
+        return false
+      end
+    end
+  end
 end
