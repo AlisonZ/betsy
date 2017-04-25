@@ -161,4 +161,21 @@ describe ProductsController do
       new_name.must_equal old_name
     end
   end
+
+  describe "#status" do
+    it "can change status from true to false" do
+      post login_path, params: { username: 'test', email: "test-email" }
+      get user_path(users(:aurora).id)
+      patch status_path(users(:aurora).products.first.id)
+      users(:aurora).products.first.selling_status.must_equal false
+    end
+
+    it "can change status from false to true" do
+      post login_path, params: { username: 'test', email: "test-email" }
+      get user_path(users(:aurora).id)
+      patch status_path(users(:aurora).products.first.id)
+      patch status_path(users(:aurora).products.first.id)
+      users(:aurora).products.first.selling_status.must_equal true
+    end
+  end
 end
