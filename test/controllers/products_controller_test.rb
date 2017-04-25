@@ -45,8 +45,14 @@ describe ProductsController do
 
   describe "#New" do
     it "should get a form for a new product" do
+      post login_path(username: users(:aurora).username, email: users(:aurora).email)
       get new_product_path
       must_respond_with :success
+    end
+
+    it "should not go to new product form if no logged in user" do
+      get new_product_path
+      must_redirect_to :root
     end
 
     it "should be able to add new product if logged in user" do
