@@ -38,6 +38,36 @@ CSV.read("db/products.csv", headers: true).map do |line|
     end
 end
 
+50.times do
+  new_order_item = OrderItem.new(product_id: rand(1..24), order_id: rand(1..10))
+  product = Product.find(new_order_item.product_id)
+  new_order_item.quantity = rand(1..product.stock)
+  new_order_item.save
+  if !new_order_item.id
+    puts "couldn't create orderitem of #{new_order_item.quantity}#{product.name.pluralize}"
+    puts new_order_item.errors.messages
+  end
+end
+
+15.times do
+  new_order = Order.new
+  rand(1..5).times do
+    new_order.order_items << OrderItem.find(rand(1..50))
+  end
+  new_order.email = "#{('a'..'z').to_a.shuffle[0,5].join}@#{('a'..'z').to_a.shuffle[0,5].join}.fake"
+  new_order.address = "#{rand(1..100)} #{["E","W","S","N"].sample} #{%w(fake real nope notgonnahappen fairyland silly haha).sample.capitalize} #{["Ave","Street","Way","Blvd"].sample}"
+  new_order.name_on_cc = ('a'..'z').to_a.shuffle[0,6].join
+  new_order.cc_number = (1..9).to_a.shuffle[0,4].join.to_i
+  new_order.cc_ccv = (1..9).to_a.shuffle[0,3].join.to_i
+  new_order.billing_zip = (1..9).to_a.shuffle[0,5].join.to_i
+  new_order.save
+  if !new_order.id
+    puts "couldn't create order"
+    puts new_order.errors.messages
+  end
+end
+
+
 
 
 # CSV.read("db/categories_products.csv", headers: true).map do |line|
