@@ -29,8 +29,8 @@ class ProductsController < ApplicationController
 
 
   def new
-    @product = Product.new
-    @category = Category.new
+      @product = Product.new
+      @category = Category.new
   end
 
 

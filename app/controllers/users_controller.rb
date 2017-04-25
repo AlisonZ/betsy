@@ -11,18 +11,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    # raise
-
-    if !@user
-      render_404
-    end
   end
 
 
   private
-
-  def user_params
-    params.require(:user).permit(:username, :email)
-  end
+  # this is never used -- commenting out for now
+  # def user_params
+  #   params.require(:user).permit(:username, :email)
+  # end
 
 end

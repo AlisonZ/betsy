@@ -48,6 +48,12 @@ describe ProductsController do
       get new_product_path
       must_respond_with :success
     end
+
+    it "should be able to add new product if logged in user" do
+      post login_path, params: { username: 'test', email: "test-email" }
+      get new_product_path
+      must_respond_with :success
+    end
   end
 
   describe "#Create" do
