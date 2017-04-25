@@ -30,7 +30,7 @@ CSV.read("db/categories.csv", headers: true).map do |line|
 end
 
 CSV.read("db/products.csv", headers: true).map do |line|
-    new_product = Product.create(user_id: line[0].to_i, name: line[1], description: line[2], price: line[3].to_f.round(2), photo_url: line[4], stock: line[5].to_i, category_ids: [line[6], line[7]])
+    new_product = Product.create(user_id: line[0].to_i, name: line[1], description: line[2], selling_status: true, price: line[3].to_f.round(2), photo_url: line[4], stock: line[5].to_i, category_ids: [line[6], line[7]])
 
     if !new_product.id
         puts "couldn't create product #{new_product.name}"

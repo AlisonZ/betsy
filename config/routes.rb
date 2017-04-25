@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
 
+  patch '/products/status/:id', to: 'products#status', as: 'status'
   resources :products
   resources :product do
       resources :reviews, only: [:new, :create]
@@ -32,4 +33,5 @@ Rails.application.routes.draw do
   #Should we change this controller method name to edit?
 
   put '/orders/:id', to: 'orders#update', as: 'confirmation'
+
 end
