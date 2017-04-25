@@ -39,7 +39,7 @@ CSV.read("db/products.csv", headers: true).map do |line|
 end
 
 50.times do
-  new_order_item = OrderItem.new(product_id: rand(1..24), order_id: rand(1..10))
+  new_order_item = OrderItem.new(product_id: rand(1..24), order_id: rand(1..20))
   product = Product.find(new_order_item.product_id)
   new_order_item.quantity = rand(1..product.stock)
   new_order_item.save
@@ -49,14 +49,16 @@ end
   end
 end
 
-15.times do
+20.times do
+  cons = %w( b c d f g h j k l m n p q r s t v w x z )
+  vows = %w( a e i o u y )
   new_order = Order.new
-  rand(1..5).times do
-    new_order.order_items << OrderItem.find(rand(1..50))
-  end
-  new_order.email = "#{('a'..'z').to_a.shuffle[0,5].join}@#{('a'..'z').to_a.shuffle[0,5].join}.fake"
+  n = 1
+  orderitems = OrderItem.where(order_id: n)
+  new_order.order_items = orderitems
+  new_order.email = "#{cons.sample}@#{cons.sample}#{vows.sample}#{cons.sample}.fake"
   new_order.address = "#{rand(1..100)} #{["E","W","S","N"].sample} #{%w(fake real nope notgonnahappen fairyland silly haha).sample.capitalize} #{["Ave","Street","Way","Blvd"].sample}"
-  new_order.name_on_cc = ('a'..'z').to_a.shuffle[0,6].join
+  new_order.name_on_cc = "#{vows.sample.capitalize}#{cons.sample}#{vows.sample} #{cons.sample.capitalize}#{vows.sample}"
   new_order.cc_number = (1..9).to_a.shuffle[0,4].join.to_i
   new_order.cc_ccv = (1..9).to_a.shuffle[0,3].join.to_i
   new_order.billing_zip = (1..9).to_a.shuffle[0,5].join.to_i
@@ -64,6 +66,23 @@ end
   if !new_order.id
     puts "couldn't create order"
     puts new_order.errors.messages
+  end
+  n += 1
+end
+
+#reviews
+100.times do
+  exclamations = %w( wow yikes sheesh dang no yes terrible wonderful amazing )
+  adjectives = %w( good bad stinky hot flavorful uncertain hottening flatly kindness pink forkful evenly makely flyful candidly )
+  sayings  = ["I can't even!", "No way!", "Why???", "Must have one.", "Can you believe it?", "Don't buy this."]
+  new_review = Review.new(product_id: rand(1..24))
+  new_review.title = "#{exclamations.sample.capitalize}!"
+  new_review.rating = rand(1..5)
+  new_review.review_text = "Such #{adjectives.sample}. #{sayings.sample}"
+  new_review.save
+  if !new_review.id
+    puts "couldn't create review"
+    puts new_review.errors.messages
   end
 end
 
