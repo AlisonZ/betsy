@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
     @user_total = Order.user_total(session[:user_id])
     @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
     @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
-    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid")
-    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete")
+    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
+    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
 
     respond_to do |format|
       format.html

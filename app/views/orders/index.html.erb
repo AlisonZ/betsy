@@ -20,9 +20,46 @@
 </ul>
 
 <h2>Fulfillment Summary:</h2>
-<% if @user_orders != [] %>
+
+<h3>Incomplete orders</h3>
+<% if @user_incomplete_orders != [] %>
 <ul>
-    <% @user_orders.each do |order| %>
+    <% @user_incomplete_orders.each do |order| %>
+    <li>
+        <%= link_to "Order #{order.id}", order_path(order.id) %>
+        Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
+        Status: <%= order.status %>
+        <ul>
+            <% order.order_items.each do |item| %>
+              <% if item.product.user_id == session[:user_id] %>
+              <li>
+                  <%= link_to item.product.name, product_path(item.product.id) %>
+                  <ul>
+                    <li>
+                      <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
+                      Subtotal: <%= number_to_currency(item.subtotal) %>
+                    </li>
+
+                    <li>
+                      <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+                      <%= f.label :ship_status, "Shipping Status:" %>
+                      <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
+                      <%= f.submit %>
+                      <% end %>
+                    </li>
+                  </ul>
+                <% end %>
+              <% end %>
+            </li>
+        </ul>
+    </li>
+    <% end %>
+</ul>
+<% end %>
+<h3>Complete orders</h3>
+<% if @user_complete_orders != [] %>
+<ul>
+    <% @user_complete_orders.each do |order| %>
     <li>
         <%= link_to "Order #{order.id}", order_path(order.id) %>
         Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
