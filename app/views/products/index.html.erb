@@ -5,13 +5,13 @@
 </div>
 <ul class="row">
 <% @products.each do |product| %>
-  <li class="small-12 medium-6 large-4 columns category">
-    <div class="border">
-    <%= link_to(product_path(product.id)) do %>
-      <%= product.name %> <br />
-      <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
-    <% end %>
-  </div>
-  </li>
+  <%= link_to(product_path(product.id)) do %>
+    <li class="small-12 medium-6 large-4 columns category">
+      <div class="border">
+        <%= product.name %> <br />
+        <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
+      </div>
+    </li>
+  <% end %>
 <% end %>
 </ul>

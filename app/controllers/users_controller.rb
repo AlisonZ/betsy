@@ -2,10 +2,15 @@ class UsersController < ApplicationController
   before_action :check_owner, only: [:show]
 
   def index
-    @users = User.all
+    all_users = User.all
+    @users = all_users.find_all { |user| user.products != [] }
     respond_to do |format|
       format.html
       format.csv { send_data @users.to_csv }
+    end
+    if @users == nil
+      flash[:warning] = "There are no merchants at this time"
+      redirect_to root_path
     end
   end
 
