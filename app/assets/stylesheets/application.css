@@ -31,8 +31,7 @@ header {
 }
 
 .header-login {
-  clear: both;
-
+  /*clear: both;*/
   float: right;
   display: block;
 }
@@ -41,8 +40,16 @@ header {
   display: inline-block;
 }
 
-.cart {
+.cart img {
   height: 30px;
+}
+
+.cart {
+  margin: 10px;
+}
+
+.login {
+  margin-right: 10px;
 }
 
 body {
@@ -58,8 +65,5 @@ body {
   border: 2px solid gold;
   border-radius: 20px;
   text-align: center;
+  margin: 20px 0;
  }
-
-.index {
-  /*margin: 10px 10%;*/
-}
