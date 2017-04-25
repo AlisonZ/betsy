@@ -32,12 +32,15 @@ class OrderItemsController < ApplicationController
   def update
     @item = OrderItem.find_by_id(params[:id])
     if @item.update(item_params)
-      redirect_to :cart
+        if @item.order.status == 'pending'
+            redirect_to :cart
+        else
+            redirect_to user_orders_path(session[:user_id])
+        end
     else
       flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
       render :cart
     end
-
   end
 
   def destroy
@@ -57,7 +60,7 @@ class OrderItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:order_item).permit(:quantity)
+    params.require(:order_item).permit(:quantity, :ship_status)
   end
 
   def create_order
