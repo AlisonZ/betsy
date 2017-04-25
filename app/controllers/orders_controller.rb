@@ -29,14 +29,15 @@ class OrdersController < ApplicationController
       @order.billing_zip = order_params[:billing_zip]
       @order.address = order_params[:address]
       if @order.save
+        # byebug
         session[:order_id] = nil
         @order.order_items.each do |item|
           #updates the stock of each of the products
           item.product.stock = item.product.stock - item.quantity
           item.product.save
-          #need to test this, and possibly pull out into model method?
         end
-        #Should update the merchant page somehow with a notice of a new order?
+      else
+        raise
       end
     end
   end

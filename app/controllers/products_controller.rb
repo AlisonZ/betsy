@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
 
-
   def index
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
@@ -12,31 +11,33 @@ class ProductsController < ApplicationController
       @category_name = user.username.capitalize
     else
       @products = Product.all
-
       @category_name = "All Products"
     end
     respond_to do |format|
       format.html
       format.csv { send_data @products.to_csv }
     end
-    # raise
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find_by_id(params[:id])
+    if !@product
+      render_404
+    end
     @item = OrderItem.new
-    # raise
   end
 
+
   def new
-    @product = Product.new
-    @category = Category.new
+      @product = Product.new
+      @category = Category.new
   end
 
 
   def create
     @product = Product.create(product_params)
     @product.user_id = current_user.id
+    # byebug
     if @product.save
       flash[:success] = "#{@product.name} successfully added!"
       redirect_to products_path
@@ -52,7 +53,6 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by_id(params[:id])
-
     if @product.update(product_params)
       flash[:success] = "#{@product.name} successfully edited"
       redirect_to product_path(@product.id)
@@ -67,9 +67,5 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :description, :stock, :price, :photo_url, :selling_status, category_ids: [])
   end
-
-
-
-
 
 end

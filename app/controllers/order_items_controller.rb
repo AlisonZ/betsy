@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :create_order, only: [:create]
+  helper_method :duplicate_item?
 
   def index
     @order_items = OrderItem.all
@@ -10,17 +11,30 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @item = OrderItem.new
-    @item.quantity = item_params[:quantity]
-    @item.product_id = params[:id]
-    @item.order_id = @order.id
-    if @item.save
-      @order.order_items << @item
-      redirect_to cart_path
-    else
-      flash.now[:failure] = "Unable to add to cart at this time"
-      redirect_to product_path(params[:id])
-    end
+    # if !duplicate_item?
+      @item = OrderItem.new
+      @item.quantity = item_params[:quantity]
+      @item.product_id = params[:id]
+      @item.order_id = @order.id
+      if @item.save
+        @order.order_items << @item
+        redirect_to cart_path
+      else
+        flash.now[:failure] = "Unable to add to cart at this time"
+        redirect_to product_path(params[:id])
+      end
+    # else
+    #   @item = @cart_items.where(product_id: params[:id]).first
+    #   @item.quantity += item_params[:quantity]
+    #   if @item.update
+    #     flash[:success] = "Added #{item_params[:quantity]} to existing order for #{@item.product.name}"
+    #     redirect_to cart_path
+    #   else
+    #     flash.now[:failure] = "Sorry, something went wrong"
+    #     redirect_to :back
+    #   end
+    #
+    # end
   end
 
   def cart
@@ -71,4 +85,13 @@ class OrderItemsController < ApplicationController
       session[:order_id] = @order.id
     end
   end
+
+  # def duplicate_item?
+  #   if @cart_items.where(product_id: params[:id]).empty?
+  #     return false
+  #   else
+  #     return true
+  #   end
+  # end
+
 end

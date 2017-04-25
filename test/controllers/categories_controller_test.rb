@@ -10,9 +10,12 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
             must_respond_with :success
         end
 
-        it "should get show" do
-            get category_path(1)
-            must_respond_with :success
+        it "should redirect to user page after creating" do
+
+            post login_path, params: { username: users(:felix).username, email: users(:felix).email }
+            post categories_path, params: { category: {name: "funky"}}
+            must_respond_with :redirect
+            must_redirect_to user_path(users(:felix).id)
         end
 
         it "should show the new form" do
@@ -22,12 +25,10 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
         it "should affect the model when creating a category" do
             proc {
+              post login_path, params: { username: users(:felix).username, email: users(:felix).email }
                 post categories_path, params: { category: {name: "sci-fi"}} }.must_change 'Category.count', 1
         end
 
-        it "should redirect to category index after creating a new category" do
-            post categories_path, params:{ categroy: {name: "chick lit"}}
-            must_redirect_to categories_path
-        end
+
     end
 end

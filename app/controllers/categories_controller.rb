@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     end
 
     def new
-        @category = Category.new
+      @category = Category.new
     end
 
     def create
@@ -21,6 +21,5 @@ class CategoriesController < ApplicationController
         if category.save
             redirect_to user_path(current_user)
         end
-
     end
 end

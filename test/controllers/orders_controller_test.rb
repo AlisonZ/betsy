@@ -37,13 +37,18 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    #FAILLING RIGHT NOW AND I DON'T KNOW WHY!
     it "Updates the status of order to 'Paid'" do
+      # Initialize the cart by adding an item to it
       post new_order_item_path(products(:fancy_socks).id),
         params: {order_item:
           {quantity:   (order_items(:socks).quantity)}
         }
-      put order_path(orders(:order_one).id), params: {order:
+
+      # Get the newly created order (should be the last row in the Order table)
+      order = Order.last
+      old_status = order.status
+
+      put order_path(order.id), params: {order:
         {email: "lynn@gmail.com",
          name_on_cc: "Lynn Trickey",
          cc_number: 123,
@@ -51,12 +56,11 @@ describe OrdersController do
          billing_zip: 123,
          address: "123 Avenue St.",
          }}
-      status = orders(:order_one).status
-      status.must_equal "Paid"
+         order = Order.find(order.id)
+         order.status.must_equal "Paid"
+         new_status = order.status
+
+         new_status.wont_equal old_status
     end
   end
-
-  #Need to write a test for if it doesn't work - then what!
-
-  #
 end

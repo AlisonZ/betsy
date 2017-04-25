@@ -5,7 +5,7 @@ describe Review do
 
   it "is valid with a product_id" do
       review = Review.new
-      review.product_id = 1
+      review.product_id = products(:watch).id
       result = review.valid?
       result.must_equal true
   end
@@ -35,7 +35,7 @@ describe Review do
 
   it "is a valid review without a rating" do
       review = Review.new
-      review.product_id = 3
+      review.product_id = products(:watch).id
       result = review.valid?
       result.must_equal true
   end
