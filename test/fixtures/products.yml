@@ -15,6 +15,8 @@ fancy_socks:
   photo_url:
   stock: 1
   user: aurora
+  selling_status: true
+
 
 umbrella:
   name: Umbrella
@@ -23,6 +25,8 @@ umbrella:
   photo_url: http://www.google.com
   stock: 1
   user: aurora
+  selling_status: true
+
 
 fancy_shirt:
   name: "Expensive Shirt"
@@ -39,3 +43,4 @@ aurorahat:
   photo_url: "some url"
   stock: 5
   user: aurora
+  selling_status: true

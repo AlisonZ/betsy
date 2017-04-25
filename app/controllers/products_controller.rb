@@ -3,14 +3,14 @@ class ProductsController < ApplicationController
   def index
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
-      @products = category.products
+      @products = category.products.where(selling_status: true)
       @category_name = category.name.capitalize
     elsif params[:user_id]
       user = User.find_by(id: params[:user_id])
-      @products = user.products
+      @products = user.products.where(selling_status: true)
       @category_name = user.username.capitalize
     else
-      @products = Product.all
+      @products = Product.where(selling_status: true)
       @category_name = "All Products"
     end
     respond_to do |format|
@@ -29,8 +29,8 @@ class ProductsController < ApplicationController
 
 
   def new
-      @product = Product.new
-      @category = Category.new
+    @product = Product.new
+    @category = Category.new
   end
 
 
@@ -59,6 +59,19 @@ class ProductsController < ApplicationController
     else
       flash.now[:error] = "Something went wrong..."
       render "edit"
+    end
+  end
+
+  def status
+    @product = Product.find_by_id(params[:id])
+    if @product.selling_status == true
+      @product.selling_status = false
+    else
+      @product.selling_status = true
+    end
+    if @product.save
+      flash[:success] = "Successfully changed item status"
+      redirect_to user_path(current_user.id)
     end
   end
 
