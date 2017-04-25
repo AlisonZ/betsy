@@ -19,6 +19,16 @@ describe ProductsController do
       get products_path
       must_respond_with :success
     end
+
+    it "can filter by merchant" do
+      get user_products_path(users(:felix))
+      must_respond_with :success
+    end
+
+    it "can filter by category" do
+      get category_products_path(categories(:fiction))
+      must_respond_with :success
+    end
   end
 
   describe "#Show" do
@@ -42,9 +52,10 @@ describe ProductsController do
 
   describe "#Create" do
     it "should redirect to index after creating a new product" do
+      post login_path, params: { username: 'test', email: "test-email" }
+
       post products_path params: { product: {
         name: "My new Product",
-        user_id: users(:felix).id,
         description: "This is great!",
         stock: 123,
         price: 12400.00,
@@ -52,14 +63,15 @@ describe ProductsController do
         selling_status: true,
         category_ids: [categories(:fiction).id, categories(:nonfiction).id]
       } }
+      # product.user_id = users(:felix).id
       must_respond_with :redirect
       must_redirect_to products_path
     end
 
     it "should update model after creating a new product" do
+      post login_path, params: { username: 'test', email: "test-email" }
       proc { post products_path params: { product: {
         name: "My new Product",
-        user_id: users(:felix).id,
         description: "This is great!",
         stock: 123,
         price: 12400.00,
@@ -70,9 +82,9 @@ describe ProductsController do
     end
 
     it "should not update model with bad data" do
+      post login_path, params: { username: 'test', email: "test-email" }
       proc { post products_path params: { product: {
         name: "",
-        user_id: 0,
         description: "This is great!",
         stock: 123,
         price: 00,

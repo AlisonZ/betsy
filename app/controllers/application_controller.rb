@@ -33,15 +33,19 @@ class ApplicationController < ActionController::Base
   end
 
   def can_add_new_product?
-    if current_user.id == params[:user_id].to_i
-      return true
-    else
+    if !current_user
       return false
+    else
+      if current_user.id == params[:user_id].to_i
+        return true
+      else
+        return false
+      end
     end
   end
 
   def check_owner
-    if current_user.id != params[:id].to_i
+    if !current_user || current_user.id != params[:id].to_i
       flash[:failure] = "You must be the owner of this page to view it"
       redirect_to root_path
     end
