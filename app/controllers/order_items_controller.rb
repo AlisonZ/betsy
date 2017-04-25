@@ -45,15 +45,15 @@ class OrderItemsController < ApplicationController
 
     def update
         @item = OrderItem.find_by_id(params[:id])
+        @order = Order.find_by_id(@item.order_id)
+
         if @item.update(item_params)
-
             ##check if all shipped method
-            @order = @item.check_order_status(@item.order_id)
-
-            if @order.status == 'pending'
-                redirect_to :cart
-            else
+            if @order.status != 'pending'
+                @order = @item.check_order_status(@item.order_id)
                 redirect_to user_orders_path(session[:user_id])
+            else
+                redirect_to :cart
             end
         else
             flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"

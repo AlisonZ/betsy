@@ -19,6 +19,7 @@ class OrderItem < ApplicationRecord
     #how do we get this in the model and still have it be able to talk to the update method
     def check_order_status(id)
         @order = Order.find_by_id(id)
+
         incomplete = 0
         @order.order_items.each do |item|
             if item.ship_status == false
@@ -29,8 +30,10 @@ class OrderItem < ApplicationRecord
         if incomplete == 0
             @order.status = 'complete'
             @order.save
+        else
+            @order.status = 'Paid'
+            @order.save
         end
-
         return @order
     end
 
