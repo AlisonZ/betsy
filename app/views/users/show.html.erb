@@ -18,6 +18,20 @@
 <%= button_to "Add a new category", new_category_path, method: :get %>
 
 
-<h3><%= @user.username %>'s Purchases</h3>
+<h3>My Purchases</h3>
+<% if @purchases.empty? %>
+<p>
+  No purchases yet.
+</p>
+<% else %>
+<ul>
+  <% @purchases.each do |purchase| %>
+  <li>
+    <%= purchase.created_at.strftime("%m/%d/%Y") %>: <%= purchase.products.length %> item(s) - $<%= purchase.total %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
 
-<h3><%= link_to 'My Sales Orders', user_orders_path(@user.id) %></h3>
+
+<h3><%= link_to 'Manage My Sales Orders', user_orders_path(@user.id) %></h3>
