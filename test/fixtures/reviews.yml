@@ -9,3 +9,12 @@ dislike:
   product_id: 1
   rating: 1
   review_text: "I don't like it"
+
+
+cool:
+  product_id: products(:aurorahat).id
+  rating: 1
+
+yup:
+  product_id: products(:aurorahat).id
+  rating: 3

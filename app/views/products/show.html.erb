@@ -11,7 +11,7 @@ Category:
 <p><%= @product.description %> </p>
 <ul>
 <li>
-  <%= @product.price %>
+  Price: $<%= @product.price %>
 </li>
 <li>
   <%= @product.stock %> left in stock
@@ -19,8 +19,11 @@ Category:
 <li>
   Selling status:  <%= @product.sell_status %>
 </li>
-<li>
+<li> Merchant:
 <%= link_to @product.user.username, user_products_path(@product.user.id) %>
+</li>
+<li>
+  Average rating: <%= @product.average_rating %>
 </li>
 </ul>
 

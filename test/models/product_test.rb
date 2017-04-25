@@ -22,7 +22,7 @@ describe Product do
     product.errors.messages.must_include :user
   end
 
-  it "If a name and price are given the book is valid" do
+  it "If a name and price are given the product is valid" do
     product.name = "My awesome product"
     product.price = 12.99
     product.user = users(:aurora)
@@ -71,6 +71,48 @@ describe Product do
       product.selling_status = true
       product.sell_status.must_equal 'selling'
     end
+
+  end
+
+  describe "#average_rating" do
+    it "calculates average rating" do
+      product = products(:aurorahat)
+      Review.create(product: products(:aurorahat), title: "yeah!", rating: 4, review_text: "so so so amazing")
+      Review.create(product: products(:aurorahat), title: "yeah!", rating: 3, review_text: "so so so amazing")
+      Review.create(product: products(:aurorahat), title: "yeah!", rating: 5, review_text: "so so so amazing")
+      product.average_rating.must_equal 4
+    end
+  end
+
+  describe "#out_of_stock" do
+    it "returns true if stock is zero" do
+      product = products(:aurorahat)
+      product.stock = 0
+      product.save
+      product.out_of_stock.must_equal true
+    end
+    it "returns false if stock is not zero" do
+      product = products(:aurorahat)
+      product.stock = 4
+      product.save
+      product.out_of_stock.must_equal false
+    end
+  end
+
+  describe "#selling?" do
+    it "returns true if selling_status is true" do
+      product = products(:aurorahat)
+      product.selling_status = true
+      product.save
+      product.selling?.must_equal true
+    end
+    it "returns false if selling_status is false" do
+      product = products(:aurorahat)
+      product.selling_status = false
+      product.save
+      product.selling?.must_equal false      
+    end
+
 
   end
 
