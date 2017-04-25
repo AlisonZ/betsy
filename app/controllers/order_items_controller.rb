@@ -2,39 +2,48 @@ class OrderItemsController < ApplicationController
   before_action :create_order, only: [:create]
   helper_method :duplicate_item?
 
-  def index
-    @order_items = OrderItem.all
-    respond_to do |format|
-      format.html
-      format.csv { send_data @order_items.to_csv }
-    end
-  end
+
+  # this just exists for when we want to use the csv functionality
+  # def index
+  #   @order_items = OrderItem.all
+  #   respond_to do |format|
+  #     format.html
+  #     format.csv { send_data @order_items.to_csv }
+  #   end
+  # end
 
   def create
-    # if !duplicate_item?
-    @item = OrderItem.new
-    @item.quantity = item_params[:quantity]
-    @item.product_id = params[:id]
-    @item.order_id = @order.id
-    if @item.save
-      @order.order_items << @item
-      redirect_to cart_path
+    if !duplicate_item?
+      # raise
+      @item = OrderItem.new
+      @item.quantity = item_params[:quantity].to_i
+      @item.product_id = params[:id]
+      @item.order_id = @order.id
+      if @item.save
+        @order.order_items << @item
+        redirect_to cart_path
+      else
+        flash.now[:failure] = "Unable to add to cart at this time"
+        redirect_to product_path(params[:id])
+      end
     else
-      flash.now[:failure] = "Unable to add to cart at this time"
-      redirect_to product_path(params[:id])
+      @items = OrderItem.where(order_id: session[:order_id])
+      @item = @items.find_by(product_id: params[:id])
+      if @item.quantity + item_params[:quantity].to_i > @item.product.stock
+        flash[:failure] = "Not enough items in inventory to add #{@item.quantity} to your cart!"
+        redirect_to product_path(params[:id])
+      else
+        @item.quantity += item_params[:quantity].to_i
+        # raise
+        if @item.save
+          flash[:success] = "Added #{item_params[:quantity]} to existing order for #{@item.product.name}"
+          redirect_to cart_path
+        else
+          flash.now[:failure] = "Sorry, something went wrong"
+          redirect_to :back
+        end
+      end
     end
-    # else
-    #   @item = @cart_items.where(product_id: params[:id]).first
-    #   @item.quantity += item_params[:quantity]
-    #   if @item.update
-    #     flash[:success] = "Added #{item_params[:quantity]} to existing order for #{@item.product.name}"
-    #     redirect_to cart_path
-    #   else
-    #     flash.now[:failure] = "Sorry, something went wrong"
-    #     redirect_to :back
-    #   end
-    #
-    # end
   end
 
   def cart
@@ -45,29 +54,34 @@ class OrderItemsController < ApplicationController
 
   def update
     @item = OrderItem.find_by_id(params[:id])
-    if @item.update(item_params)
 
-      @order = Order.find_by_id(@item.order)
-      incomplete = 0
-      @order.order_items.each do |item|
-        if item.ship_status == false
-          incomplete += 1
+    if @item.quantity + item_params[:quantity].to_i <= @item.product.stock
+      if @item.update(item_params)
+
+        @order = Order.find_by_id(@item.order)
+        incomplete = 0
+        @order.order_items.each do |item|
+          if item.ship_status == false
+            incomplete += 1
+          end
         end
-      end
 
-      if incomplete == 0
-        @order.status = 'complete'
-        @order.save
-      end
+        if incomplete == 0
+          @order.status = 'complete'
+          @order.save
+        end
 
-      if @order.status == 'pending'
-        redirect_to :cart
+        if @order.status == 'pending'
+          redirect_to :cart
+        else
+          redirect_to user_orders_path(session[:user_id])
+        end
       else
-        redirect_to user_orders_path(session[:user_id])
+        flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
+        render :cart
       end
     else
-      flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
-      render :cart
+      redirect_to :cart
     end
   end
 
@@ -76,13 +90,10 @@ class OrderItemsController < ApplicationController
     if @item.destroy
       flash[:success] = "Removed #{@item.product.name} from cart"
       redirect_to :cart
-
     else
       flash.now[:failure] = "Could not remove #{@item.product.name} from cart at this time. Whoops!"
       render :cart
-
     end
-
   end
 
   private
@@ -100,12 +111,19 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  # def duplicate_item?
-  #   if @cart_items.where(product_id: params[:id]).empty?
-  #     return false
-  #   else
-  #     return true
-  #   end
-  # end
+  def duplicate_item?
+    if session[:order_id]
+      if !OrderItem.where(order_id: session[:order_id]).empty?
+        items = OrderItem.where(order_id: session[:order_id])
+        if items.find_by(product_id: params[:id])
+          return true
+        else
+          return false
+        end
+      else
+        return false
+      end
+    end
+  end
 
 end
