@@ -1,12 +1,16 @@
-<h1>Shop by Categories</h1>
-<div class="row">
-<% @categories.each do |category| %>
-    <!-- need to link to list of products with this category -->
-  <div class="small-6 medium-4 large-3 columns">
-    <%= link_to(category_products_path(category.id)) do %>
-      <%= category.name %> <br />
-      <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
-    <% end %>
+<article class="index">
+
+  <h1>Shop by Categories</h1>
+  <div class="row">
+  <% @categories.each do |category| %>
+      <!-- need to link to list of products with this category -->
+    <div class="small-12 medium-6 large-4 columns category">
+      <%= link_to(category_products_path(category.id)) do %>
+        <%= category.name %> <br />
+        <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
+      <% end %>
+    </div>
+  <% end %>
   </div>
-<% end %>
-</div>
+
+</article>

@@ -53,3 +53,13 @@ body {
 .index_photo {
   height: 100px;
 }
+
+.category {
+  border: 2px solid gold;
+  border-radius: 20px;
+  text-align: center;
+ }
+
+.index {
+  /*margin: 10px 10%;*/
+}
