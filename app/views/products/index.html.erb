@@ -1,17 +1,19 @@
+<article class="index">
 
-
-<div class = "row">
-  <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
-</div>
-<ul class="row">
-<% @products.each do |product| %>
-  <%= link_to(product_path(product.id)) do %>
-    <li class="small-12 medium-6 large-4 columns category">
-      <div class="border">
-        <%= product.name %> <br />
-        <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
-      </div>
-    </li>
+  <div class = "row">
+    <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
+  </div>
+  <ul class="row">
+  <% @products.each do |product| %>
+    <%= link_to(product_path(product.id)) do %>
+      <li class="small-12 medium-6 large-4 columns grid-item">
+        <div class="border">
+          <%= product.name %> <br />
+          <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
+        </div>
+      </li>
+    <% end %>
   <% end %>
-<% end %>
-</ul>
+  </ul>
+
+</article>
