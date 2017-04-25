@@ -1,33 +1,34 @@
 class SessionsController < ApplicationController
-  def create
-    @user = User.find_by(username: params[:username], email: params[:email])
-    if @user
-      session[:user_id] = @user.id
-      flash[:success] = "Successfully logged in as existing user #{@user.username}"
-      redirect_to :root
-    else
-      @user = User.create(username: params[:username], email: params[:email])
-      if @user.id != nil
-        session[:user_id] = @user.id
-        flash[:success] = "Successfully created new user #{@user.username} with ID #{@user.id}"
-        redirect_to :root
-      else
-        flash.now[:failure] = "Sorry, unable to log in at this time"
-        render :login_form
-      end
+    def create
+        auth_hash = request.env['omniauth.auth']
+        if auth_hash['uid']
+            user = User.find_by(uid: auth_hash[:uid], provider: 'github')
+            if user.nil?
+                user = User.create_from_github(auth_hash)
+                if user.nil?
+                    flash[:error] = "Could not log in"
+                    redirect_to :root
+                end
+            else
+                flash[:success] = "Successfully logged in as existing user #{user.username}"
+                redirect_to :root
+            end
+            session[:user_id] = user.id
+        else
+            flash[:error] = 'Could not log in'
+            redirect_to :root
+        end
+
     end
-  end
 
+    def index
+        @user = User.find(session[:user_id])
+    end
 
-  def login_form
-    @users = User.all
-  end
-
-  def logout
-    session[:user_id] = nil
-    redirect_to :root
-
-  end
-
+    def logout
+        session[:user_id] = nil
+        flash[:success] = "You are successfully logged out"
+        redirect_to root_path
+    end
 
 end

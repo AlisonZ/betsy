@@ -19,9 +19,10 @@ Rails.application.routes.draw do
   resources :reviews, only: [:index, :show]
 
   resources :users, only: [:index]
-  get '/login', to: 'sessions#login_form'
-  post '/login', to: 'sessions#create'
-  delete '/login', to: 'sessions#logout'
+  get "/auth/github/callback", to: "sessions#create"
+  # get '/login', to: 'sessions#login_form'
+  # post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#logout'
 
   resources :order_items, only: [:update, :destroy, :index]
   post 'products/:id/add', to: 'order_items#create', as: 'new_order_item'
