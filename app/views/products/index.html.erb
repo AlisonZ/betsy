@@ -1,16 +1,19 @@
 
-<h1><%= @category_name %></h1>
 
-<div class="row">
-
-  <ul>
-  <% @products.each do |product| %>
-  <li>
-    <%= link_to product.name, product_path(product.id) %>
-  </li>
-  <% end %>
-  </ul>
-
+<div class = "row">
+  <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
 </div>
+<ul class="row">
+<% @products.each do |product| %>
+  <li class="small-12 medium-6 large-4 columns category">
+    <div class="border">
+    <%= link_to(product_path(product.id)) do %>
+      <%= product.name %> <br />
+      <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
+    <% end %>
+  </div>
+  </li>
+<% end %>
+</ul>
 
 <% if can_add_new_product? %><%= link_to "Add a new product", new_product_path %><% end %>

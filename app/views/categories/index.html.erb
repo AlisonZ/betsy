@@ -1,25 +1,26 @@
 <article class="index">
 
-  <div class="row">
-    <div class="small-6 columns hero">
-      <h3>Whatever your budget...<br /> We'll break it.</h3>
-    </div>
-    <div class="small-6 columns hero-pic">
-      <img src="https://static.pexels.com/photos/9660/business-money-pink-coins.jpg" alt="piggy bank with money" />
-    </div>
+  <div class="row hero">
+    <h3 class="small-4 columns" id="slogan">
+      Whatever your budget...<br /> We can break it.
+    </h3>
   </div>
 
-  <h3>Shop by Categories</h3>
-  <div class="row">
+  <div class = "row">
+    <h3 class="small-12 cloumns">Shop by Category</h3>
+  </div>
+  <ul class="row">
   <% @categories.each do |category| %>
       <!-- need to link to list of products with this category -->
-    <div class="small-12 medium-6 large-4 columns category">
+    <li class="small-12 medium-6 large-4 columns category">
+      <div class="border">
       <%= link_to(category_products_path(category.id)) do %>
         <%= category.name %> <br />
         <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
       <% end %>
     </div>
+    </li>
   <% end %>
-  </div>
+</ul>
 
 </article>

@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
 
-  <title>d'Ebtsy</title>
+  <title>Debtsy</title>
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
@@ -13,17 +15,8 @@
 
 <body>
   <header>
-    <h1 class="main-header"><%= link_to "d'Ebtsy", root_path %></h1>
+    <h1 class="main-header"><%= link_to "Debtsy", root_path %></h1>
     <nav id="nav-bar">
-        <!-- <ul>
-            <li>
-                <%= link_to "Shop by Category", categories_path %>
-            </li>
-            <li>
-                <%= link_to "Shop by Merchant", users_path %>
-            </li>
-        </ul> -->
-
         <ul class="header-login">
           <li class="cart">
             <%= link_to image_tag( "cart"), cart_path %>
@@ -45,13 +38,23 @@
 
 
   </header>
-  <body class="content">
+  <main class="content">
     <section class="flash">
       <% flash.each do |name, message| %>
       <h3 class="row status <%= name %>"><%= message %></h3>
       <% end %>
     </section>
     <%= yield %>
-  </body>
+  </main>
+  <footer>
+    <ul>
+        <li>
+            <%= link_to "Shop by Category", categories_path %>
+        </li>
+        <li>
+            <%= link_to "Shop by Merchant", users_path %>
+        </li>
+    </ul>
+  </footer>
 </body>
 </html>

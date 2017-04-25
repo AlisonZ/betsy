@@ -1,3 +1,5 @@
+/*@import url('https://fonts.googleapis.com/css?family=Codystar');*/
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,17 +16,37 @@
  *= require_self
  *= require foundation_and_overrides
 
+COLOR PALLET
+charcoal  color: #373737
+Silk      color: #DCD0C0
+Paper     color: #F4F4F4
+Pale Gold color: #C0B283
  */
 
 * {
   list-style: none;
   margin: 0;
   padding: 0;
+  color: #373737;
+  background-color: #F4F4F4;
+}
+
+h1, h1 a, h2, h3, h4 {
+  font-family: 'Codystar', cursive;
+  font-weight: bold;
+  color: #C0B283
+}
+
+a:hover {
+  color: #DCD0C0;
+}
+
+a {
+  color: #373737;
 }
 
 header {
   height: 70px;
-  border-bottom: 2px black solid;
 }
 .main-header {
   float: left;
@@ -57,13 +79,38 @@ body {
 }
 
 /*Adding Styling for the categories index page*/
+.hero {
+  height: 400px;
+  background-color: #DCD0C0;
+}
+
+#pig{
+  height: 200px;
+  position: relative;
+  top: 0;
+}
+
+#slogan {
+  margin-top: 100px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3em;
+  background-color: inherit;
+  color: #F4F4F4;
+}
+
 .index_photo {
   height: 100px;
 }
 
 .category {
-  border: 2px solid gold;
-  border-radius: 20px;
   text-align: center;
-  margin: 20px 0;
+  margin: 20px 0px;
+  overflow: scroll;
+ }
+
+ .border {
+  width: 90%;
+  height: 200px;
+  border: 2px dotted #C0B283;
+  padding: 10px;
  }
