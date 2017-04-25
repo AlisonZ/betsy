@@ -27,6 +27,14 @@ class Product < ApplicationRecord
     end
   end
 
+  def selling?
+    if self.selling_status == true
+      return true
+    else
+      return false
+    end
+  end
+
   # def self.to_csv
   #   attributes = %w(id title description price photo_url stock user_id selling_status )
   #   CSV.generate( headers: true ) do |csv|
