@@ -14,8 +14,8 @@
   </li>
   <% end %>
 </ul>
-<%= button_to "Add a product to your store", new_product_path, method: :get %>
-<%= button_to "Add a new category", new_category_path, method: :get %>
+<%= button_to "Add a product to your store", new_product_path, method: :get, class: "button" %>
+<%= button_to "Add a new category", new_category_path, method: :get, class: "button" %>
 
 
 <h3><%= @user.username %>'s Purchases</h3>
