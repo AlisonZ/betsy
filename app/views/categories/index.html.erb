@@ -1,9 +1,26 @@
-<h1>Shop by Categories</h1>
-<% @categories.each do |category| %>
-    <!-- need to link to list of products with this category -->
-    <ul>
-      <li>
-        <%= link_to category.name, category_products_path(category.id) %>
-      </li>
-    </ul>
-<% end %>
+<article class="index">
+
+  <div class="row hero">
+    <h3 class="small-4 columns" id="slogan">
+      Whatever your budget...<br /> We can break it.
+    </h3>
+  </div>
+
+  <div class = "row">
+    <h3 class="small-12 cloumns">Shop by Category</h3>
+  </div>
+  <ul class="row">
+  <% @categories.each do |category| %>
+      <!-- need to link to list of products with this category -->
+    <li class="small-12 medium-6 large-4 columns category">
+      <div class="border">
+      <%= link_to(category_products_path(category.id)) do %>
+        <%= category.name %> <br />
+        <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
+      <% end %>
+    </div>
+    </li>
+  <% end %>
+</ul>
+
+</article>
