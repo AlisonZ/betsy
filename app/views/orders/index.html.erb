@@ -9,16 +9,18 @@
         Status: <%= order.status %>
         <ul>
             <% order.order_items.each do |item| %>
-            <li>
-                <%= link_to item.product.name, product_path(item.product.id) %>
-                Quantity: <%= item.quantity %>
-                Subtotal: <%= item.subtotal %>
-                <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
-                <%= f.label :ship_status, "Shipping Status:" %>
-                <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
-                <%= f.submit %>
+              <% if item.product.user_id == session[:user_id] %>
+              <li>
+                  <%= link_to item.product.name, product_path(item.product.id) %>
+                  Quantity: <%= item.quantity %>
+                  Subtotal: <%= item.subtotal %>
+                  <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+                  <%= f.label :ship_status, "Shipping Status:" %>
+                  <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
+                  <%= f.submit %>
+                  <% end %>
                 <% end %>
-                <% end %>
+              <% end %>
             </li>
         </ul>
     </li>

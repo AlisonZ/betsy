@@ -20,9 +20,14 @@ class Order < ApplicationRecord
 
   def self.user_orders(user)
       user_orders_items(user)
-      @user_orders = @order_items.map {|item| item.order}
-      return @user_orders
+      @user_orders = {}
+      @order_items.map {|item| @user_orders[item.order_id] = item.order}
+      return @user_orders.values
   end
+
+  # def self.order_user_orders_items(user, order)
+  #   @order_user_orders_items = user_order_items(user).where(id: order)
+  # end
 
   def self.to_csv
     attributes = %w(id status )
