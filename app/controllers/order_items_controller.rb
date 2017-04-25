@@ -11,9 +11,10 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    # if !duplicate_item?
+    if !duplicate_item?
+      # raise
       @item = OrderItem.new
-      @item.quantity = item_params[:quantity]
+      @item.quantity = item_params[:quantity].to_i
       @item.product_id = params[:id]
       @item.order_id = @order.id
       if @item.save
@@ -23,18 +24,24 @@ class OrderItemsController < ApplicationController
         flash.now[:failure] = "Unable to add to cart at this time"
         redirect_to product_path(params[:id])
       end
-    # else
-    #   @item = @cart_items.where(product_id: params[:id]).first
-    #   @item.quantity += item_params[:quantity]
-    #   if @item.update
-    #     flash[:success] = "Added #{item_params[:quantity]} to existing order for #{@item.product.name}"
-    #     redirect_to cart_path
-    #   else
-    #     flash.now[:failure] = "Sorry, something went wrong"
-    #     redirect_to :back
-    #   end
-    #
-    # end
+    else
+      @items = OrderItem.where(order_id: session[:order_id])
+      @item = @items.find_by(product_id: params[:id])
+      if @item.quantity + item_params[:quantity].to_i > @item.product.stock
+        flash[:failure] = "Not enough items in inventory to add #{@item.quantity} to your cart!"
+        redirect_to product_path(params[:id])
+      else
+        @item.quantity += item_params[:quantity].to_i
+        # raise
+        if @item.save
+          flash[:success] = "Added #{item_params[:quantity]} to existing order for #{@item.product.name}"
+          redirect_to cart_path
+        else
+          flash.now[:failure] = "Sorry, something went wrong"
+          redirect_to :back
+        end
+      end
+    end
   end
 
   def cart
@@ -86,12 +93,21 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  # def duplicate_item?
-  #   if @cart_items.where(product_id: params[:id]).empty?
-  #     return false
-  #   else
-  #     return true
-  #   end
-  # end
+  def duplicate_item?
+    if session[:order_id]
+      if !OrderItem.where(order_id: session[:order_id]).empty?
+        items = OrderItem.where(order_id: session[:order_id])
+        if items.find_by(product_id: params[:id])
+          return true
+        else
+          return false
+        end
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
 
 end
