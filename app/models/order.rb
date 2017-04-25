@@ -3,10 +3,12 @@ class Order < ApplicationRecord
   # Removing this to solve logic problem
   # validates_presence_of :order_items
 
-
-  def self.user_orders(user)
-    # user = session[:user_id].to_i
+  def self.user_products(user)
     @user_products = Product.where(user_id: user)
+  end
+
+  def self.user_orders_items(user)
+    user_products(user)
     @order_items = []
     @user_products.each do |product|
        if product.order_items != []
@@ -14,11 +16,13 @@ class Order < ApplicationRecord
        end
     end
     @order_items.flatten!
-
-    @user_orders = @order_items.map {|item| item.order}
-    return @user_orders
   end
 
+  def self.user_orders(user)
+      user_orders_items(user)
+      @user_orders = @order_items.map {|item| item.order}
+      return @user_orders
+  end
 
   def self.to_csv
     attributes = %w(id status )
