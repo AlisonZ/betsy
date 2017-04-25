@@ -2,13 +2,14 @@ class OrderItemsController < ApplicationController
   before_action :create_order, only: [:create]
   helper_method :duplicate_item?
 
-  def index
-    @order_items = OrderItem.all
-    respond_to do |format|
-        format.html
-        format.csv { send_data @order_items.to_csv }
-      end
-  end
+  # this just exists for when we want to use the csv functionality
+  # def index
+  #   @order_items = OrderItem.all
+  #   respond_to do |format|
+  #     format.html
+  #     format.csv { send_data @order_items.to_csv }
+  #   end
+  # end
 
   def create
     if !duplicate_item?
@@ -52,15 +53,19 @@ class OrderItemsController < ApplicationController
 
   def update
     @item = OrderItem.find_by_id(params[:id])
-    if @item.update(item_params)
+    if @item.quantity + item_params[:quantity].to_i <= @item.product.stock
+      if @item.update(item_params)
         if @item.order.status == 'pending'
-            redirect_to :cart
+          redirect_to :cart
         else
-            redirect_to user_orders_path(session[:user_id])
+          redirect_to user_orders_path(session[:user_id])
         end
+      else
+        flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
+        render :cart
+      end
     else
-      flash.now[:error] = "Unable to update quantity of #{@item.product.name} at this time"
-      render :cart
+      redirect_to :cart
     end
   end
 
@@ -69,13 +74,10 @@ class OrderItemsController < ApplicationController
     if @item.destroy
       flash[:success] = "Removed #{@item.product.name} from cart"
       redirect_to :cart
-
     else
       flash.now[:failure] = "Could not remove #{@item.product.name} from cart at this time. Whoops!"
       render :cart
-
     end
-
   end
 
   private
@@ -105,8 +107,6 @@ class OrderItemsController < ApplicationController
       else
         return false
       end
-    else
-      return false
     end
   end
 
