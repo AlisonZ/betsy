@@ -61,11 +61,16 @@ a {
 .button:hover {
   background-color: #C0B283;
 }
-/*header*/
 
+/*header*/
 header {
   height: 100px;
   background-color: #F4F4F4;
+}
+
+header h1.main-header {
+  padding: 0;
+  font-size: 3em;
 }
 
 #top-row {
@@ -75,7 +80,8 @@ header {
 .header-login {
   float: right;
   display: block;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .header-login li {
@@ -98,6 +104,13 @@ header {
   margin-right: 10px;
 }
 
+/*Footer*/
+footer li {
+  display: inline-block;
+  font-size: 1.25em;
+  margin: 10px;
+}
+
 /*Adding Styling for the categories index page*/
 .hero {
   height: 300px;
@@ -109,7 +122,7 @@ header {
   font-family: 'Cormorant Garamond', serif;
   font-size: 3em;
   background-color: inherit;
-  color: #F4F4F4;
+  color: white;
 }
 
 .index_photo {
