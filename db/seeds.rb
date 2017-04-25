@@ -22,7 +22,7 @@ CSV.read("db/users.csv", headers: true).map do |line|
 end
 
 CSV.read("db/categories.csv", headers: true).map do |line|
-    new_category = Category.create(name: line[0])
+    new_category = Category.create(name: line[0], photo: line[1])
     if !new_category.id
         puts "couldn't create category #{new_category.name}"
         puts new_category.errors.messages

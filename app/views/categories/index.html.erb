@@ -3,10 +3,10 @@
 <% @categories.each do |category| %>
     <!-- need to link to list of products with this category -->
   <div class="small-6 medium-4 large-3 columns">
-    <%= image_tag(category.photo, class: "index_photo") %>
-    <h3>
-      <%= link_to category.name, category_products_path(category.id) %>
-    </h3>
+    <%= link_to(category_products_path(category.id)) do %>
+      <%= category.name %> <br />
+      <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
+    <% end %>
   </div>
 <% end %>
 </div>
