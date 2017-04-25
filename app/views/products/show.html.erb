@@ -30,9 +30,15 @@ Category:
 <%= form_for @item, url: new_order_item_path(@product.id), method: :post do |f| %>
 
   <%= f.label :quantity %>
+  <% if @product.out_of_stock %>
+  <p>
+    Out of stock
+  </p>
+  <% else %>
   <%= f.select :quantity, (0..@product.stock) %>
 
   <%= f.submit "Add to Cart" %>
+  <% end %>
 
 <% end %>
 
