@@ -31,6 +31,8 @@ header {
 }
 
 .header-login {
+  clear: both;
+
   float: right;
   display: block;
 }
@@ -43,7 +45,6 @@ header {
   height: 30px;
 }
 
-
-.login-header {
-  clear: both;
+body {
+  clear:both;
 }

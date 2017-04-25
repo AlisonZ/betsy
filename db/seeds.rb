@@ -21,15 +21,6 @@ CSV.read("db/users.csv", headers: true).map do |line|
   end
 end
 
-
-CSV.read("db/products.csv", headers: true).map do |line|
-    new_product = Product.create(user_id: line[0].to_i, name: line[1], description: line[2], price: line[3].to_f.round(2), photo_url: line[4], stock: line[5].to_i)
-    if !new_product.id
-        puts "couldn't create product #{new_product.name}"
-        puts new_product.errors.messages
-    end
-end
-
 CSV.read("db/categories.csv", headers: true).map do |line|
     new_category = Category.create(name: line[0])
     if !new_category.id
@@ -37,6 +28,17 @@ CSV.read("db/categories.csv", headers: true).map do |line|
         puts new_category.errors.messages
     end
 end
+
+CSV.read("db/products.csv", headers: true).map do |line|
+    new_product = Product.create(user_id: line[0].to_i, name: line[1], description: line[2], price: line[3].to_f.round(2), photo_url: line[4], stock: line[5].to_i, category_ids: [line[6], line[7]])
+
+    if !new_product.id
+        puts "couldn't create product #{new_product.name}"
+        puts new_product.errors.messages
+    end
+end
+
+
 
 # CSV.read("db/categories_products.csv", headers: true).map do |line|
 #     new_category_product = Category.create(name: line[0])
