@@ -19,6 +19,15 @@ class Product < ApplicationRecord
     end
   end
 
+  def self.highest_rated
+    highest_rated = []
+    products = Product.all
+    products.each do |product|
+      highest_rated << product if product.average_rating >= 3.5 && product.selling?
+    end
+    return highest_rated
+  end
+
   def out_of_stock
     if self.stock == 0
       return true

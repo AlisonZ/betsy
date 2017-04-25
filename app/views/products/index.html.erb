@@ -1,4 +1,13 @@
 
+<!-- just for testing purposes of highest_rated -->
+<h1>Highest Rated Products</h1>
+<ul>
+<% Product.highest_rated.each do |product| %>
+<li>
+  <%= link_to product.name, product_path(product.id) %> <%= product.average_rating %>
+</li>
+<% end %>
+</ul>
 
 <div class = "row">
   <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
