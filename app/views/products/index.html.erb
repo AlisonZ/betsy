@@ -1,11 +1,16 @@
+
 <h1><%= @category_name %></h1>
 
-<ul>
-<% @products.each do |product| %>
-<li>
-  <%= link_to product.name, product_path(product.id) %>
-</li>
-<% end %>
-</ul>
+<div class="row">
+
+  <ul>
+  <% @products.each do |product| %>
+  <li>
+    <%= link_to product.name, product_path(product.id) %>
+  </li>
+  <% end %>
+  </ul>
+
+</div>
 
 <% if can_add_new_product? %><%= link_to "Add a new product", new_product_path %><% end %>
