@@ -33,8 +33,14 @@ describe UsersController do
       must_respond_with :success
     end
 
+    it "won't show if not your account" do
+      post login_path, params: { username: users(:aurora).username, email: users(:aurora).email }
+      get user_path(users(:felix).id)
+      must_redirect_to :root
+    end
+
     # This is obsolete because of the check_owner method in ApplicationController
-    
+
     # it "renders 404 not_found for a bogus user" do
     #   # User.last gives the user with the highest ID
     #   # bogus_user_id = User.last.id + 1

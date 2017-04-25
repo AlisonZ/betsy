@@ -39,5 +39,16 @@ describe ReviewsController do
             } }
       }.must_change 'Review.count', 0
     end
+
+    # this test is failing because the conditional is in the view instead of as a controller before action
+    it "should not allow review on user's own product" do
+      post login_path, params: { username: users(:aurora).username, email: users(:aurora).email }
+      post product_reviews_path(products(:fancy_socks).id), params: { review: {
+            title: "this is fake",
+            rating: 4,
+            review_text: "awesome!"
+            } }
+      must_respond_with :error
+    end
   end
 end
