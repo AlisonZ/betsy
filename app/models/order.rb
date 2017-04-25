@@ -25,6 +25,13 @@ class Order < ApplicationRecord
       return @user_orders.values
   end
 
+  def self.user_status_orders(user, status)
+    return user_orders(user).select {|order| order.status == status }
+  end
+
+
+
+
   # def self.order_user_orders_items(user, order)
   #   @order_user_orders_items = user_order_items(user).where(id: order)
   # end
@@ -45,6 +52,24 @@ class Order < ApplicationRecord
     #accesses the subtotal of each of the order items
     order_items.each do |item|
       total += item.subtotal
+    end
+    return total.round(2)
+  end
+
+  def self.user_total(user)
+    total = 0.00
+    user_orders_items(user).each do |item|
+      total += item.subtotal
+    end
+    return total.round(2)
+  end
+
+  def self.user_status_total(user, status)
+    total = 0.00
+    user_orders_items(user).each do |item|
+      if item.ship_status == status
+        total += item.subtotal
+      end
     end
     return total.round(2)
   end

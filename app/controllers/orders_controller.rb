@@ -2,8 +2,13 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all.order(id: :desc)
-
     @user_orders = Order.user_orders(session[:user_id]).sort.reverse
+    @user_orders_items = Order.user_orders_items(session[:user_id])
+    @user_total = Order.user_total(session[:user_id])
+    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
+    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
+    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid")
+    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete")
 
     respond_to do |format|
       format.html
