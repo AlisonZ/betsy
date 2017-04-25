@@ -35,6 +35,15 @@ class Product < ApplicationRecord
     end
   end
 
+  def average_rating
+    total_ratings = 0
+    self.reviews.each do |review|
+      total_ratings += review.rating
+    end
+    average = total_ratings.to_f / self.reviews.count
+    return average.round(2)
+  end
+
   # def self.to_csv
   #   attributes = %w(id title description price photo_url stock user_id selling_status )
   #   CSV.generate( headers: true ) do |csv|

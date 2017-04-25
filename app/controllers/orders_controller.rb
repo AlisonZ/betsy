@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.all
-    @user_orders = Order.user_orders(session[:user_id])
+    @orders = Order.all.order(id: :desc)
+
+    @user_orders = Order.user_orders(session[:user_id]).sort.reverse
 
     respond_to do |format|
       format.html
