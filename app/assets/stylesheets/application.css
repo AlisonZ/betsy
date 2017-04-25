@@ -48,3 +48,8 @@ header {
 body {
   clear:both;
 }
+
+/*Adding Styling for the categories index page*/
+.index_photo {
+  height: 100px;
+}
