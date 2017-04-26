@@ -1,6 +1,11 @@
 <h1><%= @user.username %></h1>
 
-<h3><%= @user.username %>'s Products</h3>
+<p>
+  User Profile: <%= @user.profile %>
+</p>
+<%= link_to "Edit profile", edit_user_path(@user.id) %>
+<h3>My Products</h3>
+
 <ul>
   <% @user.products.each do |product| %>
   <li>

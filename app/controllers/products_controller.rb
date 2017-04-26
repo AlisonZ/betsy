@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :check_login, only: [:new]
-  
+
   def index
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
       user = User.find_by(id: params[:user_id])
       @products = user.products.where(selling_status: true)
       @category_name = user.username.capitalize
+      @profile = user.profile
     else
       @products = Product.where(selling_status: true)
       @category_name = "All Products"

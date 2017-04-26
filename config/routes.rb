@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resources :users, :except => [:edit, :update, :destroy] do
+  resources :users, :except => [:destroy] do
     resources :products, only: [:index]
     resources :orders, only: [:index]
   end
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # get '/login', to: 'sessions#login_form'
   # post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#logout'
+
 
   resources :order_items, only: [:update, :destroy, :index]
   post 'products/:id/add', to: 'order_items#create', as: 'new_order_item'
