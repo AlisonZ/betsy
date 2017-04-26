@@ -9,5 +9,5 @@ aurora:
 felix:
   username: "felixbenjamin"
   email: "felix@test.com"
-  uid: "12345"
+  uid: "65432"
   provider: "github"

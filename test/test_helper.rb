@@ -38,7 +38,7 @@ class ActiveSupport::TestCase
             uid: user.uid,
             info: {
                 email: user.email,
-                name: user.nickname
+                nickname: user.username
             }
         }
     end
@@ -46,8 +46,6 @@ class ActiveSupport::TestCase
     def setup
         OmniAuth.config.test_mode = true
     end
-
-
 end
 
 # OmniAuth.config.test_mode = true
