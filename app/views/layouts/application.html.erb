@@ -46,13 +46,13 @@
             <%= button_to "My account", user_path(current_user.id), method: :get, class: "button" %>
           </li>
           <li>
-            <%= button_to "Log out", login_path, method: :delete, class: "button" %>
+            <%= button_to "Log out", logout_path, method: :delete, class: "button" %>
           </li>
         </ul>
         <% else %>
         <ul class="header-login">
           <li>
-            <%= button_to "Log in", login_path, method: :get, class: "button" %>
+            <%= button_to "Log in", '/auth/github', class: "button" %>
           </li>
         </ul>
         <% end %>
