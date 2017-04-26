@@ -28,13 +28,12 @@ describe UsersController do
     #
     # show should redirect to individual user's page
     it "show user should show one user" do
-      post login_path, params: { username: users(:aurora).username, email: users(:aurora).email }
+      get auth_github_callback_path, params: { uid: users(:aurora).uid, provider: users(:aurora).provider }
       get user_path(users(:aurora).id)
-      must_respond_with :success
+      must_redirect_to '/users/users(:aurora).id'
     end
 
     it "won't show if not your account" do
-      post login_path, params: { username: users(:aurora).username, email: users(:aurora).email }
       get user_path(users(:felix).id)
       must_redirect_to :root
     end
@@ -49,7 +48,12 @@ describe UsersController do
     # end
 
 
-
+    describe "#edit" do
+      it "should get edit form for profile" do
+        get edit_user_path(users(:aurora).id)
+        must_respond_with :success
+      end
+    end
 
 
 
