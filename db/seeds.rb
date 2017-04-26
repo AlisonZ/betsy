@@ -72,14 +72,16 @@ end
 end
 
 #reviews
-100.times do
+200.times do
   exclamations = %w( wow yikes sheesh dang no yes terrible wonderful amazing )
-  adjectives = %w( good bad stinky hot flavorful uncertain hottening flatly kindness pink forkful evenly makely flyful candidly )
-  sayings  = ["I can't even!", "No way!", "Why???", "Must have one.", "Can you believe it?", "Don't buy this."]
+  adjectives = %w( good bad stinky hot flavorful uncertain hottening flatly kindness pink forkful evenly makely flyful candidly hopeful gimmicky)
+  nouns = %w( edge hard thought sleep dream fish rest end facet marinade stirring boom )
+  first_words = %w( such much so very many)
+  sayings  = ["Can't.", "No way.", "Why.", "Must one.", "Can you believe.", "Not buy.", "Wow."]
   new_review = Review.new(product_id: rand(1..24))
   new_review.title = "#{exclamations.sample.capitalize}!"
   new_review.rating = rand(1..5)
-  new_review.review_text = "Such #{adjectives.sample}. #{sayings.sample}"
+  new_review.review_text = "#{first_words.sample.capitalize} #{adjectives.sample}. #{first_words.sample.capitalize} #{nouns.sample}. #{sayings.sample}"
   new_review.save
   if !new_review.id
     puts "couldn't create review"
