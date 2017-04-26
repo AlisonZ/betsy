@@ -114,7 +114,8 @@ footer li {
 /*Adding Styling for the categories index page*/
 .hero {
   height: 300px;
-  background-color: #DCD0C0;
+  margin-top: 50px;
+  /*background-color: #DCD0C0;*/
 }
 
 #slogan {
