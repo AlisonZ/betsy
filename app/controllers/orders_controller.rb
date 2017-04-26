@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :check_login, only: [:index, :complete, :incomplete, :show]
 
   def index
     @orders = Order.all.order(id: :desc)
@@ -70,6 +71,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def check_login
+    if !current_user
+      flash[:error] = "You must be the owner to access that page"
+      redirect_to :root
+    end
+  end
 
   def order_params
       params.require(:order).permit(:email, :name_on_cc, :cc_number, :cc_ccv, :billing_zip, :address)
