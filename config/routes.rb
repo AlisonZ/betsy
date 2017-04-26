@@ -11,7 +11,12 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
 
+  get '/users/:user_id/orders/complete', to: 'orders#complete', as: 'user_orders_complete'
+
+  get '/users/:user_id/orders/incomplete', to: 'orders#incomplete', as: 'user_orders_incomplete'
+
   patch '/products/status/:id', to: 'products#status', as: 'status'
+
   resources :products
   resources :product do
       resources :reviews, only: [:new, :create]
