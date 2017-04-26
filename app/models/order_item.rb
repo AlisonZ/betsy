@@ -49,6 +49,7 @@ class OrderItem < ApplicationRecord
     end
 
 
+
     def shipping_status
         if self.ship_status
             "Shipped"

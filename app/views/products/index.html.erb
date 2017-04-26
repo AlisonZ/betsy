@@ -5,6 +5,28 @@
   </div>
   <ul class="row">
   <% @products.each do |product| %>
+
+<!-- just for testing purposes of highest_rated -->
+<h1>Highest Rated Products</h1>
+<ul>
+<% Product.highest_rated.each do |product| %>
+<li>
+  <%= link_to product.name, product_path(product.id) %> <%= product.average_rating %>
+</li>
+<% end %>
+</ul>
+
+<div class = "row">
+  <h3 class="small-12 columns"> <%= @category_name %> </h3>
+  <% if @profile %>
+  <%= @profile %>
+  <% end %>
+</div>
+<ul class="row">
+<% @products.each do |product| %>
+  <li class="small-12 medium-6 large-4 columns category">
+    <div class="border">
+>>>>>>> master
     <%= link_to(product_path(product.id)) do %>
       <li class="small-12 medium-6 large-4 columns grid-item">
         <div class="border">

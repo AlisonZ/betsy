@@ -3,7 +3,11 @@
 aurora:
   username: "auroralemieux"
   email: "aurora@test.com"
+  uid: "12345"
+  provider: "github"
 
 felix:
   username: "felixbenjamin"
   email: "felix@test.com"
+  uid: "12345"
+  provider: "github"

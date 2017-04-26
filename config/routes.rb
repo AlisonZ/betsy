@@ -6,12 +6,17 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resources :users, :except => [:edit, :update, :destroy] do
+  resources :users, :except => [:destroy] do
     resources :products, only: [:index]
     resources :orders, only: [:index]
   end
 
+  get '/users/:user_id/orders/complete', to: 'orders#complete', as: 'user_orders_complete'
+
+  get '/users/:user_id/orders/incomplete', to: 'orders#incomplete', as: 'user_orders_incomplete'
+
   patch '/products/status/:id', to: 'products#status', as: 'status'
+
   resources :products
   resources :product do
       resources :reviews, only: [:new, :create]
@@ -19,9 +24,11 @@ Rails.application.routes.draw do
   resources :reviews, only: [:index, :show]
 
   resources :users, only: [:index]
+  get "/auth/github/callback", to: "sessions#create"
   get '/login', to: 'sessions#login_form'
-  post '/login', to: 'sessions#create'
-  delete '/login', to: 'sessions#logout'
+  # post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#logout'
+
 
   resources :order_items, only: [:update, :destroy, :index]
   post 'products/:id/add', to: 'order_items#create', as: 'new_order_item'

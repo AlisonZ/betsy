@@ -15,7 +15,7 @@
 require 'csv'
 
 CSV.read("db/users.csv", headers: true).map do |line|
-  new_user = User.create(username: line[0], email: line[1])
+  new_user = User.create(username: line[0], email: line[1], uid: line[2], provider: line[3])
   if !new_user.id
     puts "couldn't create user #{new_user.username}"
   end

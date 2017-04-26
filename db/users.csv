@@ -1,16 +1,16 @@
-username,email
-Ms. Fancy Pants,fancy@pants.com
-Luigi,luigi@luigi.com
-Eleanor,ele@nor.com
-Sushi Girl,sushi@girl.com
-Spammy Pam,spam@pam.com
-Rororo,ro@ro.com
-Felix the Cat,felix@cat.com
-LuxDucks,lux@ducks.com
-CornFlakes,corn@flakes.com
-SolidGoldCheese,solid@cheese.com
-blablabla,blablabla@gmail.com
-coolbeans,coolio@someemail.com
-whatup,whhuuut@yo.com
-fosho,yoyoyo@me.com
-some_person,someperson@gdail.com
+username,email, uid, provider
+Ms. Fancy Pants,fancy@pants.com,1,github
+Luigi,luigi@luigi.com,2,github
+Eleanor,ele@nor.com,3,github
+Sushi Girl,sushi@girl.com,4,github
+Spammy Pam,spam@pam.com,5,github
+Rororo,ro@ro.com,6,github
+Felix the Cat,felix@cat.com,7,github
+LuxDucks,lux@ducks.com,8,github
+CornFlakes,corn@flakes.com,9,github
+SolidGoldCheese,solid@cheese.com,10,github
+blablabla,blablabla@gmail.com,11,github
+coolbeans,coolio@someemail.com,12,github
+whatup,whhuuut@yo.com,13,github
+fosho,yoyoyo@me.com,14,github
+some_person,someperson@gdail.com,15,github
