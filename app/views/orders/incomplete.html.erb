@@ -3,19 +3,19 @@
 <h2>SALES SUMMARY:</h2>
 <ul>
   <li>
-    Total revenue: <%= number_to_currency(@user_total) %>
+    Total revenue: <%= number_to_currency(current_user.user_total) %>
   </li>
   <li>
-    Fulfilled items total revenue: <%= number_to_currency(@user_fulfilled_total) %>
+    Fulfilled items total revenue: <%= number_to_currency(current_user.user_status_total(true)) %>
   </li>
   <li>
-    Unfulfilled items total revenue: <%= number_to_currency(@user_unfulfilled_total) %>
+    Unfulfilled items total revenue: <%= number_to_currency(current_user.user_status_total(false)) %>
   </li>
   <li>
-    Incomplete orders: <%= @user_incomplete_orders.length %>
+    Incomplete orders: <%= current_user.user_status_orders("Paid").sort.reverse.length %>
   </li>
   <li>
-    Complete orders: <%= @user_complete_orders.length %>
+    Complete orders: <%= current_user.user_status_orders("complete").sort.reverse.length %>
   </li>
 </ul>
 
@@ -24,9 +24,13 @@
 <%= link_to "Incomplete orders", user_orders_incomplete_path %>
 <%= link_to "Complete orders", user_orders_complete_path %>
 <h3>Incomplete orders</h3>
-<% if @user_incomplete_orders != [] %>
+<% if current_user.user_status_orders(false) == [] %>
+<p>
+  No orders yet
+</p>
+<% else %>
 <ul>
-    <% @user_incomplete_orders.each do |order| %>
+    <% current_user.user_status_orders(false).each do |order| %>
     <li>
         <%= link_to "Order #{order.id}", order_path(order.id) %>
         Date: <%= order.updated_at.strftime("%m/%d/%Y") %>

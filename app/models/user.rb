@@ -20,6 +20,54 @@ class User < ApplicationRecord
     return user_orders
   end
 
+  def user_orders_items
+    order_items = []
+    self.products.each do |product|
+      if product.order_items != []
+        order_items << product.order_items
+      end
+    end
+    return order_items.flatten!
+  end
+
+  def user_orders
+      order_items = user_orders_items
+      user_orders = {}
+      order_items.map {|item| user_orders[item.order_id] = item.order}
+      return user_orders.values
+  end
+
+  def user_status_orders(status)
+      return self.user_orders.select {|order| order.status == status }
+  end
+
+  def user_total
+    if self.user_orders_items != nil
+      total = 0.00
+      self.user_orders_items.each do |item|
+        total += item.subtotal
+      end
+      return total.round(2)
+    else
+      return 0
+    end
+  end
+
+  def user_status_total(status)
+    if self.user_orders_items
+      total = 0.00
+      self.user_orders_items.each do |item|
+        if item.ship_status == status
+          total += item.subtotal
+        end
+      end
+      return total.round(2)
+    else
+      return 0
+    end
+  end
+
+
   def self.create_from_github(auth_hash)
         user = User.new
         user.uid = auth_hash['uid']
