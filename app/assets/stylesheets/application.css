@@ -113,9 +113,13 @@ footer li {
 
 /*Adding Styling for the categories index page*/
 .hero {
-  height: 300px;
-  margin-top: 50px;
-  /*background-color: #DCD0C0;*/
+  height: 200px;
+  /*margin-top: 50px;*/
+  background-color: #DCD0C0;
+}
+
+.top-photos {
+  height: 200px;
 }
 
 #slogan {
@@ -127,9 +131,14 @@ footer li {
 }
 
  /*All Index Pages*/
+div.title {
+  clear: both;
+}
+
 .index h3 {
   margin-top: 20px;
   font-size: 2.5em;
+  clear:both;
 }
  .grid-item {
    text-align: center;
