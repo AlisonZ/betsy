@@ -15,10 +15,10 @@ class ProductsController < ApplicationController
       @products = Product.where(selling_status: true)
       @category_name = "All Products"
     end
-    respond_to do |format|
-      format.html
-      format.csv { send_data @products.to_csv }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @products.to_csv }
+    # end
   end
 
   def show
