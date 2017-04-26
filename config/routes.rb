@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resources :users, :except => [:edit, :update, :destroy] do
+  resources :users, :except => [:destroy] do
     resources :products, only: [:index]
     resources :orders, only: [:index]
   end
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   resources :reviews, only: [:index, :show]
 
-  resources :users, only: [:index]
+  resources :users, only: [:index, :edit, :update]
   get '/login', to: 'sessions#login_form'
   post '/login', to: 'sessions#create'
   delete '/login', to: 'sessions#logout'
