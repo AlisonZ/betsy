@@ -10,7 +10,10 @@
 </ul>
 
 <div class = "row">
-  <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
+  <h3 class="small-12 columns"> <%= @category_name %> </h3>
+  <% if @profile %>
+  <%= @profile %>
+  <% end %>
 </div>
 <ul class="row">
 <% @products.each do |product| %>
