@@ -174,3 +174,19 @@ div.title {
   padding: 10px;
   overflow: auto;
  }
+
+ /*Show page*/
+ .show {
+  font-size: 1.25em;
+ }
+
+ .product_photo {
+   width: 100%;
+   padding: 0 2%;
+ }
+
+.reviews {
+  height: 400px;
+  border: 2px dotted #C0B283;
+  overflow: scroll;
+}

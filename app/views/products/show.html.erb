@@ -1,71 +1,84 @@
+<article class="show">
 
-<h2><%= @product.name %></h2>
-Category:
-<ul>
-  <% @product.categories.each do |category| %>
-  <li>
-    <%= link_to category.name, category_products_path(category.id) %>
-  </li>
-  <% end %>
-</ul>
-<p><%= @product.description %> </p>
-<ul>
-<li>
-  Price: $<%= @product.price %>
-</li>
-<li>
-  <%= @product.stock %> left in stock
-</li>
-<li>
-  Selling status:  <%= @product.sell_status %>
-</li>
-<li> Merchant:
-<%= link_to @product.user.username, user_products_path(@product.user.id) %>
-</li>
-<li>
-  Average rating: <%= @product.average_rating %>
-</li>
-</ul>
+  <div class = "row title">
+    <h3 class="small-12 cloumns">
+      <%= @product.name %>
+    </h3>
+  </div>
 
+  <div class="row">
+    <div class="small-12 columns">
+      <p>Description: <%= @product.description %> </p>
+    </div>
 
-<img src="<%=@product.photo_url%>">
+    <div class="small-12 medium-4 columns">
+      <img src="<%=@product.photo_url%>" alt="product photo" class="product_photo">
+    </div>
 
-<%= form_for @item, url: new_order_item_path(@product.id), method: :post do |f| %>
+    <div class="small-12 medium-4 columns">
+      <ul>
+        <li> Price: $<%= @product.price %> </li>
+        <li> <%= @product.stock %> left in stock </li>
+        <li>
+          Selling status:  <%= @product.sell_status %>
+        </li>
+        <li>
+          Merchant: <%= link_to @product.user.username, user_products_path(@product.user.id) %>
+        </li>
+        <li>
+          Average rating: <%= @product.average_rating %>
+        </li>
+      </ul>
 
-  <%= f.label :quantity %>
-  <% if @product.out_of_stock %>
-  <p>
-    Out of stock
-  </p>
-  <% else %>
-  <%= f.select :quantity, (0..@product.stock) %>
+      <%= form_for @item, url: new_order_item_path(@product.id), method: :post do |f| %>
 
-  <%= f.submit "Add to Cart" %>
-  <% end %>
+        <%= f.label :quantity %>
+        <% if @product.out_of_stock %>
+        <p>
+          Out of stock
+        </p>
+        <% else %>
+        <%= f.select :quantity, (0..@product.stock) %>
 
-<% end %>
+        <%= f.submit "Add to Cart", class: "button" %>
+        <% end %>
 
+      <% end %>
 
+      <p>Categories:</p>
+      <ul>
+        <% @product.categories.each do |category| %>
+        <li>
+          <%= link_to category.name, category_products_path(category.id) %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
 
-<%= link_to "Back to all products", products_path %>
+    <div class="small-12 medium-4 columns reviews">
+      <section class="review">
+        <h2>Reviews!</h2>
+        <% @product.reviews.each do |review| %>
+        <h3>Rating: <%= review.rating %></h3>
+        <h3><%= review.title %> <small>reviewed on <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
+        <section class="review-body" >
+          <p>
+            <%= review.review_text %>
+          </p>
+        </section>
+        <% end %>
+      </section>
+    </div>
+    <div class="small-12 medium-4 columns">
+      <%= link_to "Back to all products", products_path %>
 
-  <% if can_edit? %>
-    <%= link_to "Edit this product", edit_product_path(@product.id) %>
-  <% end %>
-  <% if can_review? %>
-    <%= link_to "Review this product", new_product_review_path(@product.id) %>
-  <% end %>
+        <% if can_edit? %>
+          <%= link_to "Edit this product", edit_product_path(@product.id) %>
+        <% end %>
+        <% if can_review? %>
+          <%= link_to "Review this product", new_product_review_path(@product.id) %>
+      <% end %>
+    </div>
+  </div>
 
-
-<section class="review">
-  <h2>Reviews!</h2>
-  <% @product.reviews.each do |review| %>
-  <h3>Rating: <%= review.rating %></h3>
-  <h3><%= review.title %> <small>reviewed on <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
-  <section class="review-body" >
-    <p>
-      <%= review.review_text %>
-    </p>
-  </section>
-  <% end %>
-</section>
+</article>
