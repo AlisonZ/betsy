@@ -1,41 +1,20 @@
 <article class="index">
-
-  <div class = "row">
-    <h3 class="small-12 cloumns"> <%= @category_name %> </h3>
+  <div class = "row title">
+    <h3 class="small-12 cloumns">
+      <%= @category_name %>
+    </h3>
   </div>
-  <ul class="row">
-  <% @products.each do |product| %>
 
-<!-- just for testing purposes of highest_rated -->
-<h1>Highest Rated Products</h1>
-<ul>
-<% Product.highest_rated.each do |product| %>
-<li>
-  <%= link_to product.name, product_path(product.id) %> <%= product.average_rating %>
-</li>
-<% end %>
-</ul>
-
-<div class = "row">
-  <h3 class="small-12 columns"> <%= @category_name %> </h3>
-  <% if @profile %>
-  <%= @profile %>
-  <% end %>
-</div>
 <ul class="row">
-<% @products.each do |product| %>
-  <li class="small-12 medium-6 large-4 columns category">
+  <% @products.each do |product| %>
     <div class="border">
->>>>>>> master
     <%= link_to(product_path(product.id)) do %>
       <li class="small-12 medium-6 large-4 columns grid-item">
-        <div class="border">
-          <%= product.name %> <br />
-          <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
-        </div>
+        <%= product.name %> <br />
+        <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
       </li>
     <% end %>
+    </div>
   <% end %>
-  </ul>
-
+</ul>
 </article>

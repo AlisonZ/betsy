@@ -23,7 +23,20 @@
       </div>
     </div>
     <div class="row">
-      <nav class="small-12 columns" id="nav-bar">
+      <div class="small-5 columns shop-by">
+        <ul>
+            <li>
+                <%= link_to "shop by category", categories_path %>
+            </li>
+            <li>
+                <%= link_to "shop by merchant", users_path %>
+            </li>
+            <li>
+                <%= link_to "see all products", products_path %>
+            </li>
+        </ul>
+      </div>
+      <nav class="small-6 columns" id="nav-bar">
         <% if current_user %>
         <ul class="header-login">
           <li>
@@ -55,14 +68,9 @@
     <%= yield %>
   </main>
   <footer>
-    <ul>
-        <li>
-            <%= link_to "shop by category", categories_path %>
-        </li>
-        <li>
-            <%= link_to "shop by merchant", users_path %>
-        </li>
-    </ul>
+    <p>
+      Copyright 2017 Jolly Owl
+    </p>
   </footer>
 </body>
 </html>
