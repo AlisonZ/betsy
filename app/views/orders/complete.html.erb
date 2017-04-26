@@ -4,7 +4,6 @@
   <div class="row">
     <div class="small-12 medium-6">
 
-
       <h3>Complete orders</h3>
       <% if current_user.user_status_orders(true) == [] %>
       <p>
@@ -19,7 +18,7 @@
           Status: <%= order.status %>
           <ul>
             <% order.order_items.each do |item| %>
-            <% if item.product.user_id == session[:user_id] %>  
+            <% if item.product.user == current_user %>
             <li>
               <%= link_to item.product.name, product_path(item.product.id) %>
               <ul>
