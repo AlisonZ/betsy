@@ -29,11 +29,11 @@
   <% @categories.each do |category| %>
     <li class="small-12 medium-6 large-4 columns grid-item">
       <div class="border">
-      <%= link_to(category_products_path(category.id)) do %>
-        <%= category.name %> <br />
-        <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
+        <%= link_to(category_products_path(category.id)) do %>
+          <%= category.name %> <br />
+          <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
       <% end %>
-    </div>
+      </div>
     </li>
   <% end %>
 </ul>

@@ -169,4 +169,5 @@ div.title {
   height: 200px;
   border: 2px dotted #C0B283;
   padding: 10px;
+  overflow: auto;
  }
