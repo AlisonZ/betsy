@@ -4,43 +4,43 @@
   <div class="row">
     <div class="small-12 medium-6">
       <h3>Incomplete orders</h3>
-        <% if @user_incomplete_orders == [] %>
-          <p>
-            None
-          </p>
-        <% else %>
+      <% if current_user.user_status_orders(false) == [] %>
+      <p>
+        No orders yet
+      </p>
+      <% else %>
+      <ul>
+        <% current_user.user_status_orders(false).each do |order| %>
+        <li>
+          <%= link_to "Order #{order.id}", order_path(order.id) %>
+          Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
+          Status: <%= order.status %>
           <ul>
-            <% @user_incomplete_orders.each do |order| %>
-              <li>
-                <%= link_to "Order #{order.id}", order_path(order.id) %>
-                Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
-                Status: <%= order.status %>
-                <ul>
-                  <% order.order_items.each do |item| %>
-                    <% if item.product.user_id == session[:user_id] %>
-                      <li>
-                        <%= link_to item.product.name, product_path(item.product.id) %>
-                        <ul>
-                          <li>
-                            <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
-                            Subtotal: <%= number_to_currency(item.subtotal) %>
-                          </li>
-                            <li>
-                              <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
-                              <%= f.label :ship_status, "Shipping Status:" %>
-                              <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
-                              <%= f.submit %>
-                              <% end %>
-                            </li>
-                          </ul>
-                      </li>
-                    <% end %>
+            <% order.order_items.each do |item| %>
+            <% if item.product.user == current_user %>
+            <li>
+              <%= link_to item.product.name, product_path(item.product.id) %>
+              <ul>
+                <li>
+                  <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
+                  Subtotal: <%= number_to_currency(item.subtotal) %>
+                </li>
+                <li>
+                  <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+                  <%= f.label :ship_status, "Shipping Status:" %>
+                  <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
+                  <%= f.submit %>
                   <% end %>
-                </ul>
-              </li>
+                </li>
+              </ul>
+            </li>
+            <% end %>
             <% end %>
           </ul>
+        </li>
         <% end %>
-      </div>
+      </ul>
+      <% end %>
     </div>
+  </div>
 </article>
