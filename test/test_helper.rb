@@ -5,14 +5,14 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
-    require "minitest/reporters"  # for Colorized output
+require "minitest/reporters"  # for Colorized output
 
-    #  For colorful output!
-    Minitest::Reporters.use!(
-      Minitest::Reporters::SpecReporter.new,
-      ENV,
-      Minitest.backtrace_filter
-    )
+#  For colorful output!
+Minitest::Reporters.use!(
+Minitest::Reporters::SpecReporter.new,
+ENV,
+Minitest.backtrace_filter
+)
 
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
@@ -23,19 +23,41 @@ require "minitest/rails"
 # require "minitest/pride"
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
-  # Add more helper methods to be used by all tests here...
+    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    fixtures :all
+    # Add more helper methods to be used by all tests here...
+
+    def login_user(user)
+        OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+        get auth_github_callback_path
+    end
+
+    def mock_auth_hash(user)
+        return {
+            provider: user.provider,
+            uid: user.uid,
+            info: {
+                email: user.email,
+                name: user.nickname
+            }
+        }
+    end
+
+    def setup
+        OmniAuth.config.test_mode = true
+    end
+
+
 end
 
-OmniAuth.config.test_mode = true
-omniauth_hash = { 'provider' => 'github',
-  'uid' => '12345',
-  'info' => {
-    'name' => 'aurora',
-    'email' => 'fake_email',
-    'nickname' => 'fakeaurora'
-  }
-}
-
-OmniAuth.config.add_mock(:github, omniauth_hash)
+# OmniAuth.config.test_mode = true
+# omniauth_hash = { 'provider' => 'github',
+#   'uid' => '12345',
+#   'info' => {
+#     'name' => 'aurora',
+#     'email' => 'fake_email',
+#     'nickname' => 'fakeaurora'
+#   }
+# }
+#
+# OmniAuth.config.add_mock(:github, omniauth_hash)
