@@ -28,9 +28,10 @@ describe UsersController do
     #
     # show should redirect to individual user's page
     it "show user should show one user" do
-      get auth_github_callback_path, params: { uid: users(:aurora).uid, provider: users(:aurora).provider }
-      get user_path(users(:aurora).id)
-      must_redirect_to '/users/users(:aurora).id'
+      get auth_github_callback_path, params: { provider: "github", uid: "12345" }
+      test_user = User.where(uid: "12345")
+      get user_path(test_user.id)
+      must_respond_with :success
     end
 
     it "won't show if not your account" do
