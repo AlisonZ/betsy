@@ -1,0 +1,33 @@
+<div class="row title">
+  <h3 class="small-12 cloumns">
+    Order history
+  </h3>
+</div>
+<div class="row">
+  <div class="small-12 medium-6">
+    <h4>SALES SUMMARY:</h4>
+    <ul>
+      <li>
+        Total revenue: <%= number_to_currency(@user_total) %>
+      </li>
+      <li>
+        Fulfilled items total revenue: <%= number_to_currency(@user_fulfilled_total) %>
+      </li>
+      <li>
+        Unfulfilled items total revenue: <%= number_to_currency(@user_unfulfilled_total) %>
+      </li>
+      <li>
+        Incomplete orders: <%= @user_incomplete_orders.length %>
+      </li>
+      <li>
+        Complete orders: <%= @user_complete_orders.length %>
+      </li>
+    </ul>
+  </div>
+  <div class="small-12 medium-6">
+    <h2>Fulfillment Summary:</h2>
+    <%= link_to "All orders", user_orders_path %>
+    <%= link_to "Incomplete orders", user_orders_incomplete_path %>
+    <%= link_to "Complete orders", user_orders_complete_path %>
+  </div>
+</div>

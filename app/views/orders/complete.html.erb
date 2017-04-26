@@ -1,60 +1,45 @@
-<h1>Sales order history</h1>
+<article class="fullfilment">
 
-<h2>SALES SUMMARY:</h2>
-<ul>
-  <li>
-    Total revenue: <%= number_to_currency(@user_total) %>
-  </li>
-  <li>
-    Fulfilled items total revenue: <%= number_to_currency(@user_fulfilled_total) %>
-  </li>
-  <li>
-    Unfulfilled items total revenue: <%= number_to_currency(@user_unfulfilled_total) %>
-  </li>
-  <li>
-    Incomplete orders: <%= @user_incomplete_orders.length %>
-  </li>
-  <li>
-    Complete orders: <%= @user_complete_orders.length %>
-  </li>
-</ul>
+  <%= render partial: "user" %>
 
-<h2>Fulfillment Summary:</h2>
-<%= link_to "All orders", user_orders_path %>
-<%= link_to "Incomplete orders", user_orders_incomplete_path %>
-<%= link_to "Complete orders", user_orders_complete_path %>
-<h3>Complete orders</h3>
-<% if @user_complete_orders != [] %>
-<ul>
-    <% @user_complete_orders.each do |order| %>
-    <li>
-        <%= link_to "Order #{order.id}", order_path(order.id) %>
-        Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
-        Status: <%= order.status %>
-        <ul>
-            <% order.order_items.each do |item| %>
-              <% if item.product.user_id == session[:user_id] %>
-              <li>
-                  <%= link_to item.product.name, product_path(item.product.id) %>
-                  <ul>
-                    <li>
-                      <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
-                      Subtotal: <%= number_to_currency(item.subtotal) %>
-                    </li>
+    <h3>Complete orders</h3>
+    <% if @user_complete_orders == [] %>
+      <p>
+        No orders yet
+      </p>
+      <% else %>
+    <ul>
+        <% @user_complete_orders.each do |order| %>
+        <li>
+            <%= link_to "Order #{order.id}", order_path(order.id) %>
+            Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
+            Status: <%= order.status %>
+            <ul>
+                <% order.order_items.each do |item| %>
+                  <% if item.product.user_id == session[:user_id] %>
+                  <li>
+                      <%= link_to item.product.name, product_path(item.product.id) %>
+                      <ul>
+                        <li>
+                          <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
+                          Subtotal: <%= number_to_currency(item.subtotal) %>
+                        </li>
 
-                    <li>
-                      <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
-                      <%= f.label :ship_status, "Shipping Status:" %>
-                      <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
-                      <%= f.submit %>
-                      <% end %>
-                    </li>
-                  </ul>
-                <% end %>
-              <% end %>
-            </li>
-        </ul>
-    </li>
+                        <li>
+                          <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
+                          <%= f.label :ship_status, "Shipping Status:" %>
+                          <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
+                          <%= f.submit %>
+                          <% end %>
+                        </li>
+                      </ul>
+                    <% end %>
+                  <% end %>
+                </li>
+            </ul>
+        </li>
+        <% end %>
+    </ul>
     <% end %>
-</ul>
-<% end %>
+
+</article>

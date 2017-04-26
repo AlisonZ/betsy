@@ -1,30 +1,13 @@
-<h1>Sales order history</h1>
+<article class="fullfilment">
 
-<h2>SALES SUMMARY:</h2>
-<ul>
-  <li>
-    Total revenue: <%= number_to_currency(@user_total) %>
-  </li>
-  <li>
-    Fulfilled items total revenue: <%= number_to_currency(@user_fulfilled_total) %>
-  </li>
-  <li>
-    Unfulfilled items total revenue: <%= number_to_currency(@user_unfulfilled_total) %>
-  </li>
-  <li>
-    Incomplete orders: <%= @user_incomplete_orders.length %>
-  </li>
-  <li>
-    Complete orders: <%= @user_complete_orders.length %>
-  </li>
-</ul>
+<%= render partial: "user" %>
 
-<h2>Fulfillment Summary:</h2>
-<%= link_to "All orders", user_orders_path %>
-<%= link_to "Incomplete orders", user_orders_incomplete_path %>
-<%= link_to "Complete orders", user_orders_complete_path %>
 <h3>All orders</h3>
-<% if @user_orders != [] %>
+<% if @user_orders == [] %>
+  <p>
+    No orders yet
+  </p>
+  <% else %>
 <ul>
     <% @user_orders.each do |order| %>
     <li>
@@ -58,3 +41,5 @@
     <% end %>
 </ul>
 <% end %>
+
+</artilce>
