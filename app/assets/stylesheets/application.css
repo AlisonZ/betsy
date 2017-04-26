@@ -132,6 +132,9 @@ img.carousel {
 
 .carousel {
   text-align: center;
+  /*margin:0 25%;*/
+  display: block;
+  margin: auto;
 }
 
 #slogan {

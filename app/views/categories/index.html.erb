@@ -12,7 +12,7 @@
           <li class="orbit-slide">
             <%= link_to(product_path(product.id)) do %>
               <img class="image carousel" src="<%=product.photo_url%>" alt="Product Photo">
-              <figcaption class="product-caption">
+              <figcaption class="product-caption carousel">
                 <%= product.name %>
               </figcaption>
             <% end %>
