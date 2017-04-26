@@ -62,6 +62,14 @@ a {
   background-color: #C0B283;
 }
 
+.checkout {
+  background-color: #C0B283;
+}
+
+.checkout:hover {
+  background-color: #DCD0C0
+}
+
 /*header*/
 header {
   height: 100px;
