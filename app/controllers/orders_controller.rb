@@ -16,6 +16,23 @@ class OrdersController < ApplicationController
     end
   end
 
+  def complete
+    @user_total = Order.user_total(session[:user_id])
+    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
+    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
+    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
+    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
+  end
+
+  def incomplete
+    @user_total = Order.user_total(session[:user_id])
+    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
+    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
+    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
+    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
+  end
+
+
   def checkout
     @order = Order.find_by_id(session[:order_id])
     if @order.nil?
