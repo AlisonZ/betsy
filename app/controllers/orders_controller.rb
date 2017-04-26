@@ -1,15 +1,9 @@
 class OrdersController < ApplicationController
   before_action :check_login, only: [:index, :complete, :incomplete, :show]
+  helper_method :user_orders, :user_orders_items
 
   def index
     @orders = Order.all.order(id: :desc)
-    @user_orders = Order.user_orders(session[:user_id]).sort.reverse
-    @user_orders_items = Order.user_orders_items(session[:user_id])
-    @user_total = Order.user_total(session[:user_id])
-    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
-    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
-    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
-    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
 
     respond_to do |format|
       format.html
@@ -17,21 +11,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def complete
-    @user_total = Order.user_total(session[:user_id])
-    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
-    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
-    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
-    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
-  end
 
-  def incomplete
-    @user_total = Order.user_total(session[:user_id])
-    @user_fulfilled_total = Order.user_status_total(session[:user_id], true)
-    @user_unfulfilled_total = Order.user_status_total(session[:user_id], false)
-    @user_incomplete_orders = Order.user_status_orders(session[:user_id], "Paid").sort.reverse
-    @user_complete_orders = Order.user_status_orders(session[:user_id], "complete").sort.reverse
-  end
+  def complete; end
+
+  def incomplete;end
 
 
   def checkout
@@ -80,6 +63,8 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-      params.require(:order).permit(:email, :name_on_cc, :cc_number, :cc_ccv, :billing_zip, :address)
+    params.require(:order).permit(:email, :name_on_cc, :cc_number, :cc_ccv, :billing_zip, :address)
   end
+
+
 end
