@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
             flash[:error] = 'Could not log in'
             redirect_to :root
         end
-
     end
 
     def index
