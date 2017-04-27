@@ -81,7 +81,6 @@ describe OrderItemsController do
   end
 
   describe "#Update" do
-
     it "can update the quantity of a cart item" do
       OrderItem.destroy_all #clear it out
       post new_order_item_path(products(:aurorahat).id), params: {order_item: {quantity: 1}}
@@ -118,15 +117,14 @@ describe OrderItemsController do
     end
 
     # not getting the status thing to work
-    it "redirects to user orders page if status is not pending" do skip
-      post login_path, params: {user: {username: users(:aurora).username, email: users(:aurora).email}}
+    it "redirects to user orders page if status is not pending" do
+      login_user(users(:aurora))
 
       post new_order_item_path(products(:aurorahat).id), params: {order_item: {quantity: 1}}
       item = OrderItem.first
       item.order.status = "Paid"
       patch order_item_path(OrderItem.first.id), params: {order_item: {quantity: 6}}
       must_redirect_to user_orders_path(users(:aurora).id)
-
     end
 
     # this test is not passing -- trying to get it to fail the save so the else gets triggered
