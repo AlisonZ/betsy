@@ -23,6 +23,10 @@ class OrdersController < ApplicationController
       flash[:failure] = "Please add an item to your cart to check out"
       redirect_to root_path
     end
+    @user = User.find_by_id(session[:user_id])
+    if @user != nil
+      @order.email = @user.email
+    end
   end
 
   def update #place order
