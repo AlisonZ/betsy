@@ -4,7 +4,7 @@ describe User do
   let(:user) { User.new }
 
   it "can create a new user" do
-    user = User.new(username: "louise", email: "louise@test.com")
+    user = User.new(username: "louise", email: "louise@test.com", uid: "11223", provider: "github")
     user.save.must_equal true
   end
 
