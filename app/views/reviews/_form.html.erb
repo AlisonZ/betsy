@@ -11,12 +11,10 @@
     <%= f.text_field :title %>
 
     <%= f.label :rating %>
-    <%= f.text_field :rating %>
+    <%= f.select :rating, [1,2,3,4,5] %>
 
     <%= f.label :review_text %>
     <%= f.text_area :review_text %>
 
-
-
-    <%= f.submit action_name %>
+    <%= f.submit action_name, class: "button" %>
 <% end %>

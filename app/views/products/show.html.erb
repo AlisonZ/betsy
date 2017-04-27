@@ -69,14 +69,12 @@
         <% end %>
       </section>
     </div>
-    <div class="small-12 medium-4 columns">
-      <%= link_to "Back to all products", products_path %>
-
-        <% if can_edit? %>
-          <%= link_to "Edit this product", edit_product_path(@product.id) %>
-        <% end %>
-        <% if can_review? %>
-          <%= link_to "Review this product", new_product_review_path(@product.id) %>
+    <div class="small-12 medium-4 columns review-edit-button">
+      <% if can_edit? %>
+        <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
+      <% end %>
+      <% if can_review? %>
+        <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
       <% end %>
     </div>
   </div>

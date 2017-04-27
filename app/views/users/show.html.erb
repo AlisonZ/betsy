@@ -1,19 +1,12 @@
 <article class="user">
 
   <div class = "row title">
-    <h3 class="small-12 cloumns">
+    <h3 class="small-12 small-centered cloumns">
       <%= @user.username %>
     </h3>
   </div>
 
   <div class="row">
-    <div class="small-12 medium-4 columns">
-      <p>
-        User Profile: <%= @user.profile %>
-      </p>
-      <%= link_to "Edit profile", edit_user_path(@user.id) %>
-      <%= link_to 'Manage My Sales Orders', user_orders_path(@user.id) %>
-    </div>
     <div class="small-12 medium-4 columns">
       <h4>My Products</h4>
       <ul>
@@ -52,6 +45,14 @@
         </li>
       </ul>
       <% end %>
+    </div>
+    <div class="small-12 medium-4 columns">
+      <h4>User Profile</h4>
+      <p>
+        Description: <%= @user.profile %>
+      </p>
+      <%= link_to "Edit profile", edit_user_path(@user.id) %>
+      <%= link_to 'Manage My Sales Orders', user_orders_path(@user.id) %>
     </div>
   </div>
 </article>
