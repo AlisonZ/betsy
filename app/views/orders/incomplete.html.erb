@@ -3,7 +3,7 @@
   <%= render partial: "user" %>
   <div class="row">
     <div class="small-12 medium-6">
-      <h3>Incomplete orders</h3>
+      <h4>Incomplete orders</h4>
       <% if current_user.user_status_orders(false) == [] %>
       <p>
         No orders yet
