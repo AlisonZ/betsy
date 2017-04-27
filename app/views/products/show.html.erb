@@ -42,10 +42,18 @@
 
       <%= f.submit "Add to Cart", class: "button" %>
 
+
       <% end %>
       <% end %>
 
-
+    </div>
+    <div class="small-12 medium-4 columns left review-edit-button">
+      <% if can_edit? %>
+      <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
+      <% end %>
+      <% if can_review? %>
+      <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
+      <% end %>
     </div>
 
     <div class="small-12 medium-4 columns reviews">
@@ -61,14 +69,7 @@
         <% end %>
       </section>
     </div>
-    <div class="small-12 medium-4 columns review-edit-button">
-      <% if can_edit? %>
-      <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
-      <% end %>
-      <% if can_review? %>
-      <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
-      <% end %>
-    </div>
+
     <div class"row">
 
       <div class="small-12 columns product-description">

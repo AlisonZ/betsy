@@ -178,10 +178,13 @@ div.title {
  .grid-item {
    text-align: center;
    margin: 20px 0px;
-   overflow: scroll;
-   font-size: 1.7em;
+   overflow: auto;
+   font-size: 1.5em;
   }
 
+.category-name {
+
+}
 
 
 .index_photo {
@@ -281,4 +284,18 @@ th {
 
 .success {
   color: green;
+}
+
+// footer
+footer {
+  margin-top: -20;
+  height: 75px;
+}
+footer div {
+  display: block;
+  text-align: center;
+}
+
+footer div p {
+  padding-top: 20px;
 }

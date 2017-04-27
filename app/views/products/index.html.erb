@@ -10,7 +10,7 @@
     <li class="small-12 medium-6 large-4 columns grid-item">
       <div class="border">
         <%= link_to(product_path(product.id)) do %>
-          <%= product.name %> <br />
+          <%= truncate(product.name) %> <br />
           <img src="<%= product.photo_url %>" alt="product photo", class="index_photo" >
       <% end %>
       </div>
