@@ -7,8 +7,7 @@
 
   </div>
   <div class="row">
-    <p>Categories:</p>
-    <ul>
+    <ul class="categories-list">
       <% @product.categories.each do |category| %>
       <li>
         <%= link_to category.name, category_products_path(category.id) %>
@@ -53,7 +52,7 @@
       <section class="review">
         <h2>Reviews</h2>
         <% @product.reviews.each do |review| %>
-        <h3><%= review.title %> <small> <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3><p class="right">Rating: <%= review.rating %></p>
+        <h3><%= review.title %> <p class="right rating-number"><%= review.rating %></p><small class="review-date"> <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
         <section class="review-body" >
           <p>
             <%= review.review_text %>

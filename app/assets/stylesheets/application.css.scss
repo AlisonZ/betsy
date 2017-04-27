@@ -38,7 +38,7 @@ h2, h3 {
   font-family: 'Sail', cursive;
 }
 h4, p {
-  font-family: helvetica, sans-serif;
+  font-family: 'Quattrocento Sans', sans-serif;
 }
 
 a:hover {
@@ -206,6 +206,18 @@ div.title {
 
 
  /*Show page*/
+
+ .categories-list {
+   display: block;
+   text-align: center;
+
+ }
+
+ .categories-list li {
+   display: inline-block;
+   padding: 0 25px;
+ }
+
  .show {
   font-size: 1.25em;
  }
@@ -221,12 +233,20 @@ div.title {
   overflow: scroll;
 }
 
+.review-date {
+  padding-left: 10px;
+}
+
 .review-edit-button {
   margin-top: 10px;
 }
 
 .right {
   float: right;
+}
+
+.rating-number {
+  size: 2em;
 }
 
 
