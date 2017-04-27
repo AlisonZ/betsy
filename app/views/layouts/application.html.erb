@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Sail" rel="stylesheet">
 
 
   <title>Debtsy</title>
@@ -62,7 +63,7 @@
   <main class="content">
     <section class="flash">
       <% flash.each do |name, message| %>
-      <h3 class="row status <%= name %>"><%= message %></h3>
+      <p class="row status <%= name %>"><%= message %></p>
       <% end %>
     </section>
     <%= yield %>

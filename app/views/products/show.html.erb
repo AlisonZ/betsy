@@ -1,15 +1,23 @@
 <article class="show">
 
   <div class = "row title">
-    <h3 class="small-12 cloumns">
+    <h3 class="small-12 columns">
       <%= @product.name %>
     </h3>
+
+  </div>
+  <div class="row">
+    <p>Categories:</p>
+    <ul>
+      <% @product.categories.each do |category| %>
+      <li>
+        <%= link_to category.name, category_products_path(category.id) %>
+      </li>
+      <% end %>
+    </ul>
   </div>
 
   <div class="row">
-    <div class="small-12 columns">
-      <p>Description: <%= @product.description %> </p>
-    </div>
 
     <div class="small-12 medium-4 columns">
       <img src="<%=@product.photo_url%>" alt="product photo" class="product_photo">
@@ -17,11 +25,8 @@
 
     <div class="small-12 medium-4 columns">
       <ul>
-        <li> Price: $<%= @product.price %> </li>
-        <li> <%= @product.stock %> left in stock </li>
-        <li>
-          Selling status:  <%= @product.sell_status %>
-        </li>
+        <li class="price"> Price: <%= number_to_currency(@product.price) %> </li>
+        <li> <% if @product.out_of_stock %>Out of stock<% else %><%= @product.stock %> left in stock <% end %></li>
         <li>
           Merchant: <%= link_to @product.user.username, user_products_path(@product.user.id) %>
         </li>
@@ -30,37 +35,25 @@
         </li>
       </ul>
 
+      <% if !@product.out_of_stock %>
       <%= form_for @item, url: new_order_item_path(@product.id), method: :post do |f| %>
 
-        <%= f.label :quantity %>
-        <% if @product.out_of_stock %>
-        <p>
-          Out of stock
-        </p>
-        <% else %>
-        <%= f.select :quantity, (0..@product.stock) %>
+      <%= f.label :quantity %>
+      <%= f.select :quantity, (0..@product.stock) %>
 
-        <%= f.submit "Add to Cart", class: "button" %>
-        <% end %>
+      <%= f.submit "Add to Cart", class: "button" %>
 
       <% end %>
+      <% end %>
 
-      <p>Categories:</p>
-      <ul>
-        <% @product.categories.each do |category| %>
-        <li>
-          <%= link_to category.name, category_products_path(category.id) %>
-        </li>
-        <% end %>
-      </ul>
+
     </div>
 
     <div class="small-12 medium-4 columns reviews">
       <section class="review">
-        <h2>Reviews!</h2>
+        <h2>Reviews</h2>
         <% @product.reviews.each do |review| %>
-        <h3>Rating: <%= review.rating %></h3>
-        <h3><%= review.title %> <small>reviewed on <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
+        <h3><%= review.title %> <small> <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3><p class="right">Rating: <%= review.rating %></p>
         <section class="review-body" >
           <p>
             <%= review.review_text %>
@@ -71,11 +64,17 @@
     </div>
     <div class="small-12 medium-4 columns review-edit-button">
       <% if can_edit? %>
-        <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
+      <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
       <% end %>
       <% if can_review? %>
-        <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
+      <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
       <% end %>
+    </div>
+    <div class"row">
+
+      <div class="small-12 columns product-description">
+        <p><%= @product.description %> </p>
+      </div>
     </div>
   </div>
 
