@@ -62,12 +62,20 @@ a {
   background-color: #C0B283;
 }
 
+
+/*Specific to application.html*/
 .checkout {
   background-color: #C0B283;
+  display: block;
+  margin: auto;
 }
 
 .checkout:hover {
   background-color: #DCD0C0
+}
+
+.title {
+  text-align: center;
 }
 
 /*header*/
@@ -127,7 +135,6 @@ header h1.main-header {
 /*Adding Styling for the categories index page*/
 .hero {
   height: 275px;
-  /*margin-top: 50px;*/
 }
 
 .top-photos {
@@ -164,12 +171,15 @@ div.title {
   font-size: 2.5em;
   clear:both;
 }
+
  .grid-item {
    text-align: center;
    margin: 20px 0px;
    overflow: scroll;
    font-size: 1.7em;
   }
+
+
 
 .index_photo {
   height: 100px;
@@ -182,6 +192,15 @@ div.title {
   padding: 10px;
   overflow: auto;
  }
+
+ .user-border {
+   width: 90%;
+   height: 75px;
+   border: 2px dotted #C0B283;
+   padding: 10px;
+   overflow: auto;
+ }
+
 
  /*Show page*/
  .show {
@@ -197,4 +216,19 @@ div.title {
   height: 400px;
   border: 2px dotted #C0B283;
   overflow: scroll;
+}
+
+/*Cart Page*/
+.cart-items {
+  margin: 10px 0;
+  font-size: 1.25em;
+}
+
+/*Checkout page*/
+.checkout {
+  margin-top: 20px;
+}
+
+th {
+  text-align: left;
 }

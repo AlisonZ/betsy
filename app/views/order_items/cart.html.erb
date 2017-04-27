@@ -1,6 +1,6 @@
 <article class="user">
 
-  <div class = "row title">
+  <div class="row title">
     <h3 class="small-12 cloumns">
       Cart
     </h3>
@@ -15,7 +15,7 @@
         </p>
         <% else %>
           <% @cart_items.each do |item| %>
-            <div class="small-6 columns">
+            <div class="small-12 columns cart-items">
               <li>
                 <%= link_to item.product.name, product_path(item.product_id) %>
 
@@ -32,7 +32,7 @@
         <% end %>
       </ul>
     </div>
-    <div class="small-12 columns">
+    <div class="small-12s columns">
       <%= button_to "Checkout", checkout_path, method: :get, class: "button checkout" %>
     </div>
   </div>
