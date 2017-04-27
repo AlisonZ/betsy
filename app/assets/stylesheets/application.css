@@ -218,6 +218,10 @@ div.title {
   overflow: scroll;
 }
 
+.review-edit-button {
+  margin-top: 10px;
+}
+
 /*Cart Page*/
 .cart-items {
   margin: 10px 0;
