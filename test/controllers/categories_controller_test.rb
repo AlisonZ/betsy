@@ -3,6 +3,7 @@ require "test_helper"
 #copied this line from the books_app controller test
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
     describe CategoriesController do
+        #wrap in logged in 
         before do
             login_user(users(:felix))
         end
