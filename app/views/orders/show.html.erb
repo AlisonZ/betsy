@@ -9,7 +9,7 @@
   <div class="row">
     <div class="small-12 medium-6 columns">
       <h4>Order Items</h4>
-      <p>Order was placed at: <%=@order.updated_at %></p>
+      <p>Order was placed at: <%=@order.updated_at.strftime("%m/%d/%Y") %></p>
       <p>Order status: <%=@order.status %></p>
       <table>
         <tr>
@@ -21,15 +21,15 @@
         <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
-          <td><%= order_item.product.price %></td>
+          <td><%= number_to_currency(order_item.product.price) %></td>
           <td><%= order_item.quantity %></td>
-          <td><%= order_item.subtotal %></td>
+          <td><%= number_to_currency(order_item.subtotal) %></td>
         </tr>
         <% end %>
         </table>
         <p>
           <!-- This will update if product prices get updated, so do we need to hard save this data in the dB? -->
-            <strong>Your Total was: $<%= @order.total %></strong>
+            <strong>Your Total was: <%= number_to_currency(@order.total) %></strong>
         </p>
     </div>
     <div class="small-12 medium-6 columns">
@@ -40,7 +40,7 @@
         <li><%= @order.name_on_cc %></li>
         <li><%= @order.address %></li>
       </ul>
-      <p>Confirmation Email sent to:<%= @order.email %></p>
+      <p>Confirmation Email sent to: <%= @order.email %></p>
     </div>
   </div>
 

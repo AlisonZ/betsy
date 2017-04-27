@@ -51,8 +51,7 @@
       <p>
         Description: <%= @user.profile %>
       </p>
-      <%= link_to "Edit profile", edit_user_path(@user.id) %>
-      <%= link_to 'Manage My Sales Orders', user_orders_path(@user.id) %>
+      <%= button_to "Edit profile", edit_user_path(@user.id), method: :get, class: "button" %>
     </div>
   </div>
 </article>

@@ -14,7 +14,7 @@
       <ul>
         <li><%= @order.name_on_cc %></li>
         <li><%= @order.address %></li>
-        <li>Confirmation Email sent to:<%= @order.email %> </li>
+        <li>Confirmation Email sent to: <%= @order.email %> </li>
       </ul>
     </div>
     <div class="small-12 medium-6 columns">
@@ -31,15 +31,15 @@
         <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
-          <td><%= order_item.product.price %></td>
+          <td><%= number_to_currency(order_item.product.price) %></td>
           <td><%= order_item.quantity %></td>
-          <td><%= order_item.subtotal %></td>
+          <td><%= number_to_currency(order_item.subtotal) %></td>
         </tr>
         <% end %>
         </table>
         <p>
           <!-- This will update if product prices get updated, so do we need to hard save this data in the dB? -->
-            <strong>Your Total was: $<%= @order.total %></strong>
+            <strong>Your Total was: <%= number_to_currency(@order.total) %></strong>
         </p>
     </div>
   </div>

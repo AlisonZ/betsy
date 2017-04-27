@@ -11,13 +11,13 @@
         <%= f.label :email %>
         <%= f.text_field :email, required: true %>
 
-        <%= f.label :name_on_cc %>
+        <%= f.label "Name on credit card" %>
         <%= f.text_field :name_on_cc, required: true %>
 
-        <%= f.label :cc_number %>
+        <%= f.label "Credit card number -- don't actually give us this! it's fake!" %>
         <%= f.text_field :cc_number, required: true %>
 
-        <%= f.label :cc_ccv %>
+        <%= f.label "Credit card ccv -- also fake" %>
         <%= f.text_field :cc_ccv, required: true %>
 
         <%= f.label :billing_zip %>
@@ -42,14 +42,14 @@
         <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= order_item.product.name %></td>
-          <td><%= order_item.product.price %></td>
+          <td><%= number_to_currency(order_item.product.price) %></td>
           <td><%= order_item.quantity %></td>
-          <td><%= order_item.subtotal %></td>
+          <td><%= number_to_currency(order_item.subtotal) %></td>
         </tr>
         <% end %>
       </table>
       <p>
-          <strong>Your Order Total is: $<%= @order.total %></strong>
+          <strong>Your Order Total is: <%= number_to_currency(@order.total) %></strong>
       </p>
     </div>
   </div>
