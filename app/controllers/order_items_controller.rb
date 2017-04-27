@@ -12,7 +12,6 @@ class OrderItemsController < ApplicationController
 
   def create
     if !duplicate_item?
-      # raise
       @item = OrderItem.new
       @item.quantity = item_params[:quantity].to_i
       @item.product_id = params[:id]
