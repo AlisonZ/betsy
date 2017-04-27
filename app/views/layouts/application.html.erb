@@ -9,39 +9,47 @@
 
 
   <title>Debtsy</title>
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 </head>
 
 <body>
-  <header>
+  <header class="row">
     <div class="row" id="top-row">
-      <h1 class="main-header small-4 columns"><%= link_to "Debtsy", root_path %></h1>
-      <div class="cart small-7 columns">
+      <div class="small-4 medium-5 columns">
+        <h1 class="main-header"><%= link_to "Debtsy", root_path %></h1>
+      </div>
+      <div class="cart small-4 medium-5 columns">
         <%= link_to image_tag( "cart"), cart_path %>
         <%= total_items_in_cart %>
       </div>
     </div>
-    <div class="row">
+    <div class="row shop-by">
       <div class="small-12 large-6 columns shop-by">
         <ul>
-            <li>
-                <%= link_to "shop by category", categories_path %>
-            </li>
-            <li>
-                <%= link_to "shop by merchant", users_path %>
-            </li>
-            <li>
-                <%= link_to "see all products", products_path %>
-            </li>
+          <li>
+            <div class="columns small-12">
+              <%= link_to "shop by category", categories_path %>
+            </div>
+          </li>
+          <li>
+            <div class="columns small-12">
+              <%= link_to "shop by merchant", users_path %>
+            </div>
+          </li>
+          <li>
+            <div class="columns small-12">
+              <%= link_to "see all products", products_path %>
+            </div>
+          </li>
         </ul>
       </div>
       <nav class="small-12 large-6 columns" id="nav-bar">
         <% if current_user %>
         <ul class="header-login">
           <li>
-            Logged in as <%= current_user.username %>
+            logged in as <%= current_user.username %>
           </li>
           <li>
             <%= button_to "My account", user_path(current_user.id), method: :get, class: "button" %>

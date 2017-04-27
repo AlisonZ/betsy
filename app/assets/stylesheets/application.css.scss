@@ -76,6 +76,7 @@ a {
   text-align: center;
 }
 
+
 /*header*/
 header {
   height: 100px;
@@ -128,6 +129,9 @@ header h1.main-header {
 .shop-by {
   margin: 0;
   padding: 0;
+  padding-bottom: 10px;
+  // text-align: center;
+
 }
 
 /*Adding Styling for the categories index page*/
@@ -158,6 +162,7 @@ img.carousel {
   background-color: #DCD0C0;
   color: white;
 }
+
 
  /*All Index Pages*/
 div.title {
@@ -242,4 +247,17 @@ th {
 
 .price {
   font-size: 2em;
+}
+
+// flash
+
+.flash {
+  text-align: center;
+}
+.error, .failure {
+  color: red;
+}
+
+.success {
+  color: green;
 }
