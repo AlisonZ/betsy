@@ -22,10 +22,14 @@ class User < ApplicationRecord
 
   def user_orders_items
     order_items = []
-    self.products.each do |product|
-      if product.order_items != []
-        order_items << product.order_items
+    if self.products.any?
+      self.products.each do |product|
+        if product.order_items != []
+          order_items << product.order_items
+        end
       end
+    else
+      return order_items
     end
     return order_items.flatten!
   end
@@ -41,8 +45,9 @@ class User < ApplicationRecord
       return self.user_orders.select {|order| order.status == status }
   end
 
+
   def user_total
-    if self.user_orders_items != nil
+    if self.user_orders_items != []
       total = 0.00
       self.user_orders_items.each do |item|
         total += item.subtotal
@@ -54,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def user_status_total(status)
-    if self.user_orders_items
+    if self.user_orders_items != []
       total = 0.00
       self.user_orders_items.each do |item|
         if item.ship_status == status
@@ -67,6 +72,15 @@ class User < ApplicationRecord
     end
   end
 
+  def user_purchases_total
+    total = 0.00
+    if self.orders != []
+      self.orders.each do |order|
+        total += order.total
+      end
+    end
+    return total
+  end
 
   def self.create_from_github(auth_hash)
         user = User.new

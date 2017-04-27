@@ -43,9 +43,13 @@
       <ul>
         <% @purchases.each do |purchase| %>
         <li>
-          <%= purchase.created_at.strftime("%m/%d/%Y") %>: <%= purchase.products.length %> item(s) - $<%= purchase.total %>
+          <%= link_to "Order ##{purchase.id}", order_path(purchase.id) %> purchased on
+          <%= purchase.created_at.strftime("%m/%d/%Y") %>: <%= purchase.products.length %> item(s) - <%= number_to_currency(purchase.total) %>
         </li>
         <% end %>
+        <li>
+          Total spent: <%= number_to_currency(@user.user_purchases_total) %>
+        </li>
       </ul>
       <% end %>
     </div>
