@@ -72,6 +72,15 @@ class User < ApplicationRecord
     end
   end
 
+  def user_purchases_total
+    total = 0.00
+    if self.orders != []
+      self.orders.each do |order|
+        total += order.total
+      end
+    end
+    return total
+  end
 
   def self.create_from_github(auth_hash)
         user = User.new
