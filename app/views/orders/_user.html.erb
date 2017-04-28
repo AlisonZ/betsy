@@ -1,5 +1,10 @@
 
-
+<div class="columns small-12 medium-8">
+  <h4>Fulfillment Summary</h4>
+  <%= link_to "All orders", user_orders_path, method: :get, class: "button" %>
+  <%= link_to "Incomplete orders", user_orders_incomplete_path, method: :get, class: "button" %>
+  <%= link_to "Complete orders", user_orders_complete_path, method: :get, class: "button" %>
+</div>
   <div class="small-12 medium-4 columns sales-summary">
     <h4>Sales Summary</h4>
     <table>
@@ -44,11 +49,4 @@
         </td>
       </tr>
     </table>
-  </div>
-
-  <div class="columns small-12 medium-4">
-    <h4>Fulfillment Summary</h4>
-    <%= button_to "All orders", user_orders_path, method: :get, class: "button" %>
-    <%= button_to "Incomplete orders", user_orders_incomplete_path, method: :get, class: "button" %>
-    <%= button_to "Complete orders", user_orders_complete_path, method: :get, class: "button" %>
   </div>

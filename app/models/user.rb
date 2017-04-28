@@ -50,8 +50,12 @@ class User < ApplicationRecord
       return user_orders.values
   end
 
-  def user_status_orders(status)
-      return self.user_orders.select {|order| order.status == status }
+  def user_status_orders(order_status = nil)
+    if order_status
+      return self.user_orders.select {|order| order.status == order_status }
+    else
+      return self.user_orders
+    end
   end
 
 

@@ -1,4 +1,4 @@
-<article class="fullfilment">
+<article class="fulfillment">
 
   <div class="row title">
     <h3 class="small-12 columns">
@@ -7,49 +7,61 @@
   </div>
   <div class="row">
     <div class="small-12 medium-8 columns">
+      <h4>Fulfillment Summary</h4>
+      <%= link_to "All orders", user_orders_path(order_status: nil), method: :get, class: "button"%>
+      <%= link_to "Incomplete orders", user_orders_path(order_status: "paid"), method: :get, class: "button"%>
+      <%= link_to "Complete orders", user_orders_path(order_status: "complete"), method: :get, class: "button" %>
 
-      <%= render partial: "user" %>
+      <%= render partial: "orders", locals: {order_status: params[:order_status]}%>
+
     </div>
 
-    <div class="small-12 medium-4 columns">
 
-      <h4>All orders</h4>
-      <% if current_user.user_orders == [] %>
-      <p>
-        No orders yet
-      </p>
-      <% else %>
-      <ul>
-        <% current_user.user_orders.each do |order| %>
-        <li>
-          <%= link_to "Order #{order.id}", order_path(order.id) %>
-          Date: <%= order.updated_at.strftime("%m/%d/%Y") %>
-          Status: <%= order.status %>
-          <ul>
-            <% order.order_items.each do |item| %>
-            <% if item.product.user == current_user %>
-            <li>
-              <%= link_to item.product.name, product_path(item.product.id) %>
-              <ul>
-                <li>
-                  <%= item.quantity %> @ <%= number_to_currency(item.product.price) %> each --
-                  Subtotal: <%= number_to_currency(item.subtotal) %>
-                </li>
-                <li>
-                  <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
-                  <%= f.label :ship_status, "Shipping Status:" %>
-                  <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
-                  <%= f.submit "Update Shipping Status", method: :patch, class: "button"%>
-                  <% end %>
-                </li>
-              </ul>
-            </li>
-            <% end %>
-            <% end %>
-          </ul>
-        </li>
-        <% end %>
-      </ul>
-      <% end %>
+    <div class="small-12 medium-4 columns sales-summary">
+      <h4>Sales Summary</h4>
+      <table>
+        <tr>
+          <td>
+            Total revenue
+          </td>
+          <td>
+            <%= number_to_currency(current_user.user_total) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Fulfilled items total revenue
+          </td>
+          <td>
+            <%= number_to_currency(current_user.user_status_total(true)) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Unfulfilled items total revenue
+          </td>
+          <td>
+            <%= number_to_currency(current_user.user_status_total(false)) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Incomplete orders
+          </td>
+          <td>
+            <%= current_user.user_status_orders("paid").sort.reverse.length %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Complete orders
+          </td>
+          <td>
+            <%= current_user.user_status_orders("complete").sort.reverse.length %>
+          </td>
+        </tr>
+      </table>
     </div>
-  </article>
+  </div>
+
+</article>

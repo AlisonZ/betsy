@@ -4,6 +4,12 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all.order(id: :desc)
+    params[:order_status] ||= nil
+    # params[:order_status] = order_status
+
+    # @user_orders = current_user.user_orders if params[:status] == "all"
+
+
 
     # respond_to do |format|
     #   format.html

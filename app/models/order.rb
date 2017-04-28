@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
 
 
+
   def total
     total = 0.00
     #accesses the subtotal of each of the order items

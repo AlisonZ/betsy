@@ -13,16 +13,16 @@
         <% @user.products.each do |product| %>
         <tr>
           <td>
-            <%= link_to product.name, product_path(product.id) %>
+            <%= link_to truncate(product.name), product_path(product.id) %>
           </td>
-          <td>
-            <%= button_to "Edit", edit_product_path(product.id), method: :get, class: "button" %>
+          <td class="edit">
+            <%= link_to "Edit", edit_product_path(product.id), method: :get %>
           </td>
-          <td>
+          <td class="edit">
             <% if product.selling? %>
-            <%= button_to "Retire product", status_path(product.id), method: :patch, class: "button" %>
+            <%= link_to "Retire product", status_path(product.id), method: :patch  %>
             <% else %>
-            <%= button_to "Sell product", status_path(product.id), method: :patch, class: "button" %>
+            <%= link_to "Sell product", status_path(product.id), method: :patch  %>
             <% end %>
           </td>
         </tr>

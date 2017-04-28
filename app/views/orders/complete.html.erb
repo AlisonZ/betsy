@@ -1,16 +1,16 @@
-<article class="fullfilment">
+<article class="fulfillment">
   <div class="row title">
     <h3 class="small-12 columns">
       Order History
     </h3>
   </div>
   <div class="row">
-    <div class="small-12 medium-8 columns">
+    <div class="small-12 medium-12 columns">
 
       <%= render partial: "user" %>
     </div>
 
-    <div class="small-12 medium-4 columns">
+    <div class="small-12 medium-12 columns">
 
       <h4>Complete orders</h4>
       <% if current_user.user_status_orders("complete") == [] %>
