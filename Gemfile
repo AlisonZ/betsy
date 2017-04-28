@@ -7,7 +7,7 @@ end
 
 gem "omniauth"
 gem "omniauth-github"
-
+gem "omniauth-google-oauth2"
 #Adding foundation!
 gem 'foundation-rails'
 #this should help with turbolinks?

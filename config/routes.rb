@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index]
   get "/auth/github/callback", to: "sessions#create"
+  get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/login', to: 'sessions#login_form'
   # post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#logout'
