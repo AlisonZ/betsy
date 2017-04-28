@@ -3,12 +3,24 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :current_order_items, :total_items_in_cart
   helper_method :render_404
   helper_method :can_review?, :can_edit?, :can_add_new_product?, :highest_rated_products
+  helper_method :order_status_show
 
   def render_404
     render file: "#{ Rails.root }/public/404.html", status: 404
   end
 
   private
+
+  def order_status_show
+    if params[:order_status] == nil
+      order_status ="All"
+    elsif params[:order_status] == "complete"
+      order_status = "Complete"
+    else
+      order_status = "Incomplete"
+    end
+      return order_status
+  end
 
   def current_user
     @logged_in_user ||= User.find(session[:user_id]) if session[:user_id]

@@ -349,6 +349,22 @@ th {
   text-transform: uppercase;
 }
 
+.fulfillment h4 {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.fulfillment-orders h5 {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+}
+
+.fulfillment-orders h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
+  padding-top: 10px;
+}
+
 // flash
 
 .flash {
@@ -405,6 +421,10 @@ footer div p {
 
 .my-products-list {
   padding-bottom: 20px;
+}
+
+.my-products-list td.edit a{
+  color: grey;
 }
 
 table {
