@@ -31,13 +31,11 @@ class OrderItem < ApplicationRecord
             @order.status = 'complete'
             @order.save
         else
-            @order.status = 'Paid'
+            @order.status = 'paid'
             @order.save
         end
         return @order
     end
-
-
 
     def subtotal
         if product
@@ -47,8 +45,6 @@ class OrderItem < ApplicationRecord
             return nil
         end
     end
-
-
 
     def shipping_status
         if self.ship_status

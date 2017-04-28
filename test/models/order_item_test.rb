@@ -78,4 +78,62 @@ describe OrderItem do
       order_item.subtotal.must_be_nil
     end
   end
+  describe "check_order_status(id)" do
+    it "checks all other items in order and changes order to complete if all items have been shipped" do
+      order = orders(:check_status_order_one)
+      order.status.must_equal "pending"
+
+      order_item1 = order_items(:apple_check_status_order_one)
+      order_item2 = order_items(:orange_check_status_order_one)
+
+      order_item1.ship_status = true
+      order_item1.save
+      order_item1.ship_status.must_equal true
+
+      order = order_item1.check_order_status(order_item1.order_id)
+      order.status.must_equal "paid"
+
+      order_item2.ship_status = true
+      order_item2.save
+      order_item2.ship_status.must_equal true
+      order = order_item2.check_order_status(order_item2.order_id)
+
+      order.status.must_equal "complete"
+    end
+    it "checks all other items in order and changes order to paid if one item has been changed from shipped to not shipped" do
+
+      order = orders(:check_status_order_one)
+      order_item1 = order_items(:apple_check_status_order_one)
+      order_item2 = order_items(:orange_check_status_order_one)
+
+      order_item1.ship_status = true
+      order_item1.save
+
+      order_item2.ship_status = true
+      order_item2.save
+
+      order = order_item2.check_order_status(order_item2.order_id)
+
+      order.status.must_equal "complete"
+
+      order_item2.ship_status = false
+      order_item2.save
+
+      order = order_item2.check_order_status(order_item2.order_id)
+
+      order.status.must_equal "paid"
+    end
+  end
+  describe "shipping_status" do
+    it "returns proper shipping status when called" do
+      order_item1 = order_items(:banana_check_status_order_one)
+      order_item2 = order_items(:apple_check_status_order_one)
+
+      order_item1.shipping_status.must_equal "Shipped"
+      order_item2.shipping_status.must_equal "Not shipped yet"
+
+
+    end
+
+  end
 end

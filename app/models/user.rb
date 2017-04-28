@@ -16,7 +16,8 @@ class User < ApplicationRecord
   # end
 
   def orders
-    user_orders = Order.where(email: email)
+    #user_orders = Order.where(email: email)#.where.not(status: "pending")
+    user_orders = Order.where(["email = ? and status != ?", email, "pending"])
     return user_orders
   end
 
@@ -31,7 +32,15 @@ class User < ApplicationRecord
     else
       return order_items
     end
-    return order_items.flatten!
+    order_items.flatten!
+    unpending_order_items = []
+    order_items.each do |item|
+       if item.order.status != "pending"
+         unpending_order_items << item
+       end
+     end
+    return unpending_order_items
+
   end
 
   def user_orders
@@ -50,7 +59,9 @@ class User < ApplicationRecord
     if self.user_orders_items != []
       total = 0.00
       self.user_orders_items.each do |item|
-        total += item.subtotal
+        if item.order.status != "pending"
+          total += item.subtotal
+        end
       end
       return total.round(2)
     else
@@ -62,7 +73,7 @@ class User < ApplicationRecord
     if self.user_orders_items != []
       total = 0.00
       self.user_orders_items.each do |item|
-        if item.ship_status == status
+        if item.ship_status == status && item.order.status != "pending"
           total += item.subtotal
         end
       end
@@ -75,11 +86,13 @@ class User < ApplicationRecord
   def user_purchases_total
     total = 0.00
     if self.orders != []
-      self.orders.each do |order|
-        total += order.total
+        self.orders.each do |order|
+          if order.status != "pending"
+            total += order.total
+          end
       end
     end
-    return total
+    return total.round(2)
   end
 
   def self.create_from_github(auth_hash)

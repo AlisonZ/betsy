@@ -122,7 +122,7 @@ describe OrderItemsController do
 
       post new_order_item_path(products(:aurorahat).id), params: {order_item: {quantity: 1}}
       item = OrderItem.first
-      item.order.status = "Paid"
+      item.order.status = "paid"
       patch order_item_path(OrderItem.first.id), params: {order_item: {quantity: 6}}
       must_redirect_to user_orders_path(users(:aurora).id)
     end

@@ -1,10 +1,18 @@
 <article class="fullfilment">
 
-  <%= render partial: "user" %>
+  <div class="row title">
+    <h3 class="small-12 columns">
+      Order history
+    </h3>
+  </div>
+  <div class="small-12 medium-8 columns">
 
+    <%= render partial: "user" %>
+  </div>
   <div class="row">
-    <div class="small-12 medium-6">
-      <h3>All orders</h3>
+    <div class="small-12 medium-4 columns">
+
+      <h4>All orders</h4>
       <% if current_user.user_orders == [] %>
       <p>
         No orders yet
@@ -30,7 +38,7 @@
                   <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
                   <%= f.label :ship_status, "Shipping Status:" %>
                   <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
-                  <%= f.submit %>
+                  <%= f.submit "Update Shipping Status", method: :patch, class: "button"%>
                   <% end %>
                 </li>
               </ul>
