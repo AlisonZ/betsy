@@ -11,11 +11,9 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def complete; end
 
   def incomplete;end
-
 
   def checkout
     @order = Order.find_by_id(session[:order_id])
@@ -31,7 +29,10 @@ class OrdersController < ApplicationController
 
   def update #place order
     @order = Order.find_by_id(session[:order_id])
-    if @order
+    if @order.nil?
+      flash[:error] = "Could not place order"
+      redirect_to :root
+    else
       @order.status = "Paid"
       @order.update(order_params)
       if @order.valid?
@@ -41,8 +42,6 @@ class OrdersController < ApplicationController
           item.product.stock = item.product.stock - item.quantity
           item.product.save
         end
-      else
-        flash[:error] = "Could not place order"
       end
     end
   end

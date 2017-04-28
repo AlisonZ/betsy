@@ -62,5 +62,11 @@ describe OrdersController do
 
          new_status.wont_equal old_status
     end
+
+    it "if order does not exist, should redirect to root path" do
+      put order_path(1)
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
 end
