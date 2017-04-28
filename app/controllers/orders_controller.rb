@@ -30,18 +30,22 @@ class OrdersController < ApplicationController
   def update #place order
     @order = Order.find_by_id(session[:order_id])
     if @order.nil?
-      flash[:error] = "Could not place order"
+      flash[:error] = "There was no order to find"
       redirect_to :root
     else
       @order.status = "paid"
-      @order.update(order_params)
-      session[:order_id] = nil
-      @order.order_items.each do |item|
-        #updates the stock of each of the products
-        item.product.stock = item.product.stock - item.quantity
-        item.product.save
+      if @order.update(order_params)
+        session[:order_id] = nil
+        @order.order_items.each do |item|
+          #updates the stock of each of the products
+          item.product.stock = item.product.stock - item.quantity
+          item.product.save
+        end
+        redirect_to order_path(@order.id)
+      else
+        flash[:error] = "Could not place order"
+        redirect_to :cart
       end
-      flash[:error] = "Could not place order"
     end
   end
 
