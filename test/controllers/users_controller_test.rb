@@ -46,6 +46,35 @@ describe UsersController do
             must_redirect_to :root
         end
     end
+
+    describe "a user can update their profile" do
+      before do
+          login_user(users(:felix))
+      end
+
+      it "successfully updates profile" do
+        get user_path(users(:felix).id)
+        test_user = users(:felix)
+        old_profile = test_user.profile
+        patch user_path(users(:felix).id), params: {user: {id: test_user.id, username: test_user.username, email: test_user.email, uid: test_user.uid, provider: test_user.provider, profile: "My profile"}}
+        changed_user = User.find_by_id(users(:felix).id)
+        new_profile = changed_user.profile
+
+        new_profile.wont_equal old_profile
+
+      end
+
+      it "doesn't totally break if update didn't save" do
+        test_user = users(:felix)
+        test_user.profile = "New"
+        test_user.save
+        patch user_path(test_user.id), params: { user: {profile: "", username: nil } }
+        changed_user = User.find_by_id(users(:felix).id)
+        new_profile = changed_user.profile
+        new_profile.wont_equal ""
+
+      end
+    end
 end
 
 
