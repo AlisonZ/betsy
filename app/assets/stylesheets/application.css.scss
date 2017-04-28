@@ -20,7 +20,7 @@ Pale Gold color: #C0B283
 }
 
 body {
-  clear:both;
+  clear: both;
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px;
   color: #373737;
@@ -37,8 +37,8 @@ h1, h1 a {
 h2, h3 {
   font-family: 'Sail', cursive;
 }
-h4, p {
-  font-family: helvetica, sans-serif;
+h4, p{
+  font-family: 'Quattrocento Sans', sans-serif;
 }
 
 a:hover {
@@ -75,6 +75,7 @@ a {
 .title {
   text-align: center;
 }
+
 
 
 /*header*/
@@ -178,10 +179,13 @@ div.title {
  .grid-item {
    text-align: center;
    margin: 20px 0px;
-   overflow: scroll;
-   font-size: 1.7em;
+   overflow: auto;
+   font-size: 1.5em;
   }
 
+.category-name {
+
+}
 
 
 .index_photo {
@@ -206,6 +210,18 @@ div.title {
 
 
  /*Show page*/
+
+ .categories-list {
+   display: block;
+   text-align: center;
+
+ }
+
+ .categories-list li {
+   display: inline-block;
+   padding: 0 25px;
+ }
+
  .show {
   font-size: 1.25em;
  }
@@ -221,6 +237,10 @@ div.title {
   overflow: scroll;
 }
 
+.review-date {
+  padding-left: 10px;
+}
+
 .review-edit-button {
   margin-top: 10px;
 }
@@ -229,7 +249,14 @@ div.title {
   float: right;
 }
 
+.rating-number {
+  size: 2em;
+}
 
+.sales-summary {
+  display: block;
+  text-align: center;
+}
 /*Cart Page*/
 .cart-items {
   margin: 10px 0;
@@ -261,4 +288,41 @@ th {
 
 .success {
   color: green;
+}
+
+// footer
+footer {
+  margin-top: -20;
+  height: 75px;
+}
+footer div {
+  display: block;
+  text-align: center;
+}
+
+footer div p {
+  padding-top: 20px;
+}
+
+.jolly-owl {
+  display: block;
+  text-align: center;
+}
+
+.credit {
+  font-size: 3em;
+  padding: 20px 0;
+}
+
+.names li {
+  padding: 5px 0;
+}
+
+.order-history-title {
+  text-align: left;
+}
+
+
+.my-products-list {
+  padding-bottom: 20px;
 }
