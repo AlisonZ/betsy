@@ -53,9 +53,10 @@
         <div class="small-12 medium-4 columns reviews">
           <section class="review">
             <h2>What other shoppers think:</h2>
-            <h4>Overall rating: <strong><% if @product.average_rating == 0 %><p>
-              not rated yet</p>
-              <% else %><%= @product.average_rating %><% end %>/5</strong></h4>
+            <h4>Overall rating: <strong>
+              <% if @product.average_rating == 0 %>
+                <p>not rated yet</p>
+              <% else %><%= @product.average_rating %>/5<% end %></strong></h4>
               <% @product.reviews.each do |review| %>
               <h3><%= review.title %> <p class="right rating-number"><%= review.rating %></p><small class="review-date"> <%= review.updated_at.strftime("%B %d, %Y") %></small></h3>
               <section class="review-body" >
