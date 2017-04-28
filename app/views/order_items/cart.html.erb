@@ -17,6 +17,7 @@
           <% @cart_items.each do |item| %>
             <div class="small-12 columns cart-items">
               <li>
+                <%= image_tag item.product.photo_url, class: "cart-photo" %>
                 <%= link_to item.product.name, product_path(item.product_id) %>
 
                 <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
