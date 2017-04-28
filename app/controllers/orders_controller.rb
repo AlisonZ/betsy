@@ -2,14 +2,14 @@ class OrdersController < ApplicationController
   before_action :check_login, only: [:index, :complete, :incomplete, :show]
   helper_method :user_orders, :user_orders_items
 
-  # def index
-  #   @orders = Order.all.order(id: :desc)
-  #
-  #   respond_to do |format|
-  #     format.html
-  #     format.csv { send_data @orders.to_csv }
-  #   end
-  # end
+  def index
+    @orders = Order.all.order(id: :desc)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @orders.to_csv }
+    end
+  end
 
   def complete; end
 
