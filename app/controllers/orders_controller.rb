@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
           item.product.stock = item.product.stock - item.quantity
           item.product.save
         end
-        redirect_to order_path(@order.id)
+        # redirect_to confirmation_path(@order.id)
       else
         flash[:error] = "Could not place order"
         redirect_to :cart
@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
 
   private
 
