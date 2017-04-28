@@ -48,10 +48,10 @@
     <td>
       <%= form_for item, url: order_item_path(item), method: :patch do |f| %>
 
-      <%= f.select :ship_status, [['Shipped', true], ['Not shipped yet', false]] %>
+      <%= f.select :ship_status, [['Shipped', true], ['Not shipped', false]] %>
     </td>
     <td>
-      <%= f.submit "Update Shipping Status", method: :patch, class: "button"%>
+      <%= f.submit "Update", method: :patch, class: "button"%>
       <% end %>
     </td>
     <% end %>

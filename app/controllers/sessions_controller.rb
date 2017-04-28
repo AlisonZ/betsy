@@ -41,9 +41,10 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
-  def index
-    @user = User.find(session[:user_id])
-  end
+  # don't think we need this??
+  # def index
+  #   @user = User.find(session[:user_id])
+  # end
 
   def logout
     if session[:order_id]
