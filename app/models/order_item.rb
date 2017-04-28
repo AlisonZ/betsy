@@ -37,8 +37,6 @@ class OrderItem < ApplicationRecord
         return @order
     end
 
-
-
     def subtotal
         if product
             subtotal = product.price * quantity
@@ -47,8 +45,6 @@ class OrderItem < ApplicationRecord
             return nil
         end
     end
-
-
 
     def shipping_status
         if self.ship_status
