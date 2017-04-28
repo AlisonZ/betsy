@@ -20,6 +20,23 @@ hats:
   order: order_one
   quantity: 3
 
+banana_check_status_order_one:
+  product: banana
+  order: check_status_order_one
+  quantity: 1
+  ship_status: true
+
+apple_check_status_order_one:
+  product: apple
+  order: check_status_order_one
+  quantity: 2
+  ship_status: true
+
+orange_check_status_order_one:
+  product: orange
+  order: check_status_order_one
+  quantity: 1
+  ship_status: false
 
 two_boots:
   product: boots

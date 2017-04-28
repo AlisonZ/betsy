@@ -15,7 +15,7 @@ aurora_order_two:
   email: "aurora@test.com"
 
 felix_order_one:
-  status: "Paid"
+  status: "paid"
   email: "felix_test@test.com"
 
 felix_order_two:
@@ -27,7 +27,7 @@ user_one_order_one:
   email: "test1@buyer.com"
 
 user_one_order_two:
-  status: "Paid"
+  status: "paid"
   email: "test2@buyer.com"
 
 user_one_order_three:
@@ -43,7 +43,7 @@ user_one_order_five:
   email: "test4@buyer.com"
 
 user_one_order_six:
-  status: "Paid"
+  status: "paid"
   email: "test5@buyer.com"
 
 user_one_order_seven:
@@ -55,7 +55,7 @@ user_one_purchase_one:
   email: "user_orders_test@one.com"
 
 user_one_purchase_two:
-  status: "Paid"
+  status: "paid"
   email: "user_orders_test@one.com"
 
 # user_one_purchase_three:
@@ -65,3 +65,7 @@ user_one_purchase_two:
 user_one_pending_purchase_one:
   status: "pending"
   email: "user_orders_test@one.com"
+
+check_status_order_one:
+  status: "pending"
+  email: "a_user@g.com"

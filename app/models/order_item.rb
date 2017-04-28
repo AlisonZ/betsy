@@ -31,7 +31,7 @@ class OrderItem < ApplicationRecord
             @order.status = 'complete'
             @order.save
         else
-            @order.status = 'Paid'
+            @order.status = 'paid'
             @order.save
         end
         return @order

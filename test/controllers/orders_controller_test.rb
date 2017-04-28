@@ -37,7 +37,7 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    it "Updates the status of order to 'Paid'" do
+    it "Updates the status of order to 'paid'" do
       # Initialize the cart by adding an item to it
       post new_order_item_path(products(:fancy_socks).id),
         params: {order_item:

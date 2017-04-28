@@ -78,4 +78,21 @@ describe OrderItem do
       order_item.subtotal.must_be_nil
     end
   end
+  describe "check_order_status(id)" do
+    it "checks all other items in order and changes order to complete if all items have been shipped" do
+      order = orders(:check_status_order_one)
+      order.status.must_equal "pending"
+
+      order_item = order_items(:orange_check_status_order_one)
+
+      order_item.ship_status = true
+      order_item.save
+      order_item.ship_status.must_equal true
+      order = order_item.check_order_status(order_item.order_id)
+
+      order.status.must_equal "complete"
+
+
+    end
+  end
 end

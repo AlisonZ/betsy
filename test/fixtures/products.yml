@@ -87,3 +87,27 @@ user_one_towel:
   photo_url: "photo"
   stock: 25
   user: user_orders_test_user_one
+
+banana:
+  name: "Banana"
+  description: "A banana fixture"
+  price: 5.00
+  photo_url: "some_url.com"
+  stock: 20
+  user: felix
+
+apple:
+  name: "Apple"
+  description: "An apple fixture"
+  price: 6.00
+  photo_url: "some_other_photo.com"
+  stock: 15
+  user: aurora
+
+orange:
+  name: "Orange"
+  description: "An orange fixture"
+  price: 3.00
+  photo_url: "blablabla.com"
+  stock: 10
+  user: jackie
