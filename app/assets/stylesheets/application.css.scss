@@ -211,6 +211,10 @@ div.title {
 
  /*Show page*/
 
+.product-description {
+  padding-top: 15px;
+}
+
  .categories-list {
    display: block;
    text-align: center;
@@ -255,7 +259,11 @@ div.title {
 
 .sales-summary {
   display: block;
+}
+
+.sales-summary h4 {
   text-align: center;
+
 }
 /*Cart Page*/
 .cart-items {
@@ -314,15 +322,26 @@ footer div p {
   padding: 20px 0;
 }
 
-.names li {
+.names {
   padding: 5px 0;
 }
 
-.order-history-title {
-  text-align: left;
+.school {
+  padding-top: 5px;
 }
 
+.title h3 {
+  padding-bottom: 10px;
+}
+
+.headerh4 {
+  text-align: center;
+}
 
 .my-products-list {
   padding-bottom: 20px;
+}
+
+table {
+  font-family: 'Quattrocentro Sans', sans-serif;
 }

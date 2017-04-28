@@ -1,8 +1,7 @@
 
 
-<div class="row">
   <div class="small-12 medium-4 columns sales-summary">
-    <h4>SALES SUMMARY</h4>
+    <h4>Sales Summary</h4>
     <table>
       <tr>
         <td>
@@ -48,10 +47,8 @@
   </div>
 
   <div class="columns small-12 medium-4">
-    <h4>Fulfillment Summary:</h4>
+    <h4>Fulfillment Summary</h4>
     <%= button_to "All orders", user_orders_path, method: :get, class: "button" %>
     <%= button_to "Incomplete orders", user_orders_incomplete_path, method: :get, class: "button" %>
     <%= button_to "Complete orders", user_orders_complete_path, method: :get, class: "button" %>
   </div>
-
-</div>

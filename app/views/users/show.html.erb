@@ -8,27 +8,33 @@
 
   <div class="row">
     <div class="small-12 medium-4 columns">
-      <h4>My Products</h4>
-      <ul class="my-products-list">
+      <h4 class="headerh4">My Products</h4>
+      <table class="my-products-list">
         <% @user.products.each do |product| %>
-        <li>
-          <%= link_to product.name, product_path(product.id) %>
-          <%= link_to "Edit", edit_product_path(product.id) %>
-          <% if product.selling? %>
-          <%= link_to "Retire product", status_path(product.id), method: :patch %>
-          <% else %>
-          <%= link_to "Sell product", status_path(product.id), method: :patch %>
-          <% end %>
-        </li>
+        <tr>
+          <td>
+            <%= link_to product.name, product_path(product.id) %>
+          </td>
+          <td>
+            <%= button_to "Edit", edit_product_path(product.id), method: :get, class: "button" %>
+          </td>
+          <td>
+            <% if product.selling? %>
+            <%= button_to "Retire product", status_path(product.id), method: :patch, class: "button" %>
+            <% else %>
+            <%= button_to "Sell product", status_path(product.id), method: :patch, class: "button" %>
+            <% end %>
+          </td>
+        </tr>
         <% end %>
-      </ul>
+      </table>
       <%= button_to "Add a product to your store", new_product_path, method: :get, class: "button" %>
       <%= button_to "Add a new category", new_category_path, method: :get, class: "button" %>
       <%= button_to 'Manage My Sales Orders', user_orders_path(@user.id), method: :get, class: "button" %>
     </div>
     <div class="small-12 medium-4 columns">
 
-      <h4>My Purchases</h4>
+      <h4 class="headerh4">My Purchases</h4>
       <% if @purchases.empty? %>
       <p>
         No purchases yet.
@@ -38,7 +44,7 @@
         <thead>
           <tr>
             <th>
-              Order #
+              Order
             </th>
             <th>
               Purchased
@@ -54,7 +60,7 @@
         <% @purchases.each do |purchase| %>
         <tr>
           <td>
-            <%= link_to "Order ##{purchase.id}", order_path(purchase.id) %>
+            <%= link_to "#{purchase.id}", order_path(purchase.id) %>
           </td>
           <td>
             <%= purchase.created_at.strftime("%m/%d/%Y") %>
@@ -82,7 +88,7 @@
       <% end %>
       </div>
     <div class="small-12 medium-4 columns">
-      <h4>User Profile</h4>
+      <h4 class="headerh4">My Profile</h4>
       <p>
         Description: <%= @user.profile %>
       </p>
