@@ -41,6 +41,9 @@
         No purchases yet.
       </p>
       <% else %>
+      <p>
+        Total spent: <strong><%= number_to_currency(@user.user_purchases_total) %></strong>
+      </p>
       <table class="purchases-table">
         <thead>
           <tr>
@@ -77,14 +80,7 @@
           </td>
         </tr>
         <% end %>
-        <tr>
-          <td>
-            Total spent:
-          </td>
-          <td>
-            <strong><%= number_to_currency(@user.user_purchases_total) %></strong>
-          </td>
-        </tr>
+
       </table>
       <% end %>
       </div>
