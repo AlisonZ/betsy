@@ -13,3 +13,55 @@ aurora_order:
 aurora_order_two:
   status: "complete"
   email: "aurora@test.com"
+
+felix_order_one:
+  status: "Paid"
+  email: "felix_test@test.com"
+
+felix_order_two:
+  status: "complete"
+  email: "felix_test@test.com"
+
+user_one_order_one:
+  status: "complete"
+  email: "test1@buyer.com"
+
+user_one_order_two:
+  status: "Paid"
+  email: "test2@buyer.com"
+
+user_one_order_three:
+  status: "pending"
+  email: "test3@buyer.com"
+
+user_one_order_four:
+  status: "complete"
+  email: "another_user@me.com"
+
+user_one_order_five:
+  status: "complete"
+  email: "test4@buyer.com"
+
+user_one_order_six:
+  status: "Paid"
+  email: "test5@buyer.com"
+
+user_one_order_seven:
+  status: "pending"
+  email: "pending@order"
+
+user_one_purchase_one:
+  status: "complete"
+  email: "user_orders_test@one.com"
+
+user_one_purchase_two:
+  status: "Paid"
+  email: "user_orders_test@one.com"
+
+# user_one_purchase_three:
+#   status: "complete"
+#   email: "user_orders_test@one.com"
+
+user_one_pending_purchase_one:
+  status: "pending"
+  email: "user_orders_test@one.com"
