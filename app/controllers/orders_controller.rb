@@ -33,14 +33,8 @@ class OrdersController < ApplicationController
     @order = Order.find_by_id(session[:order_id])
     if @order
       @order.status = "Paid"
-      @order.email = order_params[:email]
-      @order.name_on_cc = order_params[:name_on_cc]
-      @order.cc_number = order_params[:cc_number]
-      @order.cc_ccv = order_params[:cc_ccv]
-      @order.billing_zip = order_params[:billing_zip]
-      @order.address = order_params[:address]
-      if @order.save
-        # byebug
+      @order.update(order_params)
+      if @order.valid?
         session[:order_id] = nil
         @order.order_items.each do |item|
           #updates the stock of each of the products
@@ -48,7 +42,7 @@ class OrdersController < ApplicationController
           item.product.save
         end
       else
-        raise
+        flash[:error] = "Could not place order"
       end
     end
   end
