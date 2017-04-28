@@ -57,7 +57,7 @@ describe OrdersController do
          address: "123 Avenue St.",
          }}
          order = Order.find(order.id)
-         order.status.must_equal "Paid"
+         order.status.must_equal "paid"
          new_status = order.status
 
          new_status.wont_equal old_status

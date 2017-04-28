@@ -56,7 +56,7 @@ end
   n = 1
   orderitems = OrderItem.where(order_id: n)
   new_order.order_items = orderitems
-  new_order.status = "Paid"
+  new_order.status = "paid"
   new_order.email = "#{cons.sample}@#{cons.sample}#{vows.sample}#{cons.sample}.fake"
   new_order.address = "#{rand(1..100)} #{["E","W","S","N"].sample} #{%w(fake real nope notgonnahappen fairyland silly haha).sample.capitalize} #{["Ave","Street","Way","Blvd"].sample}"
   new_order.name_on_cc = "#{vows.sample.capitalize}#{cons.sample}#{vows.sample} #{cons.sample.capitalize}#{vows.sample}"

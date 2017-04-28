@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
   def update #place order
     @order = Order.find_by_id(session[:order_id])
     if @order
-      @order.status = "Paid"
+      @order.status = "paid"
       @order.email = order_params[:email]
       @order.name_on_cc = order_params[:name_on_cc]
       @order.cc_number = order_params[:cc_number]

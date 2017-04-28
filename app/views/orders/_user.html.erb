@@ -17,7 +17,7 @@
         Unfulfilled items total revenue: <%= number_to_currency(current_user.user_status_total(false)) %>
       </li>
       <li>
-        Incomplete orders: <%= current_user.user_status_orders("Paid").sort.reverse.length %>
+        Incomplete orders: <%= current_user.user_status_orders("paid").sort.reverse.length %>
       </li>
       <li>
         Complete orders: <%= current_user.user_status_orders("complete").sort.reverse.length %>
