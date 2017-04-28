@@ -27,11 +27,12 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     if @user.update(user_params)
+      # raise
       flash[:success] = "Successfully updated user profile"
       redirect_to user_path(current_user.id)
     else
       flash.now[:error] = "Unable to update user profile at this time"
-      render :edit
+      redirect_to user_path(current_user.id)
     end
   end
 
