@@ -20,9 +20,9 @@
           </td>
           <td>
             <% if product.selling? %>
-            <%= button_to "Retire product", status_path(product.id), method: :patch, class: "button" %>
+            <%= button_to "Retire", status_path(product.id), method: :patch, class: "button" %>
             <% else %>
-            <%= button_to "Sell product", status_path(product.id), method: :patch, class: "button" %>
+            <%= button_to "Sell", status_path(product.id), method: :patch, class: "button" %>
             <% end %>
           </td>
         </tr>
