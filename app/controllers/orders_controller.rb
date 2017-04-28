@@ -2,20 +2,18 @@ class OrdersController < ApplicationController
   before_action :check_login, only: [:index, :complete, :incomplete, :show]
   helper_method :user_orders, :user_orders_items
 
-  # def index
-  #   @orders = Order.all.order(id: :desc)
-  #
-  #   respond_to do |format|
-  #     format.html
-  #     format.csv { send_data @orders.to_csv }
-  #   end
-  # end
+  def index
+    @orders = Order.all.order(id: :desc)
 
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @orders.to_csv }
+    # end
+  end
 
   def complete; end
 
   def incomplete;end
-
 
   def checkout
     @order = Order.find_by_id(session[:order_id])
@@ -31,15 +29,18 @@ class OrdersController < ApplicationController
 
   def update #place order
     @order = Order.find_by_id(session[:order_id])
-    @order.status = "paid"
-    @order.update(order_params)
-    if @order.valid?
+    if @order.nil?
+      flash[:error] = "Could not place order"
+      redirect_to :root
+    else
+      @order.status = "paid"
+      @order.update(order_params)
+      session[:order_id] = nil
       @order.order_items.each do |item|
         #updates the stock of each of the products
         item.product.stock = item.product.stock - item.quantity
         item.product.save
       end
-    else
       flash[:error] = "Could not place order"
     end
   end

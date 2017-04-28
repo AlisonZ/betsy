@@ -62,5 +62,64 @@ describe OrdersController do
 
          new_status.wont_equal old_status
     end
+
+    it "if order does not exist, should redirect to root path" do
+      put order_path(1)
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+  end
+
+  describe "#Show" do
+    it "Gets the order show page if user is logged in" do
+      login_user(users(:aurora))
+      get order_path(orders(:aurora_order).id)
+      must_respond_with :success
+    end
+  end
+
+  describe "#Index" do
+    it "Gets the index of a user's orders if logged in" do
+      login_user(users(:aurora))
+      get user_orders_path(users(:aurora).id)
+      must_respond_with :success
+    end
+
+    it "Redirects to root_path if not logged in" do
+      get user_orders_path(users(:aurora).id)
+      must_respond_with :redirect
+      must_redirect_to :root
+      flash[:error].must_equal "You must be the owner to access that page"
+    end
+  end
+
+  describe "#Complete" do
+    it "redirects to the complete orders page if user is logged in" do
+      login_user(users(:aurora))
+      get user_orders_complete_path(users(:aurora).id)
+      must_respond_with :success
+    end
+
+    it "Redirects to root_path if not logged in" do
+      get user_orders_complete_path(users(:aurora).id)
+      must_respond_with :redirect
+      must_redirect_to :root
+      flash[:error].must_equal "You must be the owner to access that page"
+    end
+  end
+
+  describe "#Incomplete" do
+    it "redirects to the Incomplete orders page if user is logged in" do
+      login_user(users(:aurora))
+      get user_orders_incomplete_path(users(:aurora).id)
+      must_respond_with :success
+    end
+
+    it "Redirects to root_path if not logged in" do
+      get user_orders_incomplete_path(users(:aurora).id)
+      must_respond_with :redirect
+      must_redirect_to :root
+      flash[:error].must_equal "You must be the owner to access that page"
+    end
   end
 end
