@@ -94,6 +94,14 @@ class OrderItemsController < ApplicationController
   def create_order
     if session[:order_id]
       @order = Order.find_by_id(session[:order_id])
+    elsif current_user
+      current_order = Order.find_by(status: "pending", email: current_user.email)
+      if current_order
+        session[:order_id] = current_order.id
+      else
+        @order = Order.create
+        session[:order_id] = @order.id
+      end
     else
       @order = Order.create
       session[:order_id] = @order.id
