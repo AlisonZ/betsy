@@ -74,8 +74,6 @@ a {
   text-align: center;
 }
 
-
-
 /*header*/
 header {
   height: 100px;
@@ -127,7 +125,6 @@ small {
     font-family: 'Lato', sans-serif;
     font-size: .8em;
 }
-
 
 .login {
   margin-right: 10px;
@@ -199,7 +196,6 @@ div.title {
 .category-name {
 
 }
-
 
 .index_photo {
   height: 100px;
@@ -314,8 +310,12 @@ div.title {
 
 .sales-summary h4 {
   text-align: center;
-
 }
+
+#out-of-stock {
+  font-weight: bold;
+}
+
 /*Cart Page*/
 .cart-items {
   margin: 10px 0;
@@ -372,11 +372,15 @@ th {
   font-family: 'League Script', cursive;
 }
 .error, .failure {
-  color: red;
+  color: #373737;
+  text-decoration: bold;
+  font-size: 1.25em;
 }
 
 .success {
-  color: green;
+  color: #C0B283;
+  text-decoration: bold;
+  font-size: 1.25em;
 }
 
 // footer

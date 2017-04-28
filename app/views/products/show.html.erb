@@ -25,7 +25,11 @@
     <div class="small-12 medium-4 columns">
       <ul class="price-info">
         <li class="price"> <%= number_to_currency(@product.price) %> each</li>
-        <li> <% if @product.out_of_stock %>Out of stock<% else %><%= @product.stock %> left in stock <% end %></li>
+        <% if @product.out_of_stock %>
+          <li id="out-of-stock">Out of stock</li>
+        <% else %>
+          <li> <%= @product.stock %> left in stock </li> 
+        <% end %>
         <li>
           <strong>Merchant: </strong><%= link_to @product.user.username, user_products_path(@product.user.id) %>
         </li>
