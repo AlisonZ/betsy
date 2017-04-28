@@ -356,11 +356,15 @@ th {
   font-family: 'League Script', cursive;
 }
 .error, .failure {
-  color: red;
+  color: #373737;
+  text-decoration: bold;
+  font-size: 1.25em;
 }
 
 .success {
-  color: green;
+  color: #C0B283;
+  text-decoration: bold;
+  font-size: 1.25em;
 }
 
 // footer
