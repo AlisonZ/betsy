@@ -33,7 +33,9 @@
       </ul>
     </div>
     <div class="small-12s columns">
-      <%= button_to "Checkout", checkout_path, method: :get, class: "button checkout" %>
+      <% if @cart_items != [] %>
+        <%= button_to "Checkout", checkout_path, method: :get, class: "button checkout" %>
+      <% end %>
     </div>
   </div>
 </article>
