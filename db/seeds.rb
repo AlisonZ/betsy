@@ -72,7 +72,7 @@ end
 end
 
 #reviews
-200.times do
+100.times do
   exclamations = %w( wow yikes sheesh dang no yes terrible wonderful amazing )
   adjectives = %w( good bad stinky hot flavorful uncertain hottening flatly kindness pink forkful evenly makely flyful candidly hopeful gimmicky)
   nouns = %w( edge hard thought sleep dream fish rest end facet marinade stirring boom )
