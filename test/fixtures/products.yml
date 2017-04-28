@@ -7,6 +7,7 @@ watch:
   photo_url: http://www.google.com
   stock: 1
   user: felix
+  selling_status: true
 
 fancy_socks:
   name: "Expensive Socks"
@@ -19,7 +20,7 @@ fancy_socks:
 
 
 umbrella:
-  name: Umbrella
+  name: "Umbrella"
   description: "A really cool umbrella"
   price: 14.99
   photo_url: http://www.google.com
@@ -35,6 +36,7 @@ fancy_shirt:
   photo_url: MyString
   stock: 1
   user: felix
+  selling_status: true
 
 aurorahat:
   name: "aurora's hat"
@@ -44,3 +46,68 @@ aurorahat:
   stock: 5
   user: aurora
   selling_status: true
+
+boots:
+  name: "boots"
+  description: "really fancy boots"
+  price: 500.50
+  photo_url: "photo_url"
+  stock: 20
+  user: felix
+  selling_status: true
+
+user_one_book:
+  name: "User Order Test Product One"
+  description: "A test product for user orders"
+  price: 10.50
+  photo_url: "photo"
+  stock: 20
+  user: user_orders_test_user_one
+
+user_one_shoes:
+  name: "User Order Test Product Two"
+  description: "A second test product for user orders"
+  price: 20.50
+  photo_url: "photo"
+  stock: 10
+  user: user_orders_test_user_one
+
+user_one_bag:
+  name: "User Order Test Product Three"
+  description: "A third test product for user orders"
+  price: 30.50
+  photo_url: "photo"
+  stock: 50
+  user: user_orders_test_user_one
+
+user_one_towel:
+  name: "User Order Test Product four"
+  description: "A fourth test product for user orders"
+  price: 40.50
+  photo_url: "photo"
+  stock: 25
+  user: user_orders_test_user_one
+
+banana:
+  name: "Banana"
+  description: "A banana fixture"
+  price: 5.00
+  photo_url: "some_url.com"
+  stock: 20
+  user: felix
+
+apple:
+  name: "Apple"
+  description: "An apple fixture"
+  price: 6.00
+  photo_url: "some_other_photo.com"
+  stock: 15
+  user: aurora
+
+orange:
+  name: "Orange"
+  description: "An orange fixture"
+  price: 3.00
+  photo_url: "blablabla.com"
+  stock: 10
+  user: jackie

@@ -37,7 +37,7 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    it "Updates the status of order to 'Paid'" do
+    it "Updates the status of order to 'paid'" do
       # Initialize the cart by adding an item to it
       post new_order_item_path(products(:fancy_socks).id),
         params: {order_item:
@@ -57,7 +57,7 @@ describe OrdersController do
          address: "123 Avenue St.",
          }}
          order = Order.find(order.id)
-         order.status.must_equal "Paid"
+         order.status.must_equal "paid"
          new_status = order.status
 
          new_status.wont_equal old_status

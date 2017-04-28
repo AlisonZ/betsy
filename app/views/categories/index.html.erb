@@ -9,14 +9,14 @@
         <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
 
         <% @top_products.each do |product| %>
-          <li class="orbit-slide">
-            <%= link_to(product_path(product.id)) do %>
-              <img class="image carousel" src="<%=product.photo_url%>" alt="Product Photo">
-              <figcaption class="product-caption carousel">
-                <%= product.name %>
-              </figcaption>
-            <% end %>
-          </li>
+        <li class="orbit-slide">
+          <%= link_to(product_path(product.id)) do %>
+          <img class="image carousel" src="<%=product.photo_url%>" alt="Product Photo">
+          <figcaption class="product-caption carousel">
+            <%= product.name %>
+          </figcaption>
+          <% end %>
+        </li>
         <% end %>
       </ul>
     </div>
@@ -26,16 +26,17 @@
     <h3 class="small-12 cloumns">Shop by Category</h3>
   </div>
   <ul class="row">
-  <% @categories.each do |category| %>
+    <% @categories.each do |category| %>
     <li class="small-12 medium-6 large-4 columns grid-item">
       <div class="border">
         <%= link_to(category_products_path(category.id)) do %>
-          <%= category.name %> <br />
-          <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
-      <% end %>
+          <%= category.name.downcase %>
+       <br />
+        <img src="<%= category.photo %>" alt="category_photo", class="index_photo" >
+        <% end %>
       </div>
     </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
 
 </article>

@@ -2,14 +2,14 @@ class OrdersController < ApplicationController
   before_action :check_login, only: [:index, :complete, :incomplete, :show]
   helper_method :user_orders, :user_orders_items
 
-  def index
-    @orders = Order.all.order(id: :desc)
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data @orders.to_csv }
-    end
-  end
+  # def index
+  #   @orders = Order.all.order(id: :desc)
+  #
+  #   respond_to do |format|
+  #     format.html
+  #     format.csv { send_data @orders.to_csv }
+  #   end
+  # end
 
 
   def complete; end
@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   def checkout
     @order = Order.find_by_id(session[:order_id])
     if @order.nil? || @order.order_items == []
-      flash[:warning] = "Please add an item to your cart to check out"
+      flash[:failure] = "Please add an item to your cart to check out"
       redirect_to root_path
     end
     @user = User.find_by_id(session[:user_id])
@@ -31,19 +31,16 @@ class OrdersController < ApplicationController
 
   def update #place order
     @order = Order.find_by_id(session[:order_id])
-    if @order
-      @order.status = "Paid"
-      @order.update(order_params)
-      if @order.valid?
-        session[:order_id] = nil
-        @order.order_items.each do |item|
-          #updates the stock of each of the products
-          item.product.stock = item.product.stock - item.quantity
-          item.product.save
-        end
-      else
-        flash[:error] = "Could not place order"
+    @order.status = "paid"
+    @order.update(order_params)
+    if @order.valid?
+      @order.order_items.each do |item|
+        #updates the stock of each of the products
+        item.product.stock = item.product.stock - item.quantity
+        item.product.save
       end
+    else
+      flash[:error] = "Could not place order"
     end
   end
 

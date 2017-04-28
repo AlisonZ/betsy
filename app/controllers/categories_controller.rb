@@ -1,10 +1,11 @@
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.all
+    all_categories = Category.all
+    @categories = all_categories.find_all { |category| category.products != [] }
     @top_products = Product.highest_rated
     respond_to do |format|
       format.html
-      format.csv { send_data @categories.to_csv }
+      format.csv { send_data all_categories.to_csv }
     end
   end
 

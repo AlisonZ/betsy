@@ -7,8 +7,7 @@
 
   </div>
   <div class="row">
-    <p>Categories:</p>
-    <ul>
+    <ul class="categories-list">
       <% @product.categories.each do |category| %>
       <li>
         <%= link_to category.name, category_products_path(category.id) %>
@@ -25,13 +24,15 @@
 
     <div class="small-12 medium-4 columns">
       <ul>
-        <li class="price"> Price: <%= number_to_currency(@product.price) %> </li>
+        <li class="price"> <%= number_to_currency(@product.price) %> each</li>
         <li> <% if @product.out_of_stock %>Out of stock<% else %><%= @product.stock %> left in stock <% end %></li>
         <li>
-          Merchant: <%= link_to @product.user.username, user_products_path(@product.user.id) %>
+          <strong>Merchant: </strong><%= link_to @product.user.username, user_products_path(@product.user.id) %>
         </li>
         <li>
-          Average rating: <%= @product.average_rating %>
+          <strong>Average rating: </strong><% if @product.average_rating == 0 %><p>
+            not rated yet</p>
+          <% else %><%= @product.average_rating %><% end %>
         </li>
       </ul>
 
@@ -43,17 +44,25 @@
 
       <%= f.submit "Add to Cart", class: "button" %>
 
+
       <% end %>
       <% end %>
 
-
+    </div>
+    <div class="small-12 medium-4 columns left review-edit-button">
+      <% if can_edit? %>
+      <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
+      <% end %>
+      <% if can_review? %>
+      <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
+      <% end %>
     </div>
 
     <div class="small-12 medium-4 columns reviews">
       <section class="review">
         <h2>Reviews</h2>
         <% @product.reviews.each do |review| %>
-        <h3><%= review.title %> <small> <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3><p class="right">Rating: <%= review.rating %></p>
+        <h3><%= review.title %> <p class="right rating-number"><%= review.rating %></p><small class="review-date"> <%= review.updated_at.strftime("%m/%d/%Y") %></small></h3>
         <section class="review-body" >
           <p>
             <%= review.review_text %>
@@ -62,14 +71,7 @@
         <% end %>
       </section>
     </div>
-    <div class="small-12 medium-4 columns review-edit-button">
-      <% if can_edit? %>
-      <%= button_to "Edit this product", edit_product_path(@product.id), class: "button", method: :get %>
-      <% end %>
-      <% if can_review? %>
-      <%= button_to "Review this product", new_product_review_path(@product.id), class: "button", method: :get %>
-      <% end %>
-    </div>
+
     <div class"row">
 
       <div class="small-12 columns product-description">
