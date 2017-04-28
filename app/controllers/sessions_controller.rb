@@ -12,8 +12,26 @@ class SessionsController < ApplicationController
           session[:user_id] = user.id
         end
       else
-        flash[:success] = "Successfully logged in as existing user #{user.id}"
         session[:user_id] = user.id
+        # if there's a pending order in the cart when someone logs in
+        # we want to merge the cart with any previous pending order that user had saved and not finished
+        if session[:order_id]
+          # save the in progress order
+          in_progress_order = Order.find(session[:order_id])
+          # find the old pending order for the current user
+          pending_order = Order.find_by(status: "pending", email: current_user.email)
+          # reset the session order id to the pending order
+          session[:order_id] = pending_order.id
+          # move anything in in progress order to the pending order
+          pending_order.merge_pending_orders(in_progress_order)
+        else # no current order_id
+          # find any pending orders for the newly logged in user
+          pending_order = Order.find_by(status: "pending", email: current_user.email)
+          if pending_order
+            # and set the session order id to that order (no merging happening)
+            session[:order_id] = pending_order.id
+          end
+        end
       end
     else
       flash[:error] = 'Could not log in'
@@ -26,7 +44,13 @@ class SessionsController < ApplicationController
   end
 
   def logout
+    if session[:order_id]
+      order = Order.find(session[:order_id])
+      order.email = current_user.email
+      order.save
+    end
     session[:user_id] = nil
+    session[:order_id] = nil
     flash[:success] = "You are successfully logged out"
     redirect_to root_path
   end
