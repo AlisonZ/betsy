@@ -57,12 +57,12 @@ describe User do
     end
   end
 
-    # describe "Create from github" do
-    #   it "Creates a new user when signing in for the first time using github" do
-    #
-    #
-    #   end
-    # end
+  # describe "Create from github" do
+  #   it "Creates a new user when signing in for the first time using github" do
+  #
+  #
+  #   end
+  # end
 
   describe "merchant user orders" do
     describe "user_orders" do
@@ -80,8 +80,6 @@ describe User do
 
         user_one_orders_items.length.must_equal 5
       end
-    end
-
       it "returns empty array if user has no order_items" do
         user = users(:no_products_user)
         jackie_order_items = user.user_orders_items
@@ -89,10 +87,46 @@ describe User do
         jackie_order_items.length.must_equal 0
         jackie_order_items.must_equal []
       end
+    end
 
-    # describe "user_status_orders" do
-    #
-    # end
+
+    describe "user_status_orders('complete')" do
+      it "returns array of only completed orders" do
+        user = users(:user_orders_test_user_one)
+        user_one_status_orders = user.user_status_orders("complete")
+
+        user_one_status_orders.must_be_kind_of Array
+        user_one_status_orders.length.must_equal 3
+
+        user_one_status_orders[0].must_be_instance_of Order
+
+        user_one_status_orders[0].status.must_equal "complete"
+        user_one_status_orders[1].status.must_equal "complete"
+        user_one_status_orders[2].status.must_equal "complete"
+      end
+
+      it "returns empty array if there are no complete orders" do
+        user = users(:no_products_user)
+        user_one_status_orders = user.user_status_orders("complete")
+        user_one_status_orders.must_be_kind_of Array
+        user_one_status_orders.length.must_equal 0
+      end
+
+      it "returns array of only paid orders" do
+        user = users(:user_orders_test_user_one)
+        user_one_status_orders = user.user_status_orders("paid")
+
+        user_one_status_orders.must_be_kind_of Array
+        user_one_status_orders.length.must_equal 2
+
+        user_one_status_orders[0].must_be_instance_of Order
+
+        user_one_status_orders[0].status.must_equal "paid"
+        user_one_status_orders[1].status.must_equal "paid"
+      end
+
+
+    end
 
     describe "user_total" do
       it "shows grand total of products sold by user" do
@@ -150,12 +184,5 @@ describe User do
         no_purchase_user_total.must_equal 0
       end
     end
-
-
-
-
-
   end
-
-
 end

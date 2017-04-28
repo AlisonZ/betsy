@@ -2,13 +2,14 @@ class OrderItemsController < ApplicationController
   before_action :create_order, only: [:create]
   helper_method :duplicate_item?
 
-  def index
-    @order_items = OrderItem.all
-    respond_to do |format|
-      format.html
-      format.csv { send_data @order_items.to_csv }
-    end
-  end
+  # commenting out for test coverage
+  # def index
+  #   @order_items = OrderItem.all
+  #   respond_to do |format|
+  #     format.html
+  #     format.csv { send_data @order_items.to_csv }
+  #   end
+  # end
 
   def create
     if !duplicate_item?

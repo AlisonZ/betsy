@@ -30,7 +30,7 @@ apple_check_status_order_one:
   product: apple
   order: check_status_order_one
   quantity: 2
-  ship_status: true
+  ship_status: false
 
 orange_check_status_order_one:
   product: orange
