@@ -30,7 +30,9 @@
           <strong>Merchant: </strong><%= link_to @product.user.username, user_products_path(@product.user.id) %>
         </li>
         <li>
-          <strong>Average rating: </strong><%= @product.average_rating %>
+          <strong>Average rating: </strong><% if @product.average_rating == 0 %><p>
+            not rated yet</p>
+          <% else %><%= @product.average_rating %><% end %>
         </li>
       </ul>
 
