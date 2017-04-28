@@ -24,13 +24,13 @@
 
     <div class="small-12 medium-4 columns">
       <ul>
-        <li class="price"> Price: <%= number_to_currency(@product.price) %> </li>
+        <li class="price"> <%= number_to_currency(@product.price) %> each</li>
         <li> <% if @product.out_of_stock %>Out of stock<% else %><%= @product.stock %> left in stock <% end %></li>
         <li>
-          Merchant: <%= link_to @product.user.username, user_products_path(@product.user.id) %>
+          <strong>Merchant: </strong><%= link_to @product.user.username, user_products_path(@product.user.id) %>
         </li>
         <li>
-          Average rating: <%= @product.average_rating %>
+          <strong>Average rating: </strong><%= @product.average_rating %>
         </li>
       </ul>
 

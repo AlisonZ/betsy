@@ -20,7 +20,7 @@ Pale Gold color: #C0B283
 }
 
 body {
-  clear:both;
+  clear: both;
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px;
   color: #373737;
@@ -37,7 +37,7 @@ h1, h1 a {
 h2, h3 {
   font-family: 'Sail', cursive;
 }
-h4, p {
+h4, p{
   font-family: 'Quattrocento Sans', sans-serif;
 }
 
@@ -75,6 +75,7 @@ a {
 .title {
   text-align: center;
 }
+
 
 
 /*header*/
@@ -252,7 +253,10 @@ div.title {
   size: 2em;
 }
 
-
+.sales-summary {
+  display: block;
+  text-align: center;
+}
 /*Cart Page*/
 .cart-items {
   margin: 10px 0;
@@ -312,4 +316,13 @@ footer div p {
 
 .names li {
   padding: 5px 0;
+}
+
+.order-history-title {
+  text-align: left;
+}
+
+
+.my-products-list {
+  padding-bottom: 20px;
 }

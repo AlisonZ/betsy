@@ -46,6 +46,9 @@ class Product < ApplicationRecord
 
   def average_rating
     total_ratings = 0
+    if self.reviews.empty?
+      return "no reviews yet"
+    end
     self.reviews.each do |review|
       total_ratings += review.rating
     end
