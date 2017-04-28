@@ -15,13 +15,13 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
-  <header class="row">
+<body class="row">
+  <header>
     <div class="row" id="top-row">
-      <div class="small-4 medium-5 columns">
+      <div class="small-3 medium-5 columns">
         <h1 class="main-header"><%= link_to "Debtsy", root_path %></h1>
       </div>
-      <div class="cart small-4 medium-5 columns">
+      <div class="cart small-3 medium-5 columns">
         <%= link_to image_tag( "cart"), cart_path %>
         <%= total_items_in_cart %>
       </div>
@@ -69,7 +69,7 @@
       </nav>
     </div>
   </header>
-  <main class="content">
+  <main class="content row">
     <section class="flash">
       <% flash.each do |name, message| %>
       <p class="row status <%= name %>"><%= message %></p>
@@ -82,6 +82,7 @@
       <p class="small-12 column">
         &copy;2017 <%= link_to "Jolly Owl", "/jolly_owl", method: :get %>
       </p>
+
     </div>
   </footer>
 </body>
