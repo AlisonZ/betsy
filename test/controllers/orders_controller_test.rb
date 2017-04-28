@@ -70,6 +70,14 @@ describe OrdersController do
     end
   end
 
+  describe "#Show" do
+    it "Gets the order show page if user is logged in" do
+      login_user(users(:aurora))
+      get order_path(orders(:aurora_order).id)
+      must_respond_with :success
+    end
+  end
+
   describe "#Index" do
     it "Gets the index of a user's orders if logged in" do
       login_user(users(:aurora))

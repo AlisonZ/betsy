@@ -5,10 +5,10 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all.order(id: :desc)
 
-    respond_to do |format|
-      format.html
-      format.csv { send_data @orders.to_csv }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @orders.to_csv }
+    # end
   end
 
   def complete; end
