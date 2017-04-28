@@ -7,9 +7,11 @@
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Sail" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=League+Script|Quattrocento+Sans|Satisfy" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cookie|Lato" rel="stylesheet">
 
 
   <title>Debtsy</title>
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -19,11 +21,11 @@
   <header class="row">
     <div class="row" id="top-row">
       <div class="small-4 medium-5 columns">
-        <h1 class="main-header"><%= link_to "Debtsy", root_path %></h1>
+        <h1 class="main-header"><%= link_to "Debtsy", root_path %><small> Treat yo'self</small></h1>
       </div>
       <div class="cart small-4 medium-5 columns">
         <%= link_to image_tag( "cart"), cart_path %>
-        <%= total_items_in_cart %>
+        <p><%= total_items_in_cart %></p>
       </div>
     </div>
     <div class="row shop-by">

@@ -54,6 +54,7 @@ a {
   background-color: #DCD0C0;
   color: white;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .button:hover {
@@ -93,11 +94,20 @@ header h1.main-header {
   border-bottom: solid 2px #DCD0C0;
 }
 
+small {
+  font-family: 'Cookie', cursive;
+  font-size: .6em;
+  font-weight: lighter;
+  font-style: italic;
+}
+
 .header-login {
   float: right;
   display: block;
   margin-top: 10px;
   margin-bottom: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: .9em;
 }
 
 .header-login li {
@@ -115,6 +125,12 @@ header h1.main-header {
   margin-top: 15px;
   font-size: 1.5em;
 }
+.cart p {
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: .8em;
+}
+
 
 .login {
   margin-right: 10px;
@@ -212,7 +228,16 @@ div.title {
  /*Show page*/
 
 .product-description {
-  padding-top: 15px;
+  padding-top: 30px;
+  padding-left: 25px;
+  font-size: .8em;
+  padding-bottom: 50px;
+}
+
+.product-description h3 {
+  font-family: 'lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.2em;
 }
 
  .categories-list {
@@ -241,12 +266,41 @@ div.title {
   overflow: scroll;
 }
 
+.review h2{
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.review h4{
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-size: .8em;
+    text-transform: none;
+    margin-bottom: 15px;
+}
+
+.review h3 {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+}
+
 .review-date {
   padding-left: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: .8em;
 }
 
 .review-edit-button {
   margin-top: 10px;
+  text-align: right;
+}
+
+.review-body {
+  font-size: .8em;
 }
 
 .right {
@@ -281,7 +335,21 @@ th {
 }
 
 .price {
-  font-size: 2em;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2em;
+}
+
+.price li {
+  padding-left: -5px;
+}
+
+.price-info {
+  font-family: 'Lato', sans-serif;
+  font-size: .7em;
+}
+
+.price-info strong {
+  text-transform: uppercase;
 }
 
 // flash
