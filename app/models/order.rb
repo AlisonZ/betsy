@@ -21,4 +21,11 @@ class Order < ApplicationRecord
     return products
   end
 
+  def merge_pending_orders(new_order)
+    new_order.order_items.each do |item|
+      item.order_id = self.id
+      item.save
+    end
+  end
+
 end
